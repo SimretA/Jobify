@@ -24,6 +24,9 @@
     <string name="profile">Profile</string>
     <string name="explore">Explore</string>
     <string name="setting">Setting</string>
-    <string name="jobs">Jobs</string>
     <string name="meetups">Meetups</string>
+    <string name="search">Search</string>
+    <string name="all">All</string>
+    <string name="jobs">Jobs</string>
+    <string name="organization">Organization</string>
 </resources>

@@ -18,6 +18,6 @@
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.ussz.jobify.fragments.exploreFragments.ExploreFragment"
-        android:label="fragment_explore"
+        android:label="Explore"
         tools:layout="@layout/fragment_explore" />
 </navigation>
