@@ -16,7 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
+import com.ussz.jobify.Adapters.ViewPagerAdapter;
 import com.ussz.jobify.R;
+import com.ussz.jobify.fragments.exploreFragments.ExploreAllFragment;
+import com.ussz.jobify.fragments.exploreFragments.ExploreJobsFragment;
+import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
+import com.ussz.jobify.fragments.exploreFragments.ExploreOrganizationFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,8 +45,19 @@ public class HomeFragment extends Fragment {
 
         TabLayout tabLayout = rootView.findViewById(R.id.exploreTabs);
 
+
+        List<Fragment> fragmentList = new ArrayList<Fragment>(2);
+        fragmentList.add(new HomeJobsFragment());
+        fragmentList.add(new HomeMeetupFragment());
+
+
+
+        List<String> stringList = new ArrayList<String>(2);
+        stringList.add(getString(R.string.jobs));
+        stringList.add(getString(R.string.meetups));
+
         final ViewPager viewPager = rootView.findViewById(R.id.exploreViewPager);
-        final PagerAdapter hvpa = new HomeViewPagerAdapter(getChildFragmentManager(),2);
+        final PagerAdapter hvpa = new ViewPagerAdapter(getChildFragmentManager(),fragmentList,stringList);
 
         viewPager.setAdapter(hvpa);
         tabLayout.setupWithViewPager(viewPager);
@@ -49,45 +68,6 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public class HomeViewPagerAdapter extends FragmentPagerAdapter{
 
-        int tabCount;
-
-        public HomeViewPagerAdapter(FragmentManager fm,int numberOfTabs){
-            super(fm);
-            this.tabCount = numberOfTabs;
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:
-                    return (CharSequence) getString(R.string.jobs);
-                case 1:
-                    return (CharSequence) getString(R.string.meetups);
-                default:
-                    return null;
-            }
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return new HomeJobsFragment();
-                case 1:
-                    return new HomeMeetupFragment();
-                 default:
-                     return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return tabCount;
-        }
-    }
 
 }

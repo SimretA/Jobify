@@ -16,7 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
+import com.ussz.jobify.Adapters.ViewPagerAdapter;
 import com.ussz.jobify.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,8 +42,23 @@ public class ExploreFragment extends Fragment {
 
         TabLayout tabLayout = rootView.findViewById(R.id.exploreTabs);
 
+
+        List<Fragment> fragmentList = new ArrayList<Fragment>(4);
+        fragmentList.add(new ExploreAllFragment());
+        fragmentList.add(new ExploreJobsFragment());
+        fragmentList.add(new ExploreMeetupsFragment());
+        fragmentList.add(new ExploreOrganizationFragment());
+
+
+
+        List<String> stringList = new ArrayList<String>(4);
+        stringList.add(getString(R.string.all));
+        stringList.add(getString(R.string.jobs));
+        stringList.add(getString(R.string.meetups));
+        stringList.add(getString(R.string.organization));
+
         final ViewPager viewPager = rootView.findViewById(R.id.exploreViewPager);
-        final PagerAdapter evpa = new ExploreFragment.ExploreViewPagerAdapter(getChildFragmentManager(),4);
+        final PagerAdapter evpa = new ViewPagerAdapter(getChildFragmentManager(),fragmentList,stringList);
 
         viewPager.setAdapter(evpa);
         tabLayout.setupWithViewPager(viewPager);
@@ -49,53 +68,6 @@ public class ExploreFragment extends Fragment {
 
 
 
-    public class ExploreViewPagerAdapter extends FragmentPagerAdapter{
 
-        int tabCount;
-
-        public ExploreViewPagerAdapter(FragmentManager fm, int numberOfTabs){
-            super(fm);
-            this.tabCount = numberOfTabs;
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            switch (position){
-                case 0:
-                    return new ExploreAllFragment();
-                case 1:
-                    return new ExploreJobsFragment();
-                case 2:
-                    return new ExploreMeetupsFragment();
-                case 3:
-                    return new ExploreOrganizationFragment();
-                default:
-                    return null;
-            }
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position){
-                case 0:
-                    return (CharSequence) getString(R.string.all);
-                case 1:
-                    return getString(R.string.jobs);
-                case 2:
-                    return getString(R.string.meetups);
-                case 3:
-                    return (CharSequence) getString(R.string.organization);
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return tabCount;
-        }
-    }
 
 }
