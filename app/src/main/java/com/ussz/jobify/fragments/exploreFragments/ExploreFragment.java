@@ -17,9 +17,6 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ussz.jobify.R;
-import com.ussz.jobify.fragments.homeFragments.HomeFragment;
-import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
-import com.ussz.jobify.fragments.homeFragments.HomeMeetupFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,13 +63,13 @@ public class ExploreFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new exploreAllFragment();
+                    return new ExploreAllFragment();
                 case 1:
-                    return new exploreJobsFragment();
+                    return new ExploreJobsFragment();
                 case 2:
-                    return new exploreMeetupsFragment();
+                    return new ExploreMeetupsFragment();
                 case 3:
-                    return new exploreOrganizationFragment();
+                    return new ExploreOrganizationFragment();
                 default:
                     return null;
             }

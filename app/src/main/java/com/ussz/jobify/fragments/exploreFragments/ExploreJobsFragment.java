@@ -14,10 +14,10 @@ import com.ussz.jobify.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class exploreAllFragment extends Fragment {
+public class ExploreJobsFragment extends Fragment {
 
 
-    public exploreAllFragment() {
+    public ExploreJobsFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class exploreAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore_all, container, false);
+        return inflater.inflate(R.layout.fragment_explore_jobs, container, false);
     }
 
 }
