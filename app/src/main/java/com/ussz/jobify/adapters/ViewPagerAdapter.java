@@ -1,4 +1,4 @@
-package com.ussz.jobify.Adapters;
+package com.ussz.jobify.adapters;
 
 import android.os.Bundle;
 

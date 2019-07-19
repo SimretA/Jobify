@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profile_fragment_dest"
-        android:name="com.ussz.jobify.ProfileFragment"
+        android:name="com.ussz.jobify.fragments.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
@@ -20,4 +20,9 @@
         android:name="com.ussz.jobify.fragments.exploreFragments.ExploreFragment"
         android:label="Explore"
         tools:layout="@layout/fragment_explore" />
+    <fragment
+        android:id="@+id/following_fragment_dest"
+        android:name="com.ussz.jobify.FollowingFragment"
+        android:label="Following"
+        tools:layout="@layout/fragment_following" />
 </navigation>
