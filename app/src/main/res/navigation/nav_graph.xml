@@ -8,11 +8,16 @@
     <fragment
         android:id="@+id/profile_fragment_dest"
         android:name="com.ussz.jobify.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ussz.jobify.fragments.homeFragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.ussz.jobify.fragments.exploreFragments.ExploreFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_explore" />
 </navigation>

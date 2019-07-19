@@ -44,4 +44,8 @@ dependencies {
     //google material design
     implementation 'com.google.android.material:material:1.1.0-alpha07'
 
+
+    //circular image view
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'
+
 }
