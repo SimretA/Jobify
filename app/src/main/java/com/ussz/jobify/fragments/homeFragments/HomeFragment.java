@@ -35,9 +35,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        TabLayout tabLayout = rootView.findViewById(R.id.homeTabs);
+        TabLayout tabLayout = rootView.findViewById(R.id.exploreTabs);
 
-        final ViewPager viewPager = rootView.findViewById(R.id.homeViewPager);
+        final ViewPager viewPager = rootView.findViewById(R.id.exploreViewPager);
         final PagerAdapter hvpa = new HomeViewPagerAdapter(getChildFragmentManager(),2);
 
         viewPager.setAdapter(hvpa);
