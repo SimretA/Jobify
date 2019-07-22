@@ -1,6 +1,7 @@
 package com.ussz.jobify.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
+import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
 
 import java.util.ArrayList;
 
@@ -21,12 +24,12 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsListAdapter.HomeMeetupsViewHolder>  {
 
 
-    private Context context;
+    private Fragment fragment;
     private ArrayList<Meetup> meetupsArrayList;
 
 
-    public HomeMeetupsListAdapter(Context context, ArrayList<Meetup> meetupsArrayList) {
-        this.context = context;
+    public HomeMeetupsListAdapter(Fragment fragment, ArrayList<Meetup> meetupsArrayList) {
+        this.fragment = fragment;
         this.meetupsArrayList = meetupsArrayList;
     }
 
@@ -45,7 +48,18 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         holder.meetupTitle.setText(meetup.getName()+ " " + position);
         holder.meetupDescription.setText(meetup.getDescription());
         holder.meetupImage.setImageResource(R.mipmap.profile_avatar_round);
-        holder.studentLimit.setText("" + (meetup.getStudentLimit()-position*2) + " Spot");
+
+        holder.submitedBy.setText("Google "+position);
+
+        if (fragment instanceof ExploreMeetupsFragment){
+            holder.studentLimit.setText("" + (meetup.getStudentLimit()-position*2) + " Spot");
+        }
+        else{
+            //here call function that will calculate duration left
+            holder.studentLimit.setText("In " + (meetup.getStudentLimit()-position*2) + " days");
+        }
+
+
     }
 
     @Override
@@ -60,12 +74,14 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         private TextView meetupTitle;
         private TextView meetupDescription;
         private ImageView meetupImage;
+        private TextView submitedBy;
         private FancyButton studentLimit;
 
         public HomeMeetupsViewHolder(@NonNull View itemView) {
             super(itemView);
             meetupTitle = itemView.findViewById(R.id.textView2);
-            meetupDescription = itemView.findViewById(R.id.textView17);
+            meetupDescription = itemView.findViewById(R.id.textView14);
+            submitedBy = itemView.findViewById(R.id.textView3);
             meetupImage = itemView.findViewById(R.id.organizationimage);
             studentLimit = itemView.findViewById(R.id.leftSpace);
 
