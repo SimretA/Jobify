@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
-import com.ussz.jobify.data.Company;
+import com.ussz.jobify.data.Organization;
 import java.util.ArrayList;
 
 public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdapter.FollowingViewHolder> {
 
     private Context context;
-    private ArrayList<Company> followingCompanies;
+    private ArrayList<Organization> followingCompanies;
 
 
-    public FollowingListAdapter(Context context, ArrayList<Company> following) {
+    public FollowingListAdapter(Context context, ArrayList<Organization> following) {
         this.context = context;
         this.followingCompanies = following;
     }
@@ -38,9 +38,9 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     @Override
     public void onBindViewHolder(@NonNull FollowingViewHolder holder, int position) {
-        Company currentCompany = followingCompanies.get(position);
-        holder.companyName.setText(currentCompany.getCompanyName());
-        holder.companyBio.setText(currentCompany.getCompanyBio());
+        Organization currentOrganization = followingCompanies.get(position);
+        holder.companyName.setText(currentOrganization.getOrganizationName());
+        holder.companyBio.setText(currentOrganization.getOrganizationBio());
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
 
 

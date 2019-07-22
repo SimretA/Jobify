@@ -13,11 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
-import com.ussz.jobify.data.Company;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -69,7 +66,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     class HomeJobsViewHolder extends RecyclerView.ViewHolder{
 
-        // public TextView companyImage;
+        // public TextView organizationImage;
         private TextView jobTitle;
         private TextView jobDescription;
         private TextView companyName;

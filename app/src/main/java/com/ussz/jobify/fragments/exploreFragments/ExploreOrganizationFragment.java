@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.FollowingListAdapter;
-import com.ussz.jobify.data.Company;
+import com.ussz.jobify.data.Organization;
 
 import java.util.ArrayList;
 
@@ -35,8 +35,8 @@ public class ExploreOrganizationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_explore_organization, container, false);
         RecyclerView recyclerView = rootView.findViewById(R.id.exploreOrganizationRecyclerView);
 
-        Company company = new Company("Dummy Name","src","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", 1100);
-        ArrayList<Company> companies = new ArrayList<>();
+        Organization company = new Organization("Dummy Name","src","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", 1100);
+        ArrayList<Organization> companies = new ArrayList<>();
         for(int i=0; i<10;i++) {
             companies.add(company);
         }

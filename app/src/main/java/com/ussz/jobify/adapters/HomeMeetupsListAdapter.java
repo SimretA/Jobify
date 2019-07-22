@@ -70,7 +70,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
 
     class HomeMeetupsViewHolder extends RecyclerView.ViewHolder{
 
-        // public TextView companyImage;
+        // public TextView organizationImage;
         private TextView meetupTitle;
         private TextView meetupDescription;
         private ImageView meetupImage;

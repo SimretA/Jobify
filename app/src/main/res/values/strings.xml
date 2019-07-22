@@ -31,4 +31,6 @@
     <string name="organization">Organization</string>
 
     <string name="org">Org</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

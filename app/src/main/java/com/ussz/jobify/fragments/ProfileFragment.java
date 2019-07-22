@@ -10,9 +10,12 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 import com.ussz.jobify.R;
+import com.ussz.jobify.data.Graduate;
+import com.ussz.jobify.data.University;
 
 
 /**
@@ -20,6 +23,7 @@ import com.ussz.jobify.R;
  */
 public class ProfileFragment extends Fragment {
 
+    private TextView profileName, profileUniversity, profileGraduationYear, profileDepartment, profileEmail, profilePhoneNumber;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -38,6 +42,24 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.following_fragment_dest);
             }
         });
+
+        Graduate jane = new Graduate(1,"Female","Jane Doe", "Software Engineering", 2019, "", new University(1,"Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
+
+        profileName = view.findViewById(R.id.profile_name);
+        profileUniversity = view.findViewById(R.id.profile_university);
+        profileDepartment = view.findViewById(R.id.profile_department);
+        profileGraduationYear = view.findViewById(R.id.profile_graduation_year);
+        profileEmail = view.findViewById(R.id.profile_email);
+        profilePhoneNumber = view.findViewById(R.id.profile_phone_number);
+
+        profileName.setText(jane.getName());
+        profileUniversity.setText(jane.getUniversity().getName());
+        profileEmail.setText(jane.getEmail());
+        profileDepartment.setText(jane.getDepartment());
+        profileGraduationYear.setText(String.valueOf(jane.getGraduationYear()));
+        profilePhoneNumber.setText(jane.getPhoneNumber());
+
+
         return view;
 
     }

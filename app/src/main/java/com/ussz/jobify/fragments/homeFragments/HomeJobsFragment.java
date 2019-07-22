@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
-import com.ussz.jobify.adapters.FollowingListAdapter;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
-import com.ussz.jobify.data.Company;
 import com.ussz.jobify.data.Job;
 
 import java.util.ArrayList;

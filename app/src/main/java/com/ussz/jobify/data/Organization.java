@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Company {
-    private String companyName;
-    private String companyImage;
-    private String companyBio;
+public class Organization {
+    private String organizationName;
+    private String organizationImage;
+    private String organizationBio;
     private int followers;
 
 }
