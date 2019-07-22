@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_explore" />
     <fragment
         android:id="@+id/following_fragment_dest"
-        android:name="com.ussz.jobify.FollowingFragment"
+        android:name="com.ussz.jobify.fragments.FollowingFragment"
         android:label="Following"
         tools:layout="@layout/fragment_following" />
 </navigation>

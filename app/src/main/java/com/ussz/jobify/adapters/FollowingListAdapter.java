@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         Company currentCompany = followingCompanies.get(position);
         holder.companyName.setText(currentCompany.getCompanyName());
         holder.companyBio.setText(currentCompany.getCompanyBio());
-        //holder.companyImage.setd
+        holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
 
 
     }
@@ -53,13 +54,13 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     class FollowingViewHolder extends RecyclerView.ViewHolder{
 
-        // public TextView companyImage;
+        public ImageView companyImage;
         public TextView companyName;
         public TextView companyBio;
 
         public FollowingViewHolder(@NonNull View itemView) {
             super(itemView);
-//        companyImage = itemView.findViewById(R.id.company_image_recycler);
+        companyImage = itemView.findViewById(R.id.company_image_recycler);
             companyBio = itemView.findViewById(R.id.company_bio_recycler);
             companyName = itemView.findViewById(R.id.company_name_recycler);
 
