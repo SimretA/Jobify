@@ -51,4 +51,8 @@ dependencies {
     //circular image view
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
 
+    //fancy button and font for fancy button
+    implementation 'com.github.medyo:fancybuttons:1.9.1'
+    implementation "com.android.support:appcompat-v7:"
+
 }
