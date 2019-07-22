@@ -43,7 +43,7 @@ public class HomeMeetupFragment extends Fragment {
         for(int i=0; i<10;i++) {
             meetups.add(meetup);
         }
-        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(getContext(),meetups);
+        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);

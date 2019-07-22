@@ -41,7 +41,7 @@ public class ExploreJobsFragment extends Fragment {
         for(int i=0; i<10;i++) {
             jobs.add(job);
         }
-        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(getContext(),jobs);
+        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs);
         recyclerView.setAdapter(homeJobsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
