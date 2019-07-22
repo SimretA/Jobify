@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import com.ussz.jobify.data.Job;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapter.HomeJobsViewHolder> {
 
@@ -46,7 +49,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         holder.jobDescription.setText(j.getDescription());
         holder.companyName.setText("Google " + position);
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
-        holder.studentLimit.setText("" + (j.getStudentLimit()-position*2));
+        holder.leftSpace.setText("" + (j.getStudentLimit()-position*2) + " Spot");
     }
 
     @Override
@@ -61,7 +64,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         private TextView jobDescription;
         private TextView companyName;
         private ImageView companyImage;
-        private TextView studentLimit;
+        private FancyButton leftSpace;
 
         public HomeJobsViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +72,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
             jobDescription = itemView.findViewById(R.id.textView17);
             companyName = itemView.findViewById(R.id.textView16);
             companyImage = itemView.findViewById(R.id.organizationimage); //textView18
-            studentLimit = itemView.findViewById(R.id.textView18);
+            leftSpace = itemView.findViewById(R.id.leftSpace);
 
         }
     }

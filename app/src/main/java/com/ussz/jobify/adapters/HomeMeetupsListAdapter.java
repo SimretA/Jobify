@@ -16,6 +16,8 @@ import com.ussz.jobify.data.Meetup;
 
 import java.util.ArrayList;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsListAdapter.HomeMeetupsViewHolder>  {
 
 
@@ -43,7 +45,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         holder.meetupTitle.setText(meetup.getName()+ " " + position);
         holder.meetupDescription.setText(meetup.getDescription());
         holder.meetupImage.setImageResource(R.mipmap.profile_avatar_round);
-        holder.studentLimit.setText("" + (meetup.getStudentLimit()-position*2));
+        holder.studentLimit.setText("" + (meetup.getStudentLimit()-position*2) + " Spot");
     }
 
     @Override
@@ -58,14 +60,14 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         private TextView meetupTitle;
         private TextView meetupDescription;
         private ImageView meetupImage;
-        private TextView studentLimit;
+        private FancyButton studentLimit;
 
         public HomeMeetupsViewHolder(@NonNull View itemView) {
             super(itemView);
             meetupTitle = itemView.findViewById(R.id.textView2);
             meetupDescription = itemView.findViewById(R.id.textView17);
             meetupImage = itemView.findViewById(R.id.organizationimage);
-            studentLimit = itemView.findViewById(R.id.textView18);
+            studentLimit = itemView.findViewById(R.id.leftSpace);
 
         }
     }
