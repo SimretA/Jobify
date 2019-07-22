@@ -49,7 +49,6 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/textView18"
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@tools:sample/first_names" />
