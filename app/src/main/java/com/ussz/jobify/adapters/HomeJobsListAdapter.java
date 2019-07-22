@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Company;
 import com.ussz.jobify.data.Job;
+import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
 
 import org.w3c.dom.Text;
 
@@ -23,12 +25,12 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapter.HomeJobsViewHolder> {
 
-    private Context context;
+    private Fragment fragment;
     private ArrayList<Job> jobArrayList;
 
 
-    public HomeJobsListAdapter(Context context, ArrayList<Job> jobArrayList) {
-        this.context = context;
+    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList) {
+        this.fragment = fragment;
         this.jobArrayList = jobArrayList;
     }
 
@@ -49,7 +51,15 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         holder.jobDescription.setText(j.getDescription());
         holder.companyName.setText("Google " + position);
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
-        holder.leftSpace.setText("" + (j.getStudentLimit()-position*2) + " Spot");
+
+        if (fragment instanceof HomeJobsFragment){
+            //here call function that will calculate duration left
+            holder.leftSpace.setText("In " + (j.getStudentLimit()-position*2) + " Days");
+        }
+        else{
+            holder.leftSpace.setText("" + (j.getStudentLimit()-position*2) + " Spot");
+        }
+
     }
 
     @Override
