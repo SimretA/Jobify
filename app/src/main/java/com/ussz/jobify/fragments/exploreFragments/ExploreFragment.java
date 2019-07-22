@@ -53,7 +53,7 @@ public class ExploreFragment extends Fragment {
         List<String> stringList = new ArrayList<String>(3);
         stringList.add(getString(R.string.jobs));
         stringList.add(getString(R.string.meetups));
-        stringList.add(getString(R.string.organization));
+        stringList.add(getString(R.string.org));
 
         final ViewPager viewPager = rootView.findViewById(R.id.exploreViewPager);
         final PagerAdapter evpa = new ViewPagerAdapter(getChildFragmentManager(),fragmentList,stringList);

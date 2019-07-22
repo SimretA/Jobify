@@ -29,4 +29,6 @@
     <string name="all">All</string>
     <string name="jobs">Jobs</string>
     <string name="organization">Organization</string>
+
+    <string name="org">Org</string>
 </resources>
