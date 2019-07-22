@@ -43,16 +43,14 @@ public class ExploreFragment extends Fragment {
         TabLayout tabLayout = rootView.findViewById(R.id.exploreTabs);
 
 
-        List<Fragment> fragmentList = new ArrayList<Fragment>(4);
-        fragmentList.add(new ExploreAllFragment());
+        List<Fragment> fragmentList = new ArrayList<Fragment>(3);
         fragmentList.add(new ExploreJobsFragment());
         fragmentList.add(new ExploreMeetupsFragment());
         fragmentList.add(new ExploreOrganizationFragment());
 
 
 
-        List<String> stringList = new ArrayList<String>(4);
-        stringList.add(getString(R.string.all));
+        List<String> stringList = new ArrayList<String>(3);
         stringList.add(getString(R.string.jobs));
         stringList.add(getString(R.string.meetups));
         stringList.add(getString(R.string.organization));

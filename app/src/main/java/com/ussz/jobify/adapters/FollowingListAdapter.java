@@ -13,7 +13,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.data.Company;
 import java.util.ArrayList;
 
-public class FollowingListAdapter extends RecyclerView.Adapter<FollowingViewHolder> {
+public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdapter.FollowingViewHolder> {
 
     private Context context;
     private ArrayList<Company> followingCompanies;
@@ -49,18 +49,21 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingViewHold
     public int getItemCount() {
         return followingCompanies.size();
     }
-}
-class FollowingViewHolder extends RecyclerView.ViewHolder{
 
-   // public TextView companyImage;
-    public TextView companyName;
-    public TextView companyBio;
 
-    public FollowingViewHolder(@NonNull View itemView) {
-        super(itemView);
+    class FollowingViewHolder extends RecyclerView.ViewHolder{
+
+        // public TextView companyImage;
+        public TextView companyName;
+        public TextView companyBio;
+
+        public FollowingViewHolder(@NonNull View itemView) {
+            super(itemView);
 //        companyImage = itemView.findViewById(R.id.company_image_recycler);
-        companyBio = itemView.findViewById(R.id.company_bio_recycler);
-        companyName = itemView.findViewById(R.id.company_name_recycler);
+            companyBio = itemView.findViewById(R.id.company_bio_recycler);
+            companyName = itemView.findViewById(R.id.company_name_recycler);
 
+        }
     }
 }
+
