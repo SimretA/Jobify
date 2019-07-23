@@ -15,7 +15,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/triangle"
+        android:background="@drawable/profile_cover"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/clickable_following"
         app:layout_constraintTop_toTopOf="parent"
