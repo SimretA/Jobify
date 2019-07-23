@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
@@ -35,7 +36,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        CircularRevealCardView clickable = view.findViewById(R.id.clickable_following);
+        MaterialCardView clickable = view.findViewById(R.id.clickable_following);
         clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

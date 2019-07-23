@@ -27,36 +27,42 @@
 
     <TextView
         android:id="@+id/company_name_recycler"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="Place holder | 11k"
         android:textSize="@dimen/caption_size"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/fancyButton"
+        app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toEndOf="@+id/company_image_recycler"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem[7]" />
 
     <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/fancyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:paddingLeft="5dp"
         android:paddingTop="2.5dp"
         android:paddingRight="5dp"
         android:paddingBottom="2.5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/company_name_recycler"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/company_name_recycler"
         fancy:fb_radius="5dp"
-        fancy:fb_text="Unfollow" />
+        fancy:fb_text="@string/unfollow" />
 
     <TextView
         android:id="@+id/company_bio_recycler"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="4dp"
@@ -69,6 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/company_image_recycler"
         app:layout_constraintTop_toBottomOf="@+id/company_name_recycler"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="@tools:sample/lorem[19]" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.circularreveal.cardview.CircularRevealCardView>

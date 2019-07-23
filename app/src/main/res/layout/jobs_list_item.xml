@@ -46,12 +46,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/leftSpace"
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@tools:sample/first_names" />
+                tools:text="@tools:sample/lorem[7]" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier"
@@ -75,7 +76,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                tools:text="In this session you will learnn " />
+                tools:text="@tools:sample/lorem[6]" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -88,14 +89,12 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView16"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
-                tools:text="In this session you will learn best In this session you will learn " />
+                tools:text="@tools:sample/lorem[6]" />
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/leftSpace"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:paddingLeft="5dp"
@@ -104,8 +103,6 @@
                 android:paddingBottom="2.5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="@+id/textView2"
                 fancy:fb_borderColor="#FFFFFF"
                 fancy:fb_borderWidth="1dp"
@@ -113,7 +110,7 @@
                 fancy:fb_focusColor="#9bd823"
                 fancy:fb_iconPosition="left"
                 fancy:fb_radius="5dp"
-                fancy:fb_text="123 spot"
+                fancy:fb_text="123123 spot"
                 fancy:fb_textColor="#FFFFFF" />
 
 
