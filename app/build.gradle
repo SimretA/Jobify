@@ -55,4 +55,9 @@ dependencies {
     implementation 'com.github.medyo:fancybuttons:1.9.1'
     implementation "com.android.support:appcompat-v7:"
 
+    //firebase
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+
 }
+
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
