@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
@@ -31,6 +32,12 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.following_list_item, parent, false);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.org_profile_fragment_dest);
+            }
+        });
 
         return new FollowingViewHolder(itemView);
 
