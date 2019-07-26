@@ -4,5 +4,23 @@
     <color name="colorPrimaryDark">#192A56</color>
     <color name="colorAccent">#487EB0</color>
 
+    <color name="green">#558B2F</color>
+
     <color name="grey_60">#666666</color>
+
+    <color name="address">#2F7092</color>
+    <color name="followers">#0D5D98</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+
+    <color name="gradEnd">#A8192A56</color>
+    <color name="gradStart">#E9192A56</color>
+
+    <color name="followersBg">#65DCE5</color>
+    <color name="followingBg">#49BEFF</color>
+    <color name="grey">#E5E5E5</color>
+
+    <color name="white">#FFFFFF</color>
+
 </resources>
