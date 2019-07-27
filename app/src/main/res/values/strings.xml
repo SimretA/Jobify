@@ -39,4 +39,10 @@
     <string name="welcome_back">Welcome Back!</string>
     <string name="freshjobs">FreshJobs</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="username">Username</string>
+    <string name="next">next</string>
+    <string name="step_1">Step 1</string>
+    <string name="step_2">Step 2</string>
 </resources>

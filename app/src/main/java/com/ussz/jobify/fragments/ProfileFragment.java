@@ -42,13 +42,15 @@ public class ProfileFragment extends Fragment {
         clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.following_fragment_dest);
+                //for experiment i have changed this to toRegistrationOne
+                //if it is still this change to tofollowing..
+                Navigation.findNavController(v).navigate(R.id.toRegistrationOne);
             }
         });
 
         Graduate jane = new Graduate(1,"Female","Jane Doe", "Software Engineering", 2019, "", new University(1,"Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
 
-        profileName = view.findViewById(R.id.profile_name);
+        profileName = view.findViewById(R.id.tv_name);
         profileUniversity = view.findViewById(R.id.profile_university);
         profileDepartment = view.findViewById(R.id.profile_department);
         profileGraduationYear = view.findViewById(R.id.profile_graduation_year);
