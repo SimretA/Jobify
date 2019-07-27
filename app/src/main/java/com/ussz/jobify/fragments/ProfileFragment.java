@@ -42,7 +42,9 @@ public class ProfileFragment extends Fragment {
         clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.following_fragment_dest);
+                //for experiment i have changed this to toRegistrationOne
+                //if it is still this change to tofollowing..
+                Navigation.findNavController(v).navigate(R.id.toRegistrationOne);
             }
         });
 
