@@ -13,6 +13,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     AppBarConfiguration appBarConfiguration;
+
+    private FirebaseAuth mAuth;
+
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment);
 
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setDrawerLayout(drawer)
@@ -61,6 +67,18 @@ public class MainActivity extends AppCompatActivity {
 
         setUpNavigationMenu(navController);
 
+        mAuth = FirebaseAuth.getInstance();
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser==null){
+            navController.navigate(R.id.login_fragment_dest);
+        }
     }
 
     @Override

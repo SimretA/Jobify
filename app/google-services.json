@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "267557540410-no3e9j9q15ev5mt9pukj3u088inns68f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ussz.jobify",
+            "certificate_hash": "eec8c2b66cfb9d76251fec3d3c767b08c1128ad2"
+          }
+        },
+        {
           "client_id": "267557540410-0ksi868kg6u48egaflsi8pctgja2bf2r.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -17,11 +16,10 @@ import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
-import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
-import com.ussz.jobify.viewModel.UserViewModel;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -53,14 +51,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
-        userViewModel.getDataSnapshotLiveData().observe(this, new Observer<DataSnapshot>() {
-            @Override
-            public void onChanged(DataSnapshot dataSnapshot) {
-                //TODO set values here
-            }
-        });
         Graduate jane = new Graduate(1,"Female","Jane Doe", "Software Engineering", 2019, "", new University(1,"Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
 
         profileName = view.findViewById(R.id.tv_name);
