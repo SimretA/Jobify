@@ -31,7 +31,7 @@
         tools:layout="@layout/fragment_following" />
     <fragment
         android:id="@+id/org_profile_fragment_dest"
-        android:name="com.ussz.jobify.OrgProfileFragment"
+        android:name="com.ussz.jobify.fragments.OrgProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_org_profile" />
     <fragment
@@ -52,4 +52,9 @@
         android:name="com.ussz.jobify.fragments.registrationFragment.RegistrationFragmentTwo"
         android:label="Registration Step 2"
         tools:layout="@layout/fragment_registration_fragment_two" />
+    <fragment
+        android:id="@+id/login_fragment_dest"
+        android:name="com.ussz.jobify.fragments.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

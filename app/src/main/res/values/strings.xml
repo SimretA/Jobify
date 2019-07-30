@@ -34,7 +34,11 @@
     <string name="email">Email</string>
     <string name="phone_number">Phone Number</string>
     <string name="unfollow">Unfollow</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="freshjobs">FreshJobs</string>
+    <string name="forgot_password">Forgot password?</string>
     <string name="sign_up">Sign up</string>
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="username">Username</string>
