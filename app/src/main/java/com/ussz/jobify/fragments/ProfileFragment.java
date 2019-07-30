@@ -52,7 +52,7 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        Graduate jane = new Graduate(1,"Female","Jane Doe", "Software Engineering", 2019, "", new University(1,"Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
+        Graduate jane = new Graduate("1","Female","Jane Doe", "Software Engineering", 2019, "", new University("1","Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
 
         profileName = view.findViewById(R.id.tv_name);
         profileUniversity = view.findViewById(R.id.profile_university);

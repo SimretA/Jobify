@@ -1,10 +1,8 @@
 package com.ussz.jobify.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
+import com.ussz.jobify.network.JobRemote;
 
 import java.util.ArrayList;
 
@@ -37,6 +36,14 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
     public HomeJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.jobs_list_item, parent, false);
+        itemView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        JobRemote.getAllJobs();
+                    }
+                }
+        );
 
         return new HomeJobsViewHolder(itemView);
     }

@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Graduate {
-    private long id;
+
+    private String id;
     private String gender;
     private String name;
     private String department;
