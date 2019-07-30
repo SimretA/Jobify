@@ -75,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser==null){
-            navController.navigate(R.id.login_fragment_dest);
-        }
+
     }
 
     @Override

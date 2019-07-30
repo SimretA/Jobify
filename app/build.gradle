@@ -6,6 +6,7 @@ android {
         applicationId "com.ussz.jobify"
         minSdkVersion 16
         targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -62,9 +63,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:20.2.0'
     //firebase auth
     implementation 'com.google.firebase:firebase-auth:18.1.0'
-
-
-
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
 
 }
