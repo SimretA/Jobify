@@ -3,9 +3,11 @@ package com.ussz.jobify.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Meetup {
 
     public final static String FIELD_NAME = "name";
@@ -16,4 +18,5 @@ public class Meetup {
     private String description;
     private String meetupImageUrl;
     private int studentLimit;
+
 }

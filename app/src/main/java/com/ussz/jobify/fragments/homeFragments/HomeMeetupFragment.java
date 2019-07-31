@@ -4,6 +4,8 @@ package com.ussz.jobify.fragments.homeFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,8 +18,10 @@ import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
+import com.ussz.jobify.viewModel.MeetupViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,13 +45,17 @@ public class HomeMeetupFragment extends Fragment {
         Meetup meetup = new Meetup("Google IO meetup","This is the annual google IO extended meetup","",12);
         ArrayList<Meetup> meetups = new ArrayList<>();
         for(int i=0; i<10;i++) {
-            meetups.add(meetup);
+            //meetups.add(meetup);
         }
         HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+        MeetupViewModel meetupViewModel = ViewModelProviders.of(this).get(MeetupViewModel.class);
+        meetupViewModel.getMeetups().observe(this, meetups1 -> {
+            homeMeetupsListAdapter.setMeetupsArrayList((ArrayList<Meetup>) meetups1);
+        });
         return rootView;
     }
 

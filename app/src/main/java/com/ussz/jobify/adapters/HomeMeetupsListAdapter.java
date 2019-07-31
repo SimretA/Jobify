@@ -67,6 +67,11 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         return meetupsArrayList.size();
     }
 
+    public void setMeetupsArrayList(ArrayList<Meetup> meetupsArrayList){
+        this.meetupsArrayList = meetupsArrayList;
+        notifyDataSetChanged();
+    }
+
 
     class HomeMeetupsViewHolder extends RecyclerView.ViewHolder{
 
