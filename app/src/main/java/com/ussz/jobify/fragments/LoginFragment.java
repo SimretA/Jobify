@@ -7,6 +7,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +23,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ussz.jobify.R;
+import com.ussz.jobify.network.LoginRemote;
+import com.ussz.jobify.utilities.ILoginResult;
 import com.ussz.jobify.validations.LoginValidations;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -29,7 +33,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements ILoginResult {
 
 
     private TextInputEditText email,password;
@@ -38,7 +42,8 @@ public class LoginFragment extends Fragment {
 
     private ProgressBar progressBar;
 
-    private FirebaseAuth mAuth;
+    private TextView loginErrorMessageTv;
+
 
     View rootView;
 
@@ -46,6 +51,7 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
+    NavController navController;
 
 
     @Override
@@ -72,13 +78,14 @@ public class LoginFragment extends Fragment {
 
         email = rootView.findViewById(R.id.loginEmailEt);
         password = rootView.findViewById(R.id.loginPasswordEt);
-
         loginButton = rootView.findViewById(R.id.loginButton);
-
         createAccountButton = rootView.findViewById(R.id.loginCreateAccountButton);
+        loginErrorMessageTv = rootView.findViewById(R.id.loginErrorMessageTv);
 
 
-        mAuth = FirebaseAuth.getInstance();
+        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+
+
 
 
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +102,8 @@ public class LoginFragment extends Fragment {
                 String userPassword = password.getText().toString();
                 if(LoginValidations.validateEmailAndPassword(userEmail,userPassword).equals("correct")){
                     //                signInUser(email.getText().toString(), ,view);
-                }
-                else{
-                    //There is invalid input...
+                    hideViews();
+                    LoginRemote.loginUser(userEmail,userPassword,LoginFragment.this);
                 }
             }
         });
@@ -127,32 +133,19 @@ public class LoginFragment extends Fragment {
 
     }
 
-
-
-    private void signInUser(String email, String password,View view){
-
-        progressBar.setVisibility(View.VISIBLE);
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-
-                            Navigation.findNavController(view).navigate(R.id.toHomeFromLogin);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("User sign up oh! no", "signInWithEmail:failure", task.getException());
-
-                        }
-                    }
-                });
-
-        progressBar.setVisibility(View.GONE);
-
+    private void showError(String error){
+        loginErrorMessageTv.setText(error);
     }
 
 
-
-
+    @Override
+    public void loginResult(String result) {
+        if (result.equals("login success")){
+            navController.navigate(R.id.toHomeFromLogin);
+        }
+        else{
+            showError(result);
+            showViews();
+        }
+    }
 }

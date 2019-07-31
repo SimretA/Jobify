@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,24 +29,30 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
+import com.ussz.jobify.network.RegistrationRemote;
+import com.ussz.jobify.utilities.IRegistrationResult;
 import com.ussz.jobify.validations.RegistrationValidation;
 
 import java.util.concurrent.Executor;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegistrationFragmentTwo extends Fragment {
+public class RegistrationFragmentTwo extends Fragment implements IRegistrationResult {
 
     private TextInputEditText university,classOf,department;
 
     TextView registrationTwoError;
 
+    FancyButton createAccountFButton;
+
+    ProgressBar progressBar2;
+
     Graduate graduate;
 
-    FirebaseFirestore db;
-
-    private FirebaseAuth mAuth;
+    NavController navController;
 
     public RegistrationFragmentTwo() {
         // Required empty public constructor
@@ -70,13 +77,12 @@ public class RegistrationFragmentTwo extends Fragment {
         university = rootView.findViewById(R.id.universityEt);
         classOf = rootView.findViewById(R.id.classOfEt);
         department = rootView.findViewById(R.id.departmentEt);
-
         registrationTwoError = rootView.findViewById(R.id.registrationTwoError);
+        progressBar2 = rootView.findViewById(R.id.progressBar2);
+        createAccountFButton = rootView.findViewById(R.id.createAccount);
 
-        db = FirebaseFirestore.getInstance();
 
-
-        rootView.findViewById(R.id.createAccount).setOnClickListener(new View.OnClickListener() {
+        createAccountFButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String userDepartment = RegistrationValidation.Sanitize(department.getText().toString());
@@ -91,7 +97,10 @@ public class RegistrationFragmentTwo extends Fragment {
                     showError("");
                     graduate.setGraduationYear(Integer.parseInt(userClassOf));
                     graduate.setDepartment(userDepartment);
-                    registerGraduate(graduate,password);
+
+                    hideViews();
+                    RegistrationRemote.saveEmailAndPassword(graduate,password,RegistrationFragmentTwo.this);
+
                 }
                 else if(classOfTwoInt==0){
                     showError("Invalid graduation year");
@@ -102,8 +111,28 @@ public class RegistrationFragmentTwo extends Fragment {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
+        navController = Navigation.findNavController(getActivity(),R.id.nav_host_fragment);
+
+        progressBar2.setVisibility(View.GONE);
+
         return rootView;
+    }
+
+
+    private void hideViews(){
+        progressBar2.setVisibility(View.VISIBLE);
+        university.setEnabled(false);
+        classOf.setEnabled(false);
+        department.setEnabled(false);
+        createAccountFButton.setEnabled(false);
+    }
+
+    private void showViews(){
+        progressBar2.setVisibility(View.GONE);
+        university.setEnabled(true);
+        classOf.setEnabled(true);
+        department.setEnabled(true);
+        createAccountFButton.setEnabled(true);
     }
 
 
@@ -111,50 +140,26 @@ public class RegistrationFragmentTwo extends Fragment {
         registrationTwoError.setText(error);
     }
 
-    private void registerGraduate(Graduate graduate, String password) {
-        //assume the university exists for now\
-        saveEmailAndPassword(graduate.getEmail(),password);
+
+    @Override
+    public void saveAccountResult(String result) {
+        if (result.equals("Account saved success")){
+            navController.navigate(R.id.toHomeFromRegistrationTwo);
+        }
+        else{
+            showError(result);
+            showViews();
+        }
     }
 
-
-
-    private void saveAccount(Graduate graduate){
-        // Add a new document with a generated ID
-        db.collection("graduate")
-                .document(graduate.getId())
-                .set(graduate)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //Move to home
-                        Navigation.createNavigateOnClickListener(R.id.toHomeFromRegistrationTwo,null);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Errorinregistration", "Error writing document", e);
-                    }
-                });
+    @Override
+    public void saveEmailAndPasswordResult(Graduate graduate,String result) {
+        if (graduate.getId()!=null && result.equals("Registration success")){
+            RegistrationRemote.saveAccount(graduate,RegistrationFragmentTwo.this);
+        }
+        else{
+            showError(result);
+            showViews();
+        }
     }
-
-    private void saveEmailAndPassword(String email,String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener( getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                graduate.setId(user.getUid());
-                                Toast.makeText(getContext(),"success in registration 1",Toast.LENGTH_LONG).show();
-                                saveAccount(graduate);
-                            }
-                            else{
-                                Toast.makeText(getContext(),"Error in registration ",Toast.LENGTH_LONG).show();
-                                Log.w("Errorinregistration", "createUserWithEmail:failure", task.getException());
-                            }
-                    }
-                });
-    }
-
 }

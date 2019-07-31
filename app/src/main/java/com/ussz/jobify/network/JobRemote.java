@@ -11,7 +11,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
 import com.ussz.jobify.utilities.JobCustomCallback;
@@ -80,8 +79,6 @@ public class JobRemote {
 
                                 }
                                 callback.onCallBack(newJobs);
-
-
                             }
                             else
                                 Log.d("dataerror", task.getException().toString());
