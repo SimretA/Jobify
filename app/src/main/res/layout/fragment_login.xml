@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LoginFragment">
 
     <TextView
@@ -14,8 +15,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="84dp"
-        android:text="@string/welcome_back"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/app_name"
+        android:textStyle="bold"
         android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:hint="@string/email"
@@ -37,10 +42,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginEmailEt"
+            android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_password_text"
@@ -49,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:hint="@string/password"
@@ -60,36 +68,74 @@
         app:layout_constraintTop_toBottomOf="@+id/login_email_text">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginPasswordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
     <TextView
         android:id="@+id/forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginRight="32dp"
         android:text="@string/forgot_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password_text" />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/buttonsHeightForAuth"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:paddingVertical="2dp"
-        android:text="@string/login"
-        android:textAlignment="center"
-        android:textSize="@dimen/caption_size"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password_text" />
+        app:layout_constraintTop_toBottomOf="@+id/forgot_password"
+        fancy:fb_borderColor="#ccc"
+        fancy:fb_defaultColor="#D2558B2F"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="@string/login"
+        fancy:fb_textColor="#FFF" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/loginCreateAccountButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/buttonsHeightForAuth"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        fancy:fb_borderColor="#ccc"
+        fancy:fb_defaultColor="#D2558B2F"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="@string/create_account"
+        fancy:fb_textColor="#FFF" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        fancy:layout_constraintEnd_toEndOf="parent"
+        fancy:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
 
 
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -53,9 +53,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/registrationStepOneError">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usernameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -83,6 +84,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:maxLines="1"
+            android:id="@+id/emailEt"
             android:inputType="textEmailAddress"
             android:layout_height="wrap_content" />
 
@@ -110,6 +112,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:maxLines="1"
+            android:id="@+id/passwordEt"
             android:inputType="textPassword"
             android:layout_height="wrap_content" />
 
@@ -135,6 +138,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:maxLines="1"
+            android:id="@+id/phoneNumberEt"
             android:inputType="phone"
             android:layout_height="wrap_content" />
 
@@ -164,7 +168,7 @@
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/nextButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/buttonsHeightForAuth"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
@@ -178,8 +182,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         fancy:fb_borderColor="#ccc"
         fancy:fb_defaultColor="#D2558B2F"
-        fancy:fb_iconPosition="right"
-        fancy:fb_iconResource="@drawable/ic_navigate_next_black_24dp"
         fancy:fb_radius="5dp"
         fancy:fb_text="@string/next"
         fancy:fb_textColor="#FFF" />
@@ -193,6 +195,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         fancy:layout_constraintEnd_toEndOf="parent"
         fancy:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/registrationStepOneError"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:textAllCaps="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

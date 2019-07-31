@@ -5,8 +5,11 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -21,17 +24,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.view.Menu;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
 
     AppBarConfiguration appBarConfiguration;
+
+    TextView emailDrawer;
 
     private FirebaseAuth mAuth;
 
@@ -48,15 +55,10 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
 
-
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
-
 
         navController = Navigation.findNavController(this,R.id.nav_host_fragment);
 
@@ -67,17 +69,47 @@ public class MainActivity extends AppCompatActivity {
 
         setUpNavigationMenu(navController);
 
+
+
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller,
+                                             @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                int[] dest = new int[]{R.id.login_fragment_dest,R.id.registrationFragmentOne,R.id.registrationFragmentTwo};
+                int currentDestId = destination.getId();
+                if(currentDestId==dest[0] || currentDestId==dest[1] || currentDestId==dest[2]) {
+                    toolbar.setVisibility(View.GONE);
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                } else {
+                    toolbar.setVisibility(View.VISIBLE);
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+                }
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        emailDrawer = headerView.findViewById(R.id.emaildrawer);
+
+
         mAuth = FirebaseAuth.getInstance();
 
+
+
+
     }
+
+
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser==null){
+        if(mAuth.getCurrentUser()==null){
             navController.navigate(R.id.login_fragment_dest);
+        }
+        else{
+            emailDrawer.setText(mAuth.getCurrentUser().getEmail());
         }
     }
 
