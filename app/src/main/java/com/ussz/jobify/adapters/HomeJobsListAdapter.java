@@ -1,10 +1,8 @@
 package com.ussz.jobify.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +15,7 @@ import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -37,6 +36,8 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
     public HomeJobsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.jobs_list_item, parent, false);
+
+
 
         return new HomeJobsViewHolder(itemView);
     }
@@ -62,6 +63,11 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
     @Override
     public int getItemCount() {
         return jobArrayList.size();
+    }
+
+    public void setJobs(ArrayList<Job> jobs){
+        this.jobArrayList = jobs;
+        notifyDataSetChanged();
     }
 
     class HomeJobsViewHolder extends RecyclerView.ViewHolder{

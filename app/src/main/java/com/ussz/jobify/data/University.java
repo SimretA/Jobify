@@ -7,7 +7,11 @@ import lombok.Data;
 @AllArgsConstructor
 public
 class University {
-    private long id;
+
+    public final static String FIELD_NAME = "name";
+    public final static String FIELD_EMAIL = "email";
+
+    private String id;
     private String name;
     private String email;
 

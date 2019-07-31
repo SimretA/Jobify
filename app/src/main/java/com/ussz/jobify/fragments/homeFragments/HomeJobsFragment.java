@@ -1,9 +1,13 @@
 package com.ussz.jobify.fragments.homeFragments;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,14 +18,20 @@ import android.view.ViewGroup;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.data.Job;
+import com.ussz.jobify.network.JobRemote;
+import com.ussz.jobify.viewModel.JobViewModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeJobsFragment extends Fragment {
 
+
+    HomeJobsListAdapter homeJobsListAdapter;
 
     public HomeJobsFragment() {
         // Required empty public constructor
@@ -36,17 +46,20 @@ public class HomeJobsFragment extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.homeJobsRecyclerView);
 
-        Job job = new Job("Software engineering","We are looking for software engineering graduates..",23);
-        ArrayList<Job> jobs = new ArrayList<>();
-        for(int i=0; i<10;i++) {
-            jobs.add(job);
-        }
-        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs);
+
+        homeJobsListAdapter = new HomeJobsListAdapter(this,new ArrayList<>());
         recyclerView.setAdapter(homeJobsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+
+        JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
+        jobViewModel.getJobs().observe(this, jobs -> homeJobsListAdapter.setJobs((ArrayList<Job>) jobs));
+
         return rootView;
+    }
+    public void listen(ArrayList<Job> jobs){
+        homeJobsListAdapter.setJobs(jobs);
     }
 
 }
