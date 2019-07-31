@@ -2,14 +2,12 @@ package com.ussz.jobify.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Graduate {
-
-    public Graduate(){
-
-    }
 
     private String id;
     private String gender;

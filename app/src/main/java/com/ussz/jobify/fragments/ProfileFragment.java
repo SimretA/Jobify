@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -16,10 +17,14 @@ import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
+import com.ussz.jobify.viewModel.ProfileViewModel;
+
+import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -44,8 +49,25 @@ public class ProfileFragment extends Fragment {
         FancyButton clickable = view.findViewById(R.id.fancyButton2);
 
 
-        Graduate jane = new Graduate("yuolu","Female","Jane Doe", "Software Engineering", 2019, "", new University("1","Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
+        FirebaseAuth oAuth = FirebaseAuth.getInstance();
 
+        ProfileViewModel profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+
+        profileViewModel.getMyProfile(Objects.requireNonNull(oAuth.getCurrentUser()).getUid()).observe(this, new Observer<Graduate>() {
+            @Override
+            public void onChanged(Graduate graduate) {
+                setProfileData(view, graduate);
+
+            }
+        });
+
+
+
+        return view;
+
+    }
+
+    private void setProfileData(View view, Graduate graduate){
         profileName = view.findViewById(R.id.tv_name);
         profileUniversity = view.findViewById(R.id.profile_university);
         profileDepartment = view.findViewById(R.id.profile_department);
@@ -53,15 +75,14 @@ public class ProfileFragment extends Fragment {
         profileEmail = view.findViewById(R.id.profile_email);
         profilePhoneNumber = view.findViewById(R.id.profile_phone_number);
 
-        profileName.setText(jane.getName());
-        profileUniversity.setText(jane.getUniversity().getName());
-        profileEmail.setText(jane.getEmail());
-        profileDepartment.setText(jane.getDepartment());
-        profileGraduationYear.setText(String.valueOf(jane.getGraduationYear()));
-        profilePhoneNumber.setText(jane.getPhoneNumber());
+        profileName.setText(graduate.getName());
+        if(graduate.getUniversity() !=null)
+            profileUniversity.setText(graduate.getUniversity().getName());
 
-
-        return view;
+        profileEmail.setText(graduate.getEmail());
+        profileDepartment.setText(graduate.getDepartment());
+        profileGraduationYear.setText(String.valueOf(graduate.getGraduationYear()));
+        profilePhoneNumber.setText(graduate.getPhoneNumber());
 
     }
 
