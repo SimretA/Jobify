@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         FancyButton clickable = view.findViewById(R.id.fancyButton2);
 
 
-        Graduate jane = new Graduate("yuolu","Female","Jane Doe", "Software Engineering", 2019, "", new University(1,"Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
+        Graduate jane = new Graduate("yuolu","Female","Jane Doe", "Software Engineering", 2019, "", new University("1","Addis Ababa University", "registrar@aait.edu"),"09234567","janedoe@aait.edu");
 
         profileName = view.findViewById(R.id.tv_name);
         profileUniversity = view.findViewById(R.id.profile_university);
