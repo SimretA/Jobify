@@ -1,7 +1,6 @@
 package com.ussz.jobify.data;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.ussz.jobify.data.remoteDataHelpers.UniverityRef;
 
 import java.util.List;
 
