@@ -17,7 +17,10 @@ public class Job {
 
     private String title;
     private String description;
-
     private int studentLimit;
     private String department;
+    private String postedByName;
+    private String postedById;
+
+
 }

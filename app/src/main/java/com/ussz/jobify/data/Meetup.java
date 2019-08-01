@@ -18,5 +18,6 @@ public class Meetup {
     private String description;
     private String meetupImageUrl;
     private int studentLimit;
-
+    private String postedByName;
+    private String postedById;
 }

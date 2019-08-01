@@ -35,10 +35,10 @@ public class ExploreOrganizationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_explore_organization, container, false);
         RecyclerView recyclerView = rootView.findViewById(R.id.exploreOrganizationRecyclerView);
 
-        Organization company = new Organization("Dummy Name","src","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", 1100);
+//        Organization company = new Organization("Dummy Name","src","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", 1100);
         ArrayList<Organization> companies = new ArrayList<>();
         for(int i=0; i<10;i++) {
-            companies.add(company);
+           // companies.add(company);
         }
         FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), companies);
         recyclerView.setAdapter(followingListAdapter);

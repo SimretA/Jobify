@@ -42,11 +42,9 @@ public class HomeMeetupFragment extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.homeMeetupRecyclerView);
 
-        Meetup meetup = new Meetup("Google IO meetup","This is the annual google IO extended meetup","",12);
+       
         ArrayList<Meetup> meetups = new ArrayList<>();
-        for(int i=0; i<10;i++) {
-            //meetups.add(meetup);
-        }
+
         HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

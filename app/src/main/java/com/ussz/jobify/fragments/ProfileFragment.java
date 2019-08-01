@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.card.MaterialCardView;
@@ -22,8 +23,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
+import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.ProfileViewModel;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -35,6 +38,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class ProfileFragment extends Fragment {
 
     private TextView profileName, profileUniversity, profileGraduationYear, profileDepartment, profileEmail, profilePhoneNumber;
+    private Graduate mGraduate;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -46,7 +50,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        FancyButton clickable = view.findViewById(R.id.fancyButton2);
+        FancyButton clickable = view.findViewById(R.id.profile_following_btn);
 
 
         FirebaseAuth oAuth = FirebaseAuth.getInstance();
@@ -57,9 +61,23 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onChanged(Graduate graduate) {
                 setProfileData(view, graduate);
+                mGraduate = graduate;
+                clickable.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle args = new Bundle();
+                        if(mGraduate != null){
+                            args.putSerializable(Tags.BUNDLE_KEY, (Serializable) mGraduate.getFollowing());
+                        }
+                        Navigation.findNavController(view).navigate(R.id.following_fragment_dest, args);
+
+                    }
+                });
 
             }
         });
+
+
 
 
 
@@ -74,6 +92,7 @@ public class ProfileFragment extends Fragment {
         profileGraduationYear = view.findViewById(R.id.profile_graduation_year);
         profileEmail = view.findViewById(R.id.profile_email);
         profilePhoneNumber = view.findViewById(R.id.profile_phone_number);
+        FancyButton profileFollowing = view.findViewById(R.id.profile_following_btn);
 
         profileName.setText(graduate.getName());
         if(graduate.getUniversity() !=null)
@@ -83,6 +102,8 @@ public class ProfileFragment extends Fragment {
         profileDepartment.setText(graduate.getDepartment());
         profileGraduationYear.setText(String.valueOf(graduate.getGraduationYear()));
         profilePhoneNumber.setText(graduate.getPhoneNumber());
+
+        profileFollowing.setText(graduate.getFollowing() != null ? "Following " + graduate.getFollowing().size() : "Following 0 ");
 
     }
 

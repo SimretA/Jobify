@@ -1,5 +1,10 @@
 package com.ussz.jobify.data;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.ussz.jobify.data.remoteDataHelpers.UniverityRef;
+
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +20,11 @@ public class Graduate {
     private String department;
     private int graduationYear;
     private String profileImage;
+    private DocumentReference universityRef;
     private University university;
     private String phoneNumber;
     private String email;
+    private List<DocumentReference> following;
 
 
 }

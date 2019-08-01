@@ -36,10 +36,10 @@ public class ExploreJobsFragment extends Fragment {
 
         RecyclerView recyclerView = rootView.findViewById(R.id.exploreJobsRecyclerView);
 
-        Job job = new Job("Software engineering","We are looking for software engineering graduates..",23, "Software Engineering");
+        //Job job = new Job("Software engineering","We are looking for software engineering graduates..",23, "Software Engineering");
         ArrayList<Job> jobs = new ArrayList<>();
         for(int i=0; i<10;i++) {
-            jobs.add(job);
+          //  jobs.add(job);
         }
         HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs);
         recyclerView.setAdapter(homeJobsListAdapter);

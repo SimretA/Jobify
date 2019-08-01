@@ -58,6 +58,11 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         return followingCompanies.size();
     }
 
+    public void setOrginizations(ArrayList<Organization> organizations) {
+        this.followingCompanies = organizations;
+        notifyDataSetChanged();
+    }
+
 
     class FollowingViewHolder extends RecyclerView.ViewHolder{
 
