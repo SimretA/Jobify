@@ -16,7 +16,7 @@ public class ProfileViewModel  extends ViewModel {
         ProfileRemote.getProfile(
                 object -> {
                     mProfile.setValue((Graduate) object);
-                    if (mProfile.getValue() !=null) {
+                    if (mProfile.getValue() !=null && mProfile.getValue().getUniversityRef()!=null) {
                         UniversityRemote.getUniversityFromDocument(
                                 mProfile.getValue().getUniversityRef(),
                                 object2 -> {
