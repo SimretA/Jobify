@@ -19,6 +19,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
@@ -40,6 +41,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     View rootView;
 
+    CircularImageView profile_image;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -58,6 +61,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         profileGraduationYear = rootView.findViewById(R.id.profile_graduation_year);
         profileEmail = rootView.findViewById(R.id.profile_email);
         profilePhoneNumber = rootView.findViewById(R.id.profile_phone_number);
+
+        profile_image = rootView.findViewById(R.id.profile_image);
 
 
         FirebaseAuth oAuth = FirebaseAuth.getInstance();
@@ -86,6 +91,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         });
 
 
+        profile_image.setOnClickListener(this);
 
         rootView.findViewById(R.id.tv_name).setOnClickListener(this);
 //        rootView.findViewById(R.id.emailLL).setOnClickListener(this);
@@ -154,6 +160,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 messageToEditFragment[1] = profileDepartment.getText().toString();
                 //department
                 break;
+            case R.id.profile_image:
+                Navigation.findNavController(view).navigate(R.id.toEditProfileImage);
+                return;
         }
 
 
