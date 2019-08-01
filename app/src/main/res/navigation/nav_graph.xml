@@ -16,6 +16,9 @@
         <argument
             android:name="messageForEditing"
             app:argType="string[]" />
+        <action
+            android:id="@+id/toEditProfileImage"
+            app:destination="@id/editProfileImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -83,4 +86,9 @@
         android:name="com.ussz.jobify.fragments.profileFragments.EditProfileFragment"
         android:label="@string/editProfile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/editProfileImageFragment"
+        android:name="com.ussz.jobify.fragments.profileFragments.EditProfileImageFragment"
+        android:label="Edit Profile image"
+        tools:layout="@layout/fragment_edit_profile_image" />
 </navigation>

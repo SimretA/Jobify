@@ -5,7 +5,6 @@ import android.util.Log;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ussz.jobify.data.University;
-import com.ussz.jobify.data.remoteDataHelpers.UniverityRef;
 import com.ussz.jobify.utilities.CustomCallback;
 
 public class UniversityRemote {
