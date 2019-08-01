@@ -45,4 +45,13 @@
     <string name="next">Next</string>
     <string name="step_1">Step 1</string>
     <string name="step_2">Step 2</string>
+
+
+    <string name="text">text</string>
+    <string name="textEmailAddress">textEmailAddress</string>
+    <string name="phone">phone</string>
+    <string name="number">number</string>
+    <string name="editProfile">Edit profile</string>
+
+
 </resources>

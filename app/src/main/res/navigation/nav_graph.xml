@@ -7,9 +7,16 @@
 
     <fragment
         android:id="@+id/profile_fragment_dest"
-        android:name="com.ussz.jobify.fragments.ProfileFragment"
+        android:name="com.ussz.jobify.fragments.profileFragments.ProfileFragment"
         android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/toEditProfile"
+            app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="messageForEditing"
+            app:argType="string[]" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ussz.jobify.fragments.homeFragments.HomeFragment"
@@ -71,4 +78,9 @@
             android:id="@+id/toHomeFromLogin"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.ussz.jobify.fragments.profileFragments.EditProfileFragment"
+        android:label="@string/editProfile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

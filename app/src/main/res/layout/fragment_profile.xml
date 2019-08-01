@@ -100,6 +100,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:id="@+id/emailLL"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
@@ -130,6 +131,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/phoneNumberLL"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
@@ -160,6 +162,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/universityLL"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
@@ -190,6 +193,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/classOfLL"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
@@ -219,6 +223,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/departmentLL"
                 android:layout_marginTop="15dp"
                 android:orientation="vertical">
 
