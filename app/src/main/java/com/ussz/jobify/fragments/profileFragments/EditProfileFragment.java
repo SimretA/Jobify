@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.R;
 import com.ussz.jobify.network.EditRemote;
 import com.ussz.jobify.utilities.IEditResult;
+import com.ussz.jobify.validations.EditValidation;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -61,9 +62,11 @@ public class EditProfileFragment extends Fragment implements IEditResult {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showViews();
                 String data = updateProfileEt.getText().toString();
-                editData(data,registrationOneData[0]);
+                if(EditValidation.simpleEditDataValidation(registrationOneData[1],data)){
+                    showViews();
+                    editData(data,registrationOneData[0]);
+                }
             }
         });
 
@@ -72,6 +75,9 @@ public class EditProfileFragment extends Fragment implements IEditResult {
 
         return rootView;
     }
+
+
+
 
     private void editData(String data, String registrationOneDatum) {
         switch (registrationOneDatum){

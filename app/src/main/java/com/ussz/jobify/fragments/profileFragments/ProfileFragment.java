@@ -71,9 +71,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         });
 
         rootView.findViewById(R.id.tv_name).setOnClickListener(this);
-        rootView.findViewById(R.id.emailLL).setOnClickListener(this);
+//        rootView.findViewById(R.id.emailLL).setOnClickListener(this);
         rootView.findViewById(R.id.phoneNumberLL).setOnClickListener(this);
-        rootView.findViewById(R.id.universityLL).setOnClickListener(this);
+//        rootView.findViewById(R.id.universityLL).setOnClickListener(this);
         rootView.findViewById(R.id.classOfLL).setOnClickListener(this);
         rootView.findViewById(R.id.departmentLL).setOnClickListener(this);
 
