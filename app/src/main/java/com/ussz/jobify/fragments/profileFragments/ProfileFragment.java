@@ -22,8 +22,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
+import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.ProfileViewModel;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -48,7 +50,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        FancyButton clickable = rootView.findViewById(R.id.fancyButton2);
+        FancyButton clickable = rootView.findViewById(R.id.profile_following_btn);
 
         profileName = rootView.findViewById(R.id.tv_name);
         profileUniversity = rootView.findViewById(R.id.profile_university);
@@ -62,13 +64,28 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         ProfileViewModel profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
 
+
+
         profileViewModel.getMyProfile(Objects.requireNonNull(oAuth.getCurrentUser()).getUid()).observe(this, new Observer<Graduate>() {
             @Override
             public void onChanged(Graduate graduate) {
-                setProfileData(graduate);
+                setProfileData(rootView, graduate);
+                clickable.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle args = new Bundle();
+                        if(graduate != null){
+                            args.putSerializable(Tags.BUNDLE_KEY, (Serializable) graduate.getFollowing());
+                        }
+                        Navigation.findNavController(v).navigate(R.id.following_fragment_dest, args);
+
+                    }
+                });
 
             }
         });
+
+
 
         rootView.findViewById(R.id.tv_name).setOnClickListener(this);
 //        rootView.findViewById(R.id.emailLL).setOnClickListener(this);
@@ -83,7 +100,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void setProfileData(Graduate graduate){
+    private void setProfileData(View view, Graduate graduate){
+
+        FancyButton profileFollowing = view.findViewById(R.id.profile_following_btn);
 
         profileName.setText(graduate.getName());
         if(graduate.getUniversity() !=null)
@@ -93,6 +112,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         profileDepartment.setText(graduate.getDepartment());
         profileGraduationYear.setText(String.valueOf(graduate.getGraduationYear()));
         profilePhoneNumber.setText(graduate.getPhoneNumber());
+
+        profileFollowing.setText(graduate.getFollowing() != null ? "Following " + graduate.getFollowing().size() : "Following 0 ");
+
+
 
     }
 
