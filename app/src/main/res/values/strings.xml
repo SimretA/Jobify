@@ -56,6 +56,9 @@
     <string name="select_destination">Select destination</string>
     <string name="deadline">Deadline</string>
     <string name="open_spots">Open Spots</string>
+    <string name="where">Where</string>
+    <string name="when">When</string>
+    <string name="hosted_by">Hosted by</string>
 
 
 </resources>
