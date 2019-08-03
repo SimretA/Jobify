@@ -92,8 +92,8 @@
         android:label="Edit Profile image"
         tools:layout="@layout/fragment_edit_profile_image" />
     <fragment
-        android:id="@+id/Details"
+        android:id="@+id/fragment_job_detail_dest"
         android:name="com.ussz.jobify.fragments.JobDetailFragment"
-        android:label="fragment_job_detail"
+        android:label="Details"
         tools:layout="@layout/fragment_job_detail" />
 </navigation>

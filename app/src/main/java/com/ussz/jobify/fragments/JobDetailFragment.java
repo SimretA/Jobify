@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.Tags;
+import com.ussz.jobify.utilities.TimeStampConverter;
 
 
 /**
@@ -44,9 +45,14 @@ public class JobDetailFragment extends Fragment {
 
     private void setContent(View view, Job job) {
         ((TextView)view.findViewById(R.id.job_detail_title)).setText(job.getTitle());
-        ((TextView)view.findViewById(R.id.job_detail_descreption)).setText(job.getDescription());
+        ((TextView)view.findViewById(R.id.job_detail_description)).setText(job.getDescription());
+        ((TextView)view.findViewById(R.id.job_detail_how_to_apply)).setText(job.getHowToApply());
+        ((TextView)view.findViewById(R.id.job_detail_deadline)).setText(TimeStampConverter.timeLeft(job.getDeadline().toDate()) + " Days Left" );
+        ((TextView)view.findViewById(R.id.job_detail_studentLimit)).setText(String.valueOf(job.getStudentLimit()));
         ((AppCompatImageView)view.findViewById(R.id.job_detail_image)).setImageResource(R.drawable.avataaars);
 
     }
+
+
 
 }

@@ -1,6 +1,11 @@
 package com.ussz.jobify.data;
 
+
+
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +28,8 @@ public class Job implements Serializable {
     private String department;
     private String postedByName;
     private String postedById;
+    private String howToApply;
+    private Timestamp deadline;
 
 
 }

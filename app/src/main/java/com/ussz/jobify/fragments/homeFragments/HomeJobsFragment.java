@@ -63,7 +63,7 @@ public class HomeJobsFragment extends Fragment implements OnJobClickedListener {
     public void showJobDetails(Job job, View view) {
         Bundle args = new Bundle();
         args.putSerializable(Tags.JOB_BUNDLE_KEY, job);
-        Navigation.findNavController(view).navigate(R.id.Details,args);
+        Navigation.findNavController(view).navigate(R.id.fragment_job_detail_dest,args);
 
     }
 }
