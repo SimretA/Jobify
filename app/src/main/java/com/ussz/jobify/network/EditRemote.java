@@ -44,6 +44,10 @@ public class EditRemote {
         coreUpdateFunctionality("department",department,iEditResult);
     }
 
+    public static void updateProfileImage(String firebaseDownloadUri,IEditResult iEditResult){
+        coreUpdateFunctionality("profileImage",firebaseDownloadUri,iEditResult);
+    }
+
 
     private static void coreUpdateFunctionality(String filedToUpdate,Object newData,IEditResult iEditResult){
         db.runTransaction(new Transaction.Function<Void>() {

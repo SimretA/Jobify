@@ -64,6 +64,11 @@ dependencies {
     //firebase auth
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    //firebase storage
+    implementation 'com.google.firebase:firebase-storage:18.1.1'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 }

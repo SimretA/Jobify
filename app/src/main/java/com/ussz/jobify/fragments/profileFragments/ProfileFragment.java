@@ -1,8 +1,11 @@
 package com.ussz.jobify.fragments.profileFragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,19 +13,29 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.University;
+import com.ussz.jobify.network.EditRemote;
+import com.ussz.jobify.network.ProfileImageRemote;
+import com.ussz.jobify.network.ProfileRemote;
+import com.ussz.jobify.utilities.IEditResult;
+import com.ussz.jobify.utilities.IUploadImageResult;
 import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.ProfileViewModel;
 
@@ -35,13 +48,23 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener , IUploadImageResult, IEditResult {
 
     private TextView profileName, profileUniversity, profileGraduationYear, profileDepartment, profileEmail, profilePhoneNumber;
 
-    View rootView;
+    private View rootView;
 
-    CircularImageView profile_image;
+    private BottomSheetDialog bottomSheetDialog;
+    private static final int  GALLERY_REQUEST_CODE = 377;
+    private TextView uploadFromGalleryTv,uploadFromFile;
+
+    private ProgressBar progressBar4;
+
+    private CircularImageView profile_image;
+
+    private FirebaseAuth oAuth;
+
+    private Graduate gGraduate;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -64,8 +87,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         profile_image = rootView.findViewById(R.id.profile_image);
 
+        progressBar4 = rootView.findViewById(R.id.progressBar4);
 
-        FirebaseAuth oAuth = FirebaseAuth.getInstance();
+
+        oAuth = FirebaseAuth.getInstance();
 
         ProfileViewModel profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
 
@@ -75,17 +100,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onChanged(Graduate graduate) {
                 setProfileData(rootView, graduate);
-                clickable.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle args = new Bundle();
-                        if(graduate != null){
-                            args.putSerializable(Tags.BUNDLE_KEY, (Serializable) graduate.getFollowing());
-                        }
-                        Navigation.findNavController(v).navigate(R.id.following_fragment_dest, args);
+                gGraduate = graduate;
 
-                    }
-                });
+            }
+        });
+
+
+        clickable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                if(gGraduate != null){
+                    args.putSerializable(Tags.BUNDLE_KEY, (Serializable) gGraduate.getFollowing());
+                }
+                Navigation.findNavController(v).navigate(R.id.following_fragment_dest, args);
 
             }
         });
@@ -101,9 +129,65 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         rootView.findViewById(R.id.departmentLL).setOnClickListener(this);
 
 
+        createBottomSheetDialog();
+
+
+        progressBar4.setVisibility(View.GONE);
+
+
 
         return rootView;
 
+    }
+
+    private void openUpGallery(String intentAction) {
+        Intent getIntent = new Intent(intentAction);
+        getIntent.setType("image/*");
+        startActivityForResult(getIntent,GALLERY_REQUEST_CODE);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK){
+            if (requestCode == GALLERY_REQUEST_CODE) {//data.getData returns the content URI for the selected Image
+                Uri selectedImage = data.getData();
+
+                profile_image.setImageURI(selectedImage);
+
+                ProfileImageRemote.uploadImage(selectedImage,oAuth.getCurrentUser().getUid(),ProfileFragment.this);
+
+                showView();
+            }
+        }
+    }
+
+    private void showView() {
+        progressBar4.setVisibility(View.VISIBLE);
+        profile_image.setEnabled(false);
+    }
+
+    private void hideView(){
+        progressBar4.setVisibility(View.GONE);
+        profile_image.setEnabled(true);
+    }
+
+
+    private void createBottomSheetDialog(){
+        if (bottomSheetDialog == null){
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.selectimagebottomsheet,null);
+
+            uploadFromGalleryTv = view.findViewById(R.id.uploadFromGalleryTv);
+            uploadFromFile = view.findViewById(R.id.uploadFromFile);
+
+            uploadFromGalleryTv.setOnClickListener(this);
+            uploadFromFile.setOnClickListener(this);
+
+            bottomSheetDialog = new BottomSheetDialog(getContext());
+            bottomSheetDialog.setContentView(view);
+        }
     }
 
     private void setProfileData(View view, Graduate graduate){
@@ -118,6 +202,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         profileDepartment.setText(graduate.getDepartment());
         profileGraduationYear.setText(String.valueOf(graduate.getGraduationYear()));
         profilePhoneNumber.setText(graduate.getPhoneNumber());
+
+        if (graduate.getProfileImage()!=null){
+            Picasso.get().load(graduate.getProfileImage()).into(profile_image);
+        }
 
         profileFollowing.setText(graduate.getFollowing() != null ? "Following " + graduate.getFollowing().size() : "Following 0 ");
 
@@ -161,7 +249,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 //department
                 break;
             case R.id.profile_image:
-                Navigation.findNavController(view).navigate(R.id.toEditProfileImage);
+                bottomSheetDialog.show();
+                return;
+            case  R.id.uploadFromGalleryTv:
+                openUpGallery(Intent.ACTION_PICK);
+                bottomSheetDialog.cancel();
+                return;
+            case R.id.uploadFromFile:
+                openUpGallery(Intent.ACTION_GET_CONTENT);
+                bottomSheetDialog.cancel();
                 return;
         }
 
@@ -177,4 +273,34 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private void showSuccessMessage(String message){
+        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+    }
+
+    private void showFailureMessage(String message){
+        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void uploadImageResult(String result) {
+        if (result.equals("Upload failed")){
+            showFailureMessage(result);
+        }
+        else{
+            EditRemote.updateProfileImage(result,ProfileFragment.this);
+        }
+        hideView();
+    }
+
+
+    @Override
+    public void editResult(String result) {
+        if(result.equals("Transaction success!")){
+            showSuccessMessage("update success");
+        }
+        else{
+            showFailureMessage("Update failed");
+        }
+    }
 }
