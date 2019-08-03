@@ -14,13 +14,14 @@ import android.view.ViewGroup;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
 import com.ussz.jobify.data.Meetup;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreMeetupsFragment extends Fragment {
+public class ExploreMeetupsFragment extends Fragment implements CustomOnClickedListener {
 
 
     public ExploreMeetupsFragment() {
@@ -41,7 +42,7 @@ public class ExploreMeetupsFragment extends Fragment {
         for(int i=0; i<10;i++) {
           //  meetups.add(meetup);
         }
-        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups);
+        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups,this);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -49,4 +50,8 @@ public class ExploreMeetupsFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void showDetails(Object object, View view) {
+
+    }
 }

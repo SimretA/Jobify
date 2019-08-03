@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
-import com.ussz.jobify.adapters.OnJobClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.JobViewModel;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeJobsFragment extends Fragment implements OnJobClickedListener {
+public class HomeJobsFragment extends Fragment implements CustomOnClickedListener {
 
 
     HomeJobsListAdapter homeJobsListAdapter;
@@ -60,9 +60,9 @@ public class HomeJobsFragment extends Fragment implements OnJobClickedListener {
     }
 
     @Override
-    public void showJobDetails(Job job, View view) {
+    public void showDetails(Object object, View view) {
         Bundle args = new Bundle();
-        args.putSerializable(Tags.JOB_BUNDLE_KEY, job);
+        args.putSerializable(Tags.JOB_BUNDLE_KEY, (Job) object);
         Navigation.findNavController(view).navigate(R.id.fragment_job_detail_dest,args);
 
     }

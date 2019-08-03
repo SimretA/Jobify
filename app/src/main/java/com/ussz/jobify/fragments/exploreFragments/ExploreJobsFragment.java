@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
-import com.ussz.jobify.adapters.OnJobClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
 import com.ussz.jobify.data.Job;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreJobsFragment extends Fragment implements OnJobClickedListener {
+public class ExploreJobsFragment extends Fragment implements CustomOnClickedListener {
 
 
     public ExploreJobsFragment() {
@@ -50,8 +50,9 @@ public class ExploreJobsFragment extends Fragment implements OnJobClickedListene
         return rootView;
     }
 
+
     @Override
-    public void showJobDetails(Job job, View view) {
+    public void showDetails(Object object, View view) {
 
     }
 }

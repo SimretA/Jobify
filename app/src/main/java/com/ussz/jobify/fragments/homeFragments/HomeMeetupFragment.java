@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,8 @@ import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.MeetupViewModel;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeMeetupFragment extends Fragment {
+public class HomeMeetupFragment extends Fragment implements CustomOnClickedListener {
 
 
     public HomeMeetupFragment() {
@@ -45,7 +48,7 @@ public class HomeMeetupFragment extends Fragment {
        
         ArrayList<Meetup> meetups = new ArrayList<>();
 
-        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups);
+        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups, this);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -57,4 +60,12 @@ public class HomeMeetupFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void showDetails(Object object, View view) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(Tags.MEETUP_BUNDLE_KEY, (Meetup) object);
+        Navigation.findNavController(view).navigate(R.id.meetup_detail_fragment_dest,args);
+
+    }
 }

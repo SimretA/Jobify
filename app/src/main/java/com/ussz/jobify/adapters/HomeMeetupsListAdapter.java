@@ -1,7 +1,5 @@
 package com.ussz.jobify.adapters;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
-import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
 
 import java.util.ArrayList;
 
@@ -26,11 +24,13 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
 
     private Fragment fragment;
     private ArrayList<Meetup> meetupsArrayList;
+    private CustomOnClickedListener listener;
 
 
-    public HomeMeetupsListAdapter(Fragment fragment, ArrayList<Meetup> meetupsArrayList) {
+    public HomeMeetupsListAdapter(Fragment fragment, ArrayList<Meetup> meetupsArrayList,CustomOnClickedListener listener) {
         this.fragment = fragment;
         this.meetupsArrayList = meetupsArrayList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -58,6 +58,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
             //here call function that will calculate duration left
             holder.studentLimit.setText("In " + (meetup.getStudentLimit()-position*2) + " days");
         }
+        holder.bind(meetup,listener);
 
 
     }
@@ -90,6 +91,9 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
             meetupImage = itemView.findViewById(R.id.organizationimage);
             studentLimit = itemView.findViewById(R.id.leftSpace);
 
+        }
+        public void bind(Meetup meetup, CustomOnClickedListener listener){
+            itemView.setOnClickListener(v-> listener.showDetails(meetup,v));
         }
     }
 }

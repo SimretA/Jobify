@@ -1,6 +1,8 @@
 package com.ussz.jobify.data;
 
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Meetup {
+public class Meetup implements Serializable {
 
     public final static String FIELD_NAME = "name";
     public final static String FIELD_DESCRIPTION = "description";

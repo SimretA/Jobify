@@ -47,7 +47,7 @@ public class JobDetailFragment extends Fragment {
         ((TextView)view.findViewById(R.id.job_detail_title)).setText(job.getTitle());
         ((TextView)view.findViewById(R.id.job_detail_description)).setText(job.getDescription());
         ((TextView)view.findViewById(R.id.job_detail_how_to_apply)).setText(job.getHowToApply());
-        ((TextView)view.findViewById(R.id.job_detail_deadline)).setText(TimeStampConverter.timeLeft(job.getDeadline().toDate()) + " Days Left" );
+        ((TextView)view.findViewById(R.id.job_detail_deadline)).setText(TimeStampConverter.timeLeft(job.getDeadline().toDate()) + " \nDays Left" );
         ((TextView)view.findViewById(R.id.job_detail_studentLimit)).setText(String.valueOf(job.getStudentLimit()));
         ((AppCompatImageView)view.findViewById(R.id.job_detail_image)).setImageResource(R.drawable.avataaars);
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
+import com.ussz.jobify.utilities.CustomOnClickedListener;
 
 import java.util.ArrayList;
 
@@ -22,10 +23,10 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     private Fragment fragment;
     private ArrayList<Job> jobArrayList;
-    private OnJobClickedListener listener;
+    private CustomOnClickedListener listener;
 
 
-    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, OnJobClickedListener listener) {
+    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, CustomOnClickedListener listener) {
         this.fragment = fragment;
         this.jobArrayList = jobArrayList;
         this.listener = listener;
@@ -51,20 +52,20 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull HomeJobsViewHolder holder, int position) {
-        Job j = jobArrayList.get(position);
-        holder.jobTitle.setText(j.getTitle());
-        holder.jobDescription.setText(j.getDescription());
+        Job job = jobArrayList.get(position);
+        holder.jobTitle.setText(job.getTitle());
+        holder.jobDescription.setText(job.getDescription());
         holder.companyName.setText("Google " + position);
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
 
         if (fragment instanceof HomeJobsFragment){
             //here call function that will calculate duration left
-            holder.leftSpace.setText("In " + (j.getStudentLimit()-position*2) + " Days");
+            holder.leftSpace.setText("In " + (job.getStudentLimit()-position*2) + " Days");
         }
         else{
-            holder.leftSpace.setText("" + (j.getStudentLimit()-position*2) + " Spot");
+            holder.leftSpace.setText("" + (job.getStudentLimit()-position*2) + " Spot");
         }
-        holder.bind(j, listener);
+        holder.bind(job, listener);
 
     }
 
@@ -96,8 +97,8 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
         }
 
-        public void bind(Job job, OnJobClickedListener listener) {
-            itemView.setOnClickListener(v -> listener.showJobDetails(job, v));
+        public void bind(Job job, CustomOnClickedListener listener) {
+            itemView.setOnClickListener(v -> listener.showDetails(job, v));
         }
     }
 }

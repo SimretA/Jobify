@@ -40,13 +40,13 @@
 
         <TextView
             android:id="@+id/job_detail_description"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="@string/dummy_text"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,10 +56,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView7"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="31dp"
-            android:layout_marginEnd="23dp"
-            android:layout_marginRight="23dp"
             app:layout_constraintEnd_toStartOf="@+id/cardView6"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,34 +68,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
                     android:gravity="center_horizontal"
                     android:text="@string/deadline"
                     android:textColor="@color/colorPrimaryDark"
-
                     android:textSize="@dimen/caption_size" />
 
                 <TextView
                     android:id="@+id/job_detail_deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="11-11-11"
-                    android:textSize="18sp"
-                    android:layout_gravity="center"/>
+                    android:textSize="18sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView6"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginTop="31dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cardView7"
@@ -104,24 +107,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginVertical="3dp"
                     android:gravity="center_horizontal"
                     android:text="@string/open_spots"
                     android:textColor="@color/colorPrimaryDark"
-
                     android:textSize="@dimen/caption_size" />
+
                 <TextView
                     android:id="@+id/job_detail_studentLimit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="5dp"
                     android:gravity="center|center_horizontal|center_vertical"
                     android:text="11"
-                    android:layout_gravity="center"
                     android:textSize="30sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -130,8 +135,8 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginLeft="52dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:text="How To Apply"
             android:textColor="@color/colorPrimaryDark"
@@ -141,15 +146,14 @@
 
         <TextView
             android:id="@+id/job_detail_how_to_apply"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
             android:text="@string/dummy_text"
             android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
