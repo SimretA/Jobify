@@ -3,6 +3,7 @@ package com.ussz.jobify.fragments.profileFragments;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.network.EditRemote;
 import com.ussz.jobify.utilities.IEditResult;
@@ -31,7 +34,9 @@ public class EditProfileFragment extends Fragment implements IEditResult {
     private FancyButton editButton;
     private ProgressBar progressBar3;
 
-    private TextView errorMessageTv;
+    private ConstraintLayout updateProfileLayout;
+
+
 
 
     public EditProfileFragment() {
@@ -49,7 +54,8 @@ public class EditProfileFragment extends Fragment implements IEditResult {
         updateProfileEt = rootView.findViewById(R.id.updateProfileEt);
         editButton = rootView.findViewById(R.id.editButton);
 
-        errorMessageTv = rootView.findViewById(R.id.editErrorMessage);
+
+        updateProfileLayout = rootView.findViewById(R.id.updateProfileLayout);
 
         progressBar3 = rootView.findViewById(R.id.progressBar3);
 
@@ -104,14 +110,16 @@ public class EditProfileFragment extends Fragment implements IEditResult {
 
 
     private void showSuccessMessage(String message){
-        errorMessageTv.setTextColor(getResources().getColor(R.color.green));
-        errorMessageTv.setText(message);
+        Snackbar snackbar = Snackbar.make(updateProfileLayout,message,Snackbar.LENGTH_SHORT);
+        snackbar.setTextColor(getResources().getColor(R.color.green));
+        snackbar.show();
 
     }
 
     private void showFailureMessage(String message){
-        errorMessageTv.setTextColor(getResources().getColor(R.color.red));
-        errorMessageTv.setText(message);
+        Snackbar snackbar = Snackbar.make(updateProfileLayout,message,Snackbar.LENGTH_SHORT);
+        snackbar.setTextColor(getResources().getColor(R.color.red));
+        snackbar.show();
     }
 
     private void showViews(){
@@ -138,24 +146,24 @@ public class EditProfileFragment extends Fragment implements IEditResult {
             inputType = R.string.textEmailAddress;
         }
         else if(databeingEdited.equals("phonenumber")){
-             hint =  "phonenumber";
+             hint =  "phone number";
              inputType = R.string.phone;
         }
         else if(databeingEdited.equals("university")){
             hint = "university";
         }
         else if(databeingEdited.equals("graduationyear")){
-            hint = "graduationyear";
+            hint = "graduation year";
             inputType = R.string.number;
         }
         else if(databeingEdited.equals("department")){
             hint = "department";
         }
 
-        textInputLayout.setHint(hint);
+        textInputLayout.setHint(hint.toUpperCase());
         updateProfileEt.setInputType(inputType);
         updateProfileEt.setText(registrationOneData[1]);
-        editButton.setText("Update " + hint);
+        editButton.setText(("Update " + hint).toUpperCase());
 
     }
 

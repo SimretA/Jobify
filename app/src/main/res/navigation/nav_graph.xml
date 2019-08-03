@@ -16,9 +16,6 @@
         <argument
             android:name="messageForEditing"
             app:argType="string[]" />
-        <action
-            android:id="@+id/toEditProfileImage"
-            app:destination="@id/editProfileImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

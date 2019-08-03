@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
     AppBarConfiguration appBarConfiguration;
 
-    TextView emailDrawer;
-
     private FirebaseAuth mAuth;
 
     NavController navController;
@@ -87,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        emailDrawer = headerView.findViewById(R.id.emaildrawer);
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -107,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if(mAuth.getCurrentUser()==null){
             navController.navigate(R.id.login_fragment_dest);
-        }
-        else{
-            emailDrawer.setText(mAuth.getCurrentUser().getEmail());
         }
     }
 
