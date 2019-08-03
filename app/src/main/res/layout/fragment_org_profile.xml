@@ -64,8 +64,8 @@
             android:layout_marginRight="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fancyButton2"
-            fancy:fb_borderColor="#ccc"
             fancy:fb_borderWidth="1dp"
+            fancy:fb_borderColor="#ccc"
             fancy:fb_defaultColor="#fff"
             fancy:fb_radius="30dp"
             fancy:fb_text="11K Followers"
@@ -101,7 +101,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/textView9"/>
 
 
         <androidx.cardview.widget.CardView

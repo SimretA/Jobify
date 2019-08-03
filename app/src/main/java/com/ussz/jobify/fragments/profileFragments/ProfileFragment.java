@@ -280,13 +280,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
 
 
     private void showSuccessMessage(String message){
-        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_LONG);
         snackbar.setTextColor(getResources().getColor(R.color.green));
         snackbar.show();
     }
 
     private void showFailureMessage(String message){
-        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_LONG);
         snackbar.setTextColor(getResources().getColor(R.color.red));
         snackbar.show();
     }

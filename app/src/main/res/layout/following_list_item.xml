@@ -56,7 +56,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/company_name_recycler"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/company_name_recycler"
-        fancy:fb_radius="5dp"
+
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_focusColor="#fff"
+        fancy:fb_iconPosition="left"
+        fancy:fb_borderColor="@color/green"
+        fancy:fb_defaultColor="#9bd823"
+        fancy:fb_radius="30dp"
+        fancy:fb_textColor="@color/green"
+
         fancy:fb_text="@string/unfollow" />
 
     <TextView
