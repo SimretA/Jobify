@@ -104,14 +104,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView2"
-                fancy:fb_borderColor="#FFFFFF"
+
                 fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="#000"
-                fancy:fb_focusColor="#9bd823"
+                fancy:fb_focusColor="#fff"
                 fancy:fb_iconPosition="left"
-                fancy:fb_radius="5dp"
+                fancy:fb_borderColor="@color/green"
+                fancy:fb_defaultColor="#9bd823"
+                fancy:fb_radius="30dp"
+                fancy:fb_textColor="@color/green"
+
                 fancy:fb_text="123123 spot"
-                fancy:fb_textColor="#FFFFFF" />
+                 />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

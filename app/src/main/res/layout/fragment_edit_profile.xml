@@ -47,7 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         fancy:fb_borderColor="#ccc"
-        fancy:fb_defaultColor="#D2558B2F"
+        fancy:fb_defaultColor="@color/green"
         fancy:fb_radius="5dp"
         fancy:fb_text="@string/next"
         fancy:fb_textColor="#FFF" />
