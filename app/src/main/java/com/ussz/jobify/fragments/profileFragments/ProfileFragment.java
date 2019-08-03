@@ -18,12 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -66,6 +68,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
 
     private Graduate gGraduate;
 
+    private RelativeLayout profileLayout;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -88,6 +92,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
         profile_image = rootView.findViewById(R.id.profile_image);
 
         progressBar4 = rootView.findViewById(R.id.progressBar4);
+
+        profileLayout = rootView.findViewById(R.id.profilelayout);
 
 
         oAuth = FirebaseAuth.getInstance();
@@ -274,11 +280,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
 
 
     private void showSuccessMessage(String message){
-        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_SHORT);
+        snackbar.setTextColor(getResources().getColor(R.color.green));
+        snackbar.show();
     }
 
     private void showFailureMessage(String message){
-        Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(profileLayout,message,Snackbar.LENGTH_SHORT);
+        snackbar.setTextColor(getResources().getColor(R.color.red));
+        snackbar.show();
     }
 
 

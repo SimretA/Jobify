@@ -51,6 +51,11 @@ public class ProfileImageRemote {
                     iUploadImageResult.uploadImageResult("Upload failed");
                 }
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                iUploadImageResult.uploadImageResult("Upload failed");
+            }
         });
 
 

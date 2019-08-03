@@ -146,24 +146,24 @@ public class EditProfileFragment extends Fragment implements IEditResult {
             inputType = R.string.textEmailAddress;
         }
         else if(databeingEdited.equals("phonenumber")){
-             hint =  "phonenumber";
+             hint =  "phone number";
              inputType = R.string.phone;
         }
         else if(databeingEdited.equals("university")){
             hint = "university";
         }
         else if(databeingEdited.equals("graduationyear")){
-            hint = "graduationyear";
+            hint = "graduation year";
             inputType = R.string.number;
         }
         else if(databeingEdited.equals("department")){
             hint = "department";
         }
 
-        textInputLayout.setHint(hint);
+        textInputLayout.setHint(hint.toUpperCase());
         updateProfileEt.setInputType(inputType);
         updateProfileEt.setText(registrationOneData[1]);
-        editButton.setText("Update " + hint);
+        editButton.setText(("Update " + hint).toUpperCase());
 
     }
 
