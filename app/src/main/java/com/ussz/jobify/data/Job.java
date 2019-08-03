@@ -1,5 +1,7 @@
 package com.ussz.jobify.data;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class Job implements Serializable {
 
     public final static String FIELD_TITLE = "title";
     public final static String FIELD_DESCRIPTION = "description";

@@ -1,7 +1,6 @@
 package com.ussz.jobify.data;
 
 import com.google.firebase.firestore.DocumentReference;
-
 import java.util.List;
 
 import lombok.AllArgsConstructor;

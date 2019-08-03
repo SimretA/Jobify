@@ -15,7 +15,6 @@ import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -23,11 +22,13 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     private Fragment fragment;
     private ArrayList<Job> jobArrayList;
+    private OnJobClickedListener listener;
 
 
-    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList) {
+    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, OnJobClickedListener listener) {
         this.fragment = fragment;
         this.jobArrayList = jobArrayList;
+        this.listener = listener;
     }
 
 
@@ -38,6 +39,12 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
                 .inflate(R.layout.jobs_list_item, parent, false);
 
 
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return new HomeJobsViewHolder(itemView);
     }
@@ -57,6 +64,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         else{
             holder.leftSpace.setText("" + (j.getStudentLimit()-position*2) + " Spot");
         }
+        holder.bind(j, listener);
 
     }
 
@@ -72,7 +80,6 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     class HomeJobsViewHolder extends RecyclerView.ViewHolder{
 
-        // public TextView organizationImage;
         private TextView jobTitle;
         private TextView jobDescription;
         private TextView companyName;
@@ -87,6 +94,10 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
             companyImage = itemView.findViewById(R.id.organizationimage); //textView18
             leftSpace = itemView.findViewById(R.id.leftSpace);
 
+        }
+
+        public void bind(Job job, OnJobClickedListener listener) {
+            itemView.setOnClickListener(v -> listener.showJobDetails(job, v));
         }
     }
 }

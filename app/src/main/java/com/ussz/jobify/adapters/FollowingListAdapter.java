@@ -1,11 +1,13 @@
 package com.ussz.jobify.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -35,6 +37,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Navigation.findNavController(v).navigate(R.id.org_profile_fragment_dest);
             }
         });
@@ -49,6 +52,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         holder.companyName.setText(currentOrganization.getOrganizationName());
         holder.companyBio.setText(currentOrganization.getOrganizationBio());
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
+
 
 
     }
@@ -72,7 +76,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
         public FollowingViewHolder(@NonNull View itemView) {
             super(itemView);
-        companyImage = itemView.findViewById(R.id.company_image_recycler);
+            companyImage = itemView.findViewById(R.id.company_image_recycler);
             companyBio = itemView.findViewById(R.id.company_bio_recycler);
             companyName = itemView.findViewById(R.id.company_name_recycler);
 

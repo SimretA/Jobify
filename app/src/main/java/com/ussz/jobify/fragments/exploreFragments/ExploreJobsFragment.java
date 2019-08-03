@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
+import com.ussz.jobify.adapters.OnJobClickedListener;
 import com.ussz.jobify.data.Job;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreJobsFragment extends Fragment {
+public class ExploreJobsFragment extends Fragment implements OnJobClickedListener {
 
 
     public ExploreJobsFragment() {
@@ -41,7 +42,7 @@ public class ExploreJobsFragment extends Fragment {
         for(int i=0; i<10;i++) {
           //  jobs.add(job);
         }
-        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs);
+        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs, this);
         recyclerView.setAdapter(homeJobsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -49,4 +50,8 @@ public class ExploreJobsFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void showJobDetails(Job job, View view) {
+
+    }
 }

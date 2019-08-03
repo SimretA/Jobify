@@ -1,13 +1,11 @@
 package com.ussz.jobify.fragments.homeFragments;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,18 +15,17 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
+import com.ussz.jobify.adapters.OnJobClickedListener;
 import com.ussz.jobify.data.Job;
-import com.ussz.jobify.network.JobRemote;
+import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.JobViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeJobsFragment extends Fragment {
+public class HomeJobsFragment extends Fragment implements OnJobClickedListener {
 
 
     HomeJobsListAdapter homeJobsListAdapter;
@@ -47,7 +44,7 @@ public class HomeJobsFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(R.id.homeJobsRecyclerView);
 
 
-        homeJobsListAdapter = new HomeJobsListAdapter(this,new ArrayList<>());
+        homeJobsListAdapter = new HomeJobsListAdapter(this,new ArrayList<>(), this);
         recyclerView.setAdapter(homeJobsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -62,4 +59,11 @@ public class HomeJobsFragment extends Fragment {
         homeJobsListAdapter.setJobs(jobs);
     }
 
+    @Override
+    public void showJobDetails(Job job, View view) {
+        Bundle args = new Bundle();
+        args.putSerializable(Tags.JOB_BUNDLE_KEY, job);
+        Navigation.findNavController(view).navigate(R.id.Details,args);
+
+    }
 }
