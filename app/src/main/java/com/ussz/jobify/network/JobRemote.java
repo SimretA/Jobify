@@ -42,6 +42,7 @@ public class JobRemote {
 
 
 
+
     public static void getAllJobs(CustomCallback callback){
 
         ArrayList<Job> newJobs = new ArrayList<>();
