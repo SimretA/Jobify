@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,24 +138,27 @@ public class EditProfileFragment extends Fragment implements IEditResult {
     private void configureEditFragmentBasedOnData(String[] registrationOneData) {
         String databeingEdited = registrationOneData[0];
         String hint = "";
-        int inputType = R.string.text;
+
+
+
+        int inputType = InputType.TYPE_CLASS_TEXT;
         if (databeingEdited.equalsIgnoreCase("username")){
             hint = "username";
         }
         else if(databeingEdited.equalsIgnoreCase("email")){
             hint = "email";
-            inputType = R.string.textEmailAddress;
+            inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS;
         }
         else if(databeingEdited.equalsIgnoreCase("phonenumber")){
              hint =  "phone number";
-             inputType = R.string.phone;
+             inputType = InputType.TYPE_CLASS_PHONE;
         }
         else if(databeingEdited.equalsIgnoreCase("university")){
             hint = "university";
         }
         else if(databeingEdited.equalsIgnoreCase("graduationyear")){
             hint = "graduation year";
-            inputType = R.string.number;
+            inputType = InputType.TYPE_CLASS_NUMBER;
         }
         else if(databeingEdited.equals("department")){
             hint = "department";
