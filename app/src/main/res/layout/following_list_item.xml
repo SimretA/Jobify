@@ -37,14 +37,14 @@
         android:text="Place holder | 11k"
         android:textSize="@dimen/caption_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/fancyButton"
+        app:layout_constraintEnd_toStartOf="@+id/following_list_unfollow"
         app:layout_constraintHorizontal_bias="0.622"
         app:layout_constraintStart_toEndOf="@+id/company_image_recycler"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem[7]" />
 
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/fancyButton"
+        android:id="@+id/following_list_unfollow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

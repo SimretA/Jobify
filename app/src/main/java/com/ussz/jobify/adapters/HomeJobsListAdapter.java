@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
-import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 
 import java.util.ArrayList;
 
@@ -23,10 +23,10 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     private Fragment fragment;
     private ArrayList<Job> jobArrayList;
-    private CustomOnClickedListener listener;
+    private CustomOnClickListener listener;
 
 
-    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, CustomOnClickedListener listener) {
+    public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, CustomOnClickListener listener) {
         this.fragment = fragment;
         this.jobArrayList = jobArrayList;
         this.listener = listener;
@@ -97,7 +97,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
         }
 
-        public void bind(Job job, CustomOnClickedListener listener) {
+        public void bind(Job job, CustomOnClickListener listener) {
             itemView.setOnClickListener(v -> listener.showDetails(job, v));
         }
     }

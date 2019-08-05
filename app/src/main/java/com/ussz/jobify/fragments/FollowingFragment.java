@@ -6,10 +6,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +18,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.FollowingListAdapter;
 import com.ussz.jobify.data.Organization;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.OrganizationViewModel;
 
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FollowingFragment extends Fragment {
+public class FollowingFragment extends Fragment implements CustomOnClickListener {
 
 
     public FollowingFragment() {
@@ -45,13 +46,10 @@ public class FollowingFragment extends Fragment {
         OrganizationViewModel organizationViewModel = ViewModelProviders.of(this).get(OrganizationViewModel.class);
 
 
-//        Organization organization = new Organization("Dummy Name","src","Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.", 1100);
         ArrayList<Organization> companies = new ArrayList<>();
-        for(int i=0; i<10;i++) {
-            //companies.add(organization);
-        }
 
-        FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), companies);
+
+        FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), companies, this);
         recyclerView.setAdapter(followingListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
@@ -59,14 +57,15 @@ public class FollowingFragment extends Fragment {
             organizationViewModel.loadOrganizationsFromDocument((List<DocumentReference>) getArguments().getSerializable(Tags.BUNDLE_KEY));
 
         }
-        organizationViewModel.organizations.observe(this, new Observer<ArrayList<Organization>>() {
-            @Override
-            public void onChanged(ArrayList<Organization> organizations) {
-
-                followingListAdapter.setOrginizations(organizations);
-            }
-        });
+        organizationViewModel.organizations.observe(this, organizations -> followingListAdapter.setOrginizations(organizations));
         return view;
     }
 
+    @Override
+    public void showDetails(Object object, View view){
+        Bundle args = new Bundle();
+        args.putSerializable(Tags.ORG_BUNDLE_KEY, (Organization) object);
+        Navigation.findNavController(view).navigate(R.id.org_profile_fragment_dest, args);
+
+    }
 }

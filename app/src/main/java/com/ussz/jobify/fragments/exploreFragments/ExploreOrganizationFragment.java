@@ -14,13 +14,14 @@ import android.view.ViewGroup;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.FollowingListAdapter;
 import com.ussz.jobify.data.Organization;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreOrganizationFragment extends Fragment {
+public class ExploreOrganizationFragment extends Fragment implements CustomOnClickListener {
 
 
     public ExploreOrganizationFragment() {
@@ -40,11 +41,16 @@ public class ExploreOrganizationFragment extends Fragment {
         for(int i=0; i<10;i++) {
            // companies.add(company);
         }
-        FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), companies);
+        FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), companies, this);
         recyclerView.setAdapter(followingListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         return rootView;
     }
 
+    @Override
+    public void showDetails(Object object, View view) {
+
+
+    }
 }

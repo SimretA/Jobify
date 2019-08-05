@@ -24,15 +24,12 @@ public class OrganizationViewModel extends ViewModel {
     }
 
     public void loadOrganizationsFromDocument(List<DocumentReference> documentReferenceList){
-        if (documentReferenceList!=null){
+        if (documentReferenceList!=null && organizations.getValue().size()==0){
             OrganizationRemote.getOrganizatinsFromDocument(
-                    documentReferenceList, new CustomCallback() {
-                        @Override
-                        public void onCallBack(Object object) {
-                            ArrayList<Organization> newOne = organizations.getValue();
-                            newOne.add((Organization) object);
-                            organizations.setValue(newOne);
-                        }
+                    documentReferenceList, object -> {
+                        ArrayList<Organization> newOne = organizations.getValue();
+                        newOne.add((Organization) object);
+                        organizations.setValue(newOne);
                     }
             );
         }

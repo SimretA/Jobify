@@ -59,6 +59,8 @@
     <string name="where">Where</string>
     <string name="when">When</string>
     <string name="hosted_by">Hosted by</string>
+    <string name="recent_jobs">Jobs</string>
+    <string name="meet_ups">Meet ups</string>
 
 
 </resources>

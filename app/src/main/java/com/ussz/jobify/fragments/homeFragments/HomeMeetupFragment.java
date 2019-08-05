@@ -4,7 +4,6 @@ package com.ussz.jobify.fragments.homeFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,21 +14,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
-import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
-import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
-import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.MeetupViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeMeetupFragment extends Fragment implements CustomOnClickedListener {
+public class HomeMeetupFragment extends Fragment implements CustomOnClickListener {
 
 
     public HomeMeetupFragment() {
