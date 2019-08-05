@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,15 +46,17 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
 
     private TextInputEditText university,classOf,department;
 
-    TextView registrationTwoError;
+    private TextView registrationTwoError;
 
-    FancyButton createAccountFButton;
+    private FancyButton createAccountFButton;
 
-    ProgressBar progressBar2;
+    private ProgressBar progressBar2;
 
-    Graduate graduate;
+    private Graduate graduate;
 
-    NavController navController;
+    private Spinner genderSpinner;
+
+    private NavController navController;
 
     public RegistrationFragmentTwo() {
         // Required empty public constructor
@@ -81,6 +85,10 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
         progressBar2 = rootView.findViewById(R.id.progressBar2);
         createAccountFButton = rootView.findViewById(R.id.createAccount);
 
+        genderSpinner = rootView.findViewById(R.id.gender);
+
+        setUpSpinner();
+
 
         createAccountFButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +96,8 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
                 String userDepartment = RegistrationValidation.Sanitize(department.getText().toString());
                 String userClassOf = RegistrationValidation.Sanitize(classOf.getText().toString());
                 String userUniversity = RegistrationValidation.Sanitize(university.getText().toString());
-
                 String validationOutPut = RegistrationValidation.validateStep2(userDepartment,userClassOf,userUniversity);
+                String userGender = genderSpinner.getSelectedItem().toString();
 
                 int classOfTwoInt = RegistrationValidation.classOfToInt(userClassOf);
 
@@ -97,6 +105,8 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
                     showError("");
                     graduate.setGraduationYear(Integer.parseInt(userClassOf));
                     graduate.setDepartment(userDepartment);
+                    graduate.setUniversity(userUniversity);
+                    graduate.setGender(userGender.substring(0,1).toUpperCase());//here converted to M,F
 
                     hideViews();
                     RegistrationRemote.saveEmailAndPassword(graduate,password,RegistrationFragmentTwo.this);
@@ -116,6 +126,12 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
         progressBar2.setVisibility(View.GONE);
 
         return rootView;
+    }
+
+    private void setUpSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),R.array.possiblegender, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(adapter);
     }
 
 
