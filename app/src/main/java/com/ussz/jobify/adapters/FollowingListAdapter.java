@@ -1,13 +1,11 @@
 package com.ussz.jobify.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -15,17 +13,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Organization;
+import com.ussz.jobify.network.OrganizationRemote;
+import com.ussz.jobify.utilities.CustomOnClickListener;
+
 import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdapter.FollowingViewHolder> {
 
     private Context context;
     private ArrayList<Organization> followingCompanies;
+    private CustomOnClickListener listener;
 
 
-    public FollowingListAdapter(Context context, ArrayList<Organization> following) {
+    public FollowingListAdapter(Context context, ArrayList<Organization> following, CustomOnClickListener listener) {
         this.context = context;
         this.followingCompanies = following;
+        this.listener = listener;
     }
 
     @NonNull
@@ -53,6 +58,33 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         holder.companyBio.setText(currentOrganization.getOrganizationBio());
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
 
+        if(currentOrganization.isFollowing()){
+            holder.unfollow.setText("Unfollow");
+        }
+        else{
+            holder.unfollow.setText("Follow");
+        }
+        holder.unfollow.setOnClickListener(view ->{
+          if(currentOrganization.isFollowing()){
+
+              holder.unfollow.setText("Follow");
+              // holder.unfollow.setBackgroundColor(R.color.white);
+              OrganizationRemote.unfollow(currentOrganization);
+              this.followingCompanies.get(position).setFollowing(false);
+
+          }
+          else {
+              holder.unfollow.setText("Unfollow");
+              // holder.unfollow.setBackgroundColor(R.color.white);
+              OrganizationRemote.follow(currentOrganization);
+              this.followingCompanies.get(position).setFollowing(true);
+
+          }
+            notifyDataSetChanged();
+
+        });
+
+        holder.bind(currentOrganization);
 
 
     }
@@ -62,7 +94,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         return followingCompanies.size();
     }
 
-    public void setOrginizations(ArrayList<Organization> organizations) {
+    public void setOrganizations(ArrayList<Organization> organizations) {
         this.followingCompanies = organizations;
         notifyDataSetChanged();
     }
@@ -70,16 +102,26 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     class FollowingViewHolder extends RecyclerView.ViewHolder{
 
-        public ImageView companyImage;
-        public TextView companyName;
-        public TextView companyBio;
+        private ImageView companyImage;
+        private TextView companyName;
+        private TextView companyBio;
+        private FancyButton unfollow;
 
         public FollowingViewHolder(@NonNull View itemView) {
             super(itemView);
             companyImage = itemView.findViewById(R.id.company_image_recycler);
             companyBio = itemView.findViewById(R.id.company_bio_recycler);
             companyName = itemView.findViewById(R.id.company_name_recycler);
+            unfollow = itemView.findViewById(R.id.following_list_unfollow);
 
+        }
+        public void bind(Organization organization){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.showDetails(organization, itemView);
+                }
+            });
         }
     }
 }

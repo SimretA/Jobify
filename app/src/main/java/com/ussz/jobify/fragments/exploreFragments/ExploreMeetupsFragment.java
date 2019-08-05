@@ -14,14 +14,14 @@ import android.view.ViewGroup;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
 import com.ussz.jobify.data.Meetup;
-import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreMeetupsFragment extends Fragment implements CustomOnClickedListener {
+public class ExploreMeetupsFragment extends Fragment implements CustomOnClickListener {
 
 
     public ExploreMeetupsFragment() {

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
-import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 
 import java.util.ArrayList;
 
@@ -24,10 +24,10 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
 
     private Fragment fragment;
     private ArrayList<Meetup> meetupsArrayList;
-    private CustomOnClickedListener listener;
+    private CustomOnClickListener listener;
 
 
-    public HomeMeetupsListAdapter(Fragment fragment, ArrayList<Meetup> meetupsArrayList,CustomOnClickedListener listener) {
+    public HomeMeetupsListAdapter(Fragment fragment, ArrayList<Meetup> meetupsArrayList, CustomOnClickListener listener) {
         this.fragment = fragment;
         this.meetupsArrayList = meetupsArrayList;
         this.listener = listener;
@@ -92,7 +92,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
             studentLimit = itemView.findViewById(R.id.leftSpace);
 
         }
-        public void bind(Meetup meetup, CustomOnClickedListener listener){
+        public void bind(Meetup meetup, CustomOnClickListener listener){
             itemView.setOnClickListener(v-> listener.showDetails(meetup,v));
         }
     }

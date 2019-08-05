@@ -68,6 +68,8 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="recent_jobs">Jobs</string>
+    <string name="meet_ups">Meet ups</string>
 
 
 </resources>

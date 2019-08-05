@@ -3,6 +3,6 @@ package com.ussz.jobify.utilities;
 import android.view.View;
 
 
-public interface CustomOnClickedListener {
+public interface CustomOnClickListener {
     void showDetails(Object object, View view);
 }

@@ -8,34 +8,25 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.circularreveal.cardview.CircularRevealCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Graduate;
-import com.ussz.jobify.data.University;
 import com.ussz.jobify.network.EditRemote;
 import com.ussz.jobify.network.ProfileImageRemote;
-import com.ussz.jobify.network.ProfileRemote;
 import com.ussz.jobify.utilities.IEditResult;
 import com.ussz.jobify.utilities.IUploadImageResult;
 import com.ussz.jobify.utilities.Tags;
@@ -201,8 +192,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
         FancyButton profileFollowing = view.findViewById(R.id.profile_following_btn);
 
         profileName.setText(graduate.getName());
-        if(graduate.getUniversity() !=null)
-            profileUniversity.setText(graduate.getUniversity().getName());
+        profileUniversity.setText(graduate.getUniversity());
 
         profileEmail.setText(graduate.getEmail());
         profileDepartment.setText(graduate.getDepartment());

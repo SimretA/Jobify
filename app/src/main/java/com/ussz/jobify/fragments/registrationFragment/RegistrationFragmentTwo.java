@@ -107,7 +107,6 @@ public class RegistrationFragmentTwo extends Fragment implements IRegistrationRe
                     graduate.setDepartment(userDepartment);
                     graduate.setUniversity(userUniversity);
                     graduate.setGender(userGender.substring(0,1).toUpperCase());//here converted to M,F
-
                     hideViews();
                     RegistrationRemote.saveEmailAndPassword(graduate,password,RegistrationFragmentTwo.this);
 

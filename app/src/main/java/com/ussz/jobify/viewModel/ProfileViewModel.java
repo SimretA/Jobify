@@ -5,29 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.ussz.jobify.data.Graduate;
-import com.ussz.jobify.data.University;
 import com.ussz.jobify.network.ProfileRemote;
-import com.ussz.jobify.network.UniversityRemote;
 
 public class ProfileViewModel  extends ViewModel {
     MutableLiveData<Graduate> mProfile;
 
     private void loadProfile(String userID){
         ProfileRemote.getProfile(
-                object -> {
-                    mProfile.setValue((Graduate) object);
-                    if (mProfile.getValue() !=null && mProfile.getValue().getUniversityRef()!=null) {
-                        UniversityRemote.getUniversityFromDocument(
-                                mProfile.getValue().getUniversityRef(),
-                                object2 -> {
-                                    Graduate newGraduate = mProfile.getValue();
-                                    newGraduate.setUniversity((University) object2);
-                                    mProfile.setValue(newGraduate);
-                                }
-
-                        );
-                    }
-                    },
+                object -> mProfile.setValue((Graduate) object),
                 userID);
 
     }

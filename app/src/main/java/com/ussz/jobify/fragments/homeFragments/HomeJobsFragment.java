@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
-import com.ussz.jobify.utilities.CustomOnClickedListener;
+import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.JobViewModel;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeJobsFragment extends Fragment implements CustomOnClickedListener {
+public class HomeJobsFragment extends Fragment implements CustomOnClickListener {
 
 
     private HomeJobsListAdapter homeJobsListAdapter;
