@@ -14,8 +14,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/progressbarhomemeetups"
+        android:indeterminateDrawable="@drawable/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/homeMeetupRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/homeMeetupRecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/homeMeetupRecyclerView"
+        app:layout_constraintVertical_bias="0.01999998" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
