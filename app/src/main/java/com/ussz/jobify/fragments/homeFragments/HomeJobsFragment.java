@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
@@ -28,7 +29,9 @@ import java.util.ArrayList;
 public class HomeJobsFragment extends Fragment implements CustomOnClickedListener {
 
 
-    HomeJobsListAdapter homeJobsListAdapter;
+    private HomeJobsListAdapter homeJobsListAdapter;
+
+    private ProgressBar prograssbarhomejobs;
 
     public HomeJobsFragment() {
         // Required empty public constructor
@@ -43,6 +46,8 @@ public class HomeJobsFragment extends Fragment implements CustomOnClickedListene
 
         RecyclerView recyclerView = rootView.findViewById(R.id.homeJobsRecyclerView);
 
+        prograssbarhomejobs = rootView.findViewById(R.id.prograssbarhomejobs);
+
 
         homeJobsListAdapter = new HomeJobsListAdapter(this,new ArrayList<>(), this);
         recyclerView.setAdapter(homeJobsListAdapter);
@@ -51,11 +56,15 @@ public class HomeJobsFragment extends Fragment implements CustomOnClickedListene
 
 
         JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
-        jobViewModel.getJobs().observe(this, jobs -> homeJobsListAdapter.setJobs((ArrayList<Job>) jobs));
+        jobViewModel.getJobs().observe(this, jobs -> listen((ArrayList<Job>) jobs) );
+
+        prograssbarhomejobs.setVisibility(View.VISIBLE);
 
         return rootView;
     }
     public void listen(ArrayList<Job> jobs){
+
+        prograssbarhomejobs.setVisibility(View.GONE);
         homeJobsListAdapter.setJobs(jobs);
     }
 

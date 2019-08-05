@@ -138,21 +138,21 @@ public class EditProfileFragment extends Fragment implements IEditResult {
         String databeingEdited = registrationOneData[0];
         String hint = "";
         int inputType = R.string.text;
-        if (databeingEdited.equals("username")){
+        if (databeingEdited.equalsIgnoreCase("username")){
             hint = "username";
         }
-        else if(databeingEdited.equals("email")){
+        else if(databeingEdited.equalsIgnoreCase("email")){
             hint = "email";
             inputType = R.string.textEmailAddress;
         }
-        else if(databeingEdited.equals("phonenumber")){
+        else if(databeingEdited.equalsIgnoreCase("phonenumber")){
              hint =  "phone number";
              inputType = R.string.phone;
         }
-        else if(databeingEdited.equals("university")){
+        else if(databeingEdited.equalsIgnoreCase("university")){
             hint = "university";
         }
-        else if(databeingEdited.equals("graduationyear")){
+        else if(databeingEdited.equalsIgnoreCase("graduationyear")){
             hint = "graduation year";
             inputType = R.string.number;
         }

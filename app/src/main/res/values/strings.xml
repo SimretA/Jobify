@@ -59,6 +59,15 @@
     <string name="where">Where</string>
     <string name="when">When</string>
     <string name="hosted_by">Hosted by</string>
+    <string name="gender">Gender</string>
+    <string name="filter">Filter</string>
+    <string name="sallery">Sallery</string>
+
+
+    <string-array name="possiblegender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 
 
 </resources>

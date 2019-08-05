@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
@@ -32,6 +33,11 @@ import java.util.List;
 public class HomeMeetupFragment extends Fragment implements CustomOnClickedListener {
 
 
+
+    private ProgressBar progressbarhomemeetups;
+
+    private HomeMeetupsListAdapter homeMeetupsListAdapter;
+
     public HomeMeetupFragment() {
         // Required empty public constructor
     }
@@ -45,20 +51,36 @@ public class HomeMeetupFragment extends Fragment implements CustomOnClickedListe
 
         RecyclerView recyclerView = rootView.findViewById(R.id.homeMeetupRecyclerView);
 
+        progressbarhomemeetups = rootView.findViewById(R.id.progressbarhomemeetups);
+
        
         ArrayList<Meetup> meetups = new ArrayList<>();
 
-        HomeMeetupsListAdapter homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups, this);
+        homeMeetupsListAdapter = new HomeMeetupsListAdapter(this,meetups, this);
         recyclerView.setAdapter(homeMeetupsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
         MeetupViewModel meetupViewModel = ViewModelProviders.of(this).get(MeetupViewModel.class);
         meetupViewModel.getMeetups().observe(this, meetups1 -> {
-            homeMeetupsListAdapter.setMeetupsArrayList((ArrayList<Meetup>) meetups1);
+            listen((ArrayList<Meetup>) meetups1);
         });
+
+
+        progressbarhomemeetups.setVisibility(View.VISIBLE);
+
+
         return rootView;
     }
+
+
+    private void listen(ArrayList<Meetup> meetups){
+
+        progressbarhomemeetups.setVisibility(View.GONE);
+
+        homeMeetupsListAdapter.setMeetupsArrayList(meetups);
+    }
+
 
     @Override
     public void showDetails(Object object, View view) {
