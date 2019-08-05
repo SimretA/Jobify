@@ -58,11 +58,29 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         holder.companyBio.setText(currentOrganization.getOrganizationBio());
         holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
 
+        if(currentOrganization.isFollowing()){
+            holder.unfollow.setText("Unfollow");
+        }
+        else{
+            holder.unfollow.setText("Follow");
+        }
         holder.unfollow.setOnClickListener(view ->{
-            this.followingCompanies.remove(position);
-            OrganizationRemote.unfollow(null, currentOrganization);
+          if(currentOrganization.isFollowing()){
 
-            //notifyDataSetChanged();
+              holder.unfollow.setText("Follow");
+              // holder.unfollow.setBackgroundColor(R.color.white);
+              OrganizationRemote.unfollow(currentOrganization);
+              this.followingCompanies.get(position).setFollowing(false);
+
+          }
+          else {
+              holder.unfollow.setText("Unfollow");
+              // holder.unfollow.setBackgroundColor(R.color.white);
+              OrganizationRemote.follow(currentOrganization);
+              this.followingCompanies.get(position).setFollowing(true);
+
+          }
+            notifyDataSetChanged();
 
         });
 
@@ -76,7 +94,7 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         return followingCompanies.size();
     }
 
-    public void setOrginizations(ArrayList<Organization> organizations) {
+    public void setOrganizations(ArrayList<Organization> organizations) {
         this.followingCompanies = organizations;
         notifyDataSetChanged();
     }

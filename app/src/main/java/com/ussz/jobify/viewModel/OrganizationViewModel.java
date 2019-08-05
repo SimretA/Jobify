@@ -1,14 +1,11 @@
 package com.ussz.jobify.viewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.network.OrganizationRemote;
-import com.ussz.jobify.utilities.CustomCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +22,7 @@ public class OrganizationViewModel extends ViewModel {
 
     public void loadOrganizationsFromDocument(List<DocumentReference> documentReferenceList){
         if (documentReferenceList!=null && organizations.getValue().size()==0){
-            OrganizationRemote.getOrganizatinsFromDocument(
+            OrganizationRemote.getOrganizationsFromDocument(
                     documentReferenceList, object -> {
                         ArrayList<Organization> newOne = organizations.getValue();
                         newOne.add((Organization) object);
@@ -35,6 +32,16 @@ public class OrganizationViewModel extends ViewModel {
         }
 
 
+    }
+
+    public void  loadAllOrgs(){
+        if(organizations.getValue().size()==0){
+            OrganizationRemote.getOrganizations(object -> {
+                ArrayList<Organization> newOne = organizations.getValue();
+                newOne.add((Organization) object);
+                organizations.setValue(newOne);
+            });
+        }
     }
 
 }

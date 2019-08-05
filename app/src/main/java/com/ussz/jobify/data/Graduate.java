@@ -19,7 +19,7 @@ public class Graduate {
     private int graduationYear;
     private String profileImage;
     private DocumentReference universityRef;
-    private University university;
+    private String university;
     private String phoneNumber;
     private String email;
     private List<DocumentReference> following;

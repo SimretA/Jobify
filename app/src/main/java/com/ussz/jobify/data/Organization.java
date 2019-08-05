@@ -19,5 +19,6 @@ public class Organization implements Serializable {
     private String organizationBio;
     private int followers;
     private String address;
+    private boolean following;
 
 }

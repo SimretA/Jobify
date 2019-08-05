@@ -4,7 +4,6 @@ package com.ussz.jobify.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -57,7 +56,7 @@ public class FollowingFragment extends Fragment implements CustomOnClickListener
             organizationViewModel.loadOrganizationsFromDocument((List<DocumentReference>) getArguments().getSerializable(Tags.BUNDLE_KEY));
 
         }
-        organizationViewModel.organizations.observe(this, organizations -> followingListAdapter.setOrginizations(organizations));
+        organizationViewModel.organizations.observe(this, organizations -> followingListAdapter.setOrganizations(organizations));
         return view;
     }
 

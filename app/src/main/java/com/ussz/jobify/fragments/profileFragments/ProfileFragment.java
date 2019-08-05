@@ -201,8 +201,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
         FancyButton profileFollowing = view.findViewById(R.id.profile_following_btn);
 
         profileName.setText(graduate.getName());
-        if(graduate.getUniversity() !=null)
-            profileUniversity.setText(graduate.getUniversity().getName());
+        profileUniversity.setText(graduate.getUniversity());
 
         profileEmail.setText(graduate.getEmail());
         profileDepartment.setText(graduate.getDepartment());
