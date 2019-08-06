@@ -67,4 +67,6 @@ public class FollowingFragment extends Fragment implements CustomOnClickListener
         Navigation.findNavController(view).navigate(R.id.org_profile_fragment_dest, args);
 
     }
+
+
 }

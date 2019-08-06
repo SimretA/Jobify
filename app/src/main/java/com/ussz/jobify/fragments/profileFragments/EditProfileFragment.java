@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -76,6 +77,7 @@ public class EditProfileFragment extends Fragment implements IEditResult {
                 }
             }
         });
+
 
 
         progressBar3.setVisibility(View.GONE);
@@ -176,6 +178,7 @@ public class EditProfileFragment extends Fragment implements IEditResult {
             hideViews();
             if(result.equals("Transaction success!")){
                 showSuccessMessage("update success");
+                Navigation.findNavController(getView()).navigate(R.id.profile_fragment_dest);
             }
             else{
                 showFailureMessage("update failed");
