@@ -10,6 +10,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.CustomCallback;
 
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class JobRemote {
 
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    static CollectionReference jobs = db.collection("/jobs");
 
     public void getJobWithCatagory(String department){
-        CollectionReference jobs = db.collection("/jobs");
         jobs.whereEqualTo(Job.FIELD_DEPARTMENT, department)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -42,10 +43,12 @@ public class JobRemote {
 
 
 
+
+
     public static void getAllJobs(CustomCallback callback){
 
         ArrayList<Job> newJobs = new ArrayList<>();
-        CollectionReference jobs = db.collection("/jobs");
+
         jobs.get()
                 .addOnCompleteListener(
                         task -> {
