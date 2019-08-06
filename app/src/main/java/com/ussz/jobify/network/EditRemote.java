@@ -34,8 +34,8 @@ public class EditRemote {
         coreUpdateFunctionality("email",email,iEditResult);
     }
 
-    public static void updateUniversity(){
-//        coreUpdateFunctionality();
+    public static void updateUniversity(String university, IEditResult iEditResult){
+        coreUpdateFunctionality("university",university,iEditResult);
     }
     public static void updateGraduationYear(int graduationYear, IEditResult iEditResult){
         coreUpdateFunctionality("graduationYear",graduationYear,iEditResult);
