@@ -4,11 +4,7 @@ package com.ussz.jobify.fragments.exploreFragments;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,10 +16,12 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.adapters.ViewPagerAdapter;
 import com.ussz.jobify.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,9 +32,17 @@ public class ExploreFragment extends Fragment {
 
     private Dialog dialog;
 
+    private String currentTab = "JOBS";
+
+
+    private TextInputLayout departmentEt,orgEt,salaryEt,locationEt;
+
     public ExploreFragment() {
         // Required empty public constructor
     }
+
+
+    HashMap<String,Integer> filterEditTextVisiblity;
 
 
     @Override
@@ -53,6 +59,8 @@ public class ExploreFragment extends Fragment {
         fragmentList.add(new ExploreJobsFragment());
         fragmentList.add(new ExploreMeetupsFragment());
         fragmentList.add(new ExploreOrganizationFragment());
+
+        filterEditTextVisiblity = new HashMap<>();
 
 
 
@@ -74,6 +82,26 @@ public class ExploreFragment extends Fragment {
             }
         });
 
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                currentTab = tab.getText().toString().toUpperCase();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
         return rootView;
     }
 
@@ -84,6 +112,15 @@ public class ExploreFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
         dialog.setContentView(R.layout.filterdialog);
         dialog.setCancelable(true);
+
+
+        departmentEt = dialog.findViewById(R.id.textInputLayout);
+        orgEt = dialog.findViewById(R.id.textInputLayout5);
+        salaryEt = dialog.findViewById(R.id.textInputLayout9);
+        locationEt = dialog.findViewById(R.id.textInputLayout19);
+
+
+        handleVisibility();
 
 
         ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
@@ -103,6 +140,16 @@ public class ExploreFragment extends Fragment {
         dialog.getWindow().setAttributes(lp);
     }
 
+    private void handleVisibility() {
+
+        if (currentTab.equalsIgnoreCase("meetups") ){
+            salaryEt.setVisibility(View.GONE);
+        }
+        else if(currentTab.equalsIgnoreCase("org")){
+            salaryEt.setVisibility(View.GONE);
+            departmentEt.setVisibility(View.GONE);
+        }
+    }
 
 
 }

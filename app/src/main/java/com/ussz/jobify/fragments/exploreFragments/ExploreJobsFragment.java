@@ -4,6 +4,7 @@ package com.ussz.jobify.fragments.exploreFragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.data.Job;
+import com.ussz.jobify.viewModel.JobViewModel;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,10 @@ public class ExploreJobsFragment extends Fragment implements CustomOnClickListen
         recyclerView.setAdapter(homeJobsListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+
+
+
+
 
         return rootView;
     }
