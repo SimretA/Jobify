@@ -45,14 +45,14 @@ dependencies {
 
 
     //google material design
-    implementation 'com.google.android.material:material:1.1.0-alpha08'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
 
     //lombok
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     //circular image view
-    implementation 'com.mikhaellopez:circularimageview:3.2.0'
+    implementation 'com.mikhaellopez:circularimageview:4.0.1'
 
     //fancy button and font for fancy button
     implementation 'com.github.medyo:fancybuttons:1.9.1'
@@ -69,6 +69,9 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //support for sectioned adapter
+    implementation 'io.github.luizgrp.sectionedrecyclerviewadapter:sectionedrecyclerviewadapter:2.0.0'
 
 
 }

@@ -21,16 +21,20 @@ public class JobRemote {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     static CollectionReference jobs = db.collection("/jobs");
 
-    public void getJobWithCatagory(String department){
-        jobs.whereEqualTo(Job.FIELD_DEPARTMENT, department)
+    public static void getJobWithWithDepartment(String department,CustomCallback callback){
+
+        ArrayList<Job> jobsWithDepartment = new ArrayList<>();
+
+        jobs.whereEqualTo("target.department", department)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(DocumentSnapshot doc: task.getResult()){
-                                Log.d("data", doc.getData().toString());
+                                jobsWithDepartment.add(doc.toObject(Job.class));
                             }
+                            callback.onCallBack(jobsWithDepartment);
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
@@ -38,6 +42,11 @@ public class JobRemote {
                     }
                 });
 
+
+    }
+
+
+    public void getJobWithSalaryGreaterThan(double sallery){
 
     }
 
