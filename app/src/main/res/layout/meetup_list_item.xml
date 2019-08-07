@@ -25,7 +25,7 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/rounded_textview"
                 android:gravity="center"
                 android:text="G"
                 android:textColor="@color/white"
