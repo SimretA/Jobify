@@ -101,7 +101,9 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                tools:text="@tools:sample/lorem[7]" />
+                tools:text="@tools:sample/lorem[7]"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/textView14"
@@ -117,7 +119,9 @@
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
                 fancy:layout_constraintBottom_toBottomOf="parent"
-                tools:text="@tools:sample/lorem[7]" />
+                tools:text="@tools:sample/lorem[7]"
+                android:maxLines="3"
+                android:ellipsize="marquee"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
