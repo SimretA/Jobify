@@ -72,7 +72,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/organizationimage"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                tools:text="@tools:sample/lorem[6]" />
+                tools:text="@tools:sample/lorem[6]"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/textView17"
@@ -85,7 +87,9 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView16"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
-                tools:text="@tools:sample/lorem[6]" />
+                tools:text="@tools:sample/lorem[6]"
+                android:maxLines="3"
+                android:ellipsize="end"/>
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/leftSpace"
