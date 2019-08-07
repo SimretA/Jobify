@@ -61,8 +61,9 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         holder.companyBio.setText(currentOrganization.getOrganizationBio());
 
 
+        String currentColor = Helper.getRandomColorString();
 
-        holder.companyName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        holder.companyName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.companyName1.setText(currentOrganization.getOrganizationName().substring(0,1).toUpperCase());
 
         if(currentOrganization.isFollowing()){
@@ -91,6 +92,8 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
         });
 
+
+        holder.unfollow.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.bind(currentOrganization);
 
 

@@ -70,7 +70,9 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         holder.companyName.setText(job.getOrganizationName());
 
 
-        holder.companyName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        String currentColor = Helper.getRandomColorString();
+
+        holder.companyName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.companyName1.setText(job.getOrganizationName().substring(0,1).toUpperCase());
 
         if (fragment instanceof HomeJobsFragment){
@@ -80,6 +82,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         else{
             holder.leftSpace.setText("" + (job.getStudentLimit()-position*2) + " Spot");
         }
+        holder.leftSpace.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.bind(job, listener);
 
     }

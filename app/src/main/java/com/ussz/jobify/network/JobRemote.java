@@ -47,7 +47,7 @@ public class JobRemote {
 
 
     public void getJobWithSalaryGreaterThan(double sallery){
-
+        
     }
 
 

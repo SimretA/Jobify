@@ -29,7 +29,7 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapt
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreJobsFragment extends Fragment implements CustomCallback {
+public class ExploreJobsFragment extends Fragment implements CustomCallback{
 
 
 

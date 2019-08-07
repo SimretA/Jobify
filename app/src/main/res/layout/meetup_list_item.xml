@@ -78,7 +78,7 @@
                 fancy:fb_borderColor="@color/green"
                 fancy:fb_defaultColor="#9bd823"
                 fancy:fb_radius="30dp"
-                fancy:fb_textColor="@color/green"
+                fancy:fb_textColor="@color/white"
 
                 />
 

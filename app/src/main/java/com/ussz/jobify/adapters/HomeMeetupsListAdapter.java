@@ -51,7 +51,9 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         holder.meetupTitle.setText(meetup.getName()+ " " + position);
         holder.meetupDescription.setText(meetup.getDescription());
 
-        holder.meetupName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        String currentColor = Helper.getRandomColorString();
+
+        holder.meetupName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.meetupName1.setText(meetup.getOrganizationName().substring(0,1).toUpperCase());
 
 
@@ -64,6 +66,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
             //here call function that will calculate duration left
             holder.studentLimit.setText("In " + (meetup.getStudentLimit()-position*2) + " days");
         }
+        holder.studentLimit.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.bind(meetup,listener);
 
 
