@@ -1,5 +1,7 @@
 package com.ussz.jobify.adapters;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
 import com.ussz.jobify.utilities.CustomOnClickListener;
+import com.ussz.jobify.utilities.Helper;
 
 import java.util.ArrayList;
 
@@ -47,9 +50,12 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         Meetup meetup = meetupsArrayList.get(position);
         holder.meetupTitle.setText(meetup.getName()+ " " + position);
         holder.meetupDescription.setText(meetup.getDescription());
-        holder.meetupImage.setImageResource(R.mipmap.profile_avatar_round);
 
-        holder.submitedBy.setText("Google "+position);
+        holder.meetupName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        holder.meetupName1.setText(meetup.getOrganizationName().substring(0,1).toUpperCase());
+
+
+        holder.submitedBy.setText(meetup.getOrganizationName());
 
         if (fragment instanceof ExploreMeetupsFragment){
             holder.studentLimit.setText("" + (meetup.getStudentLimit()-position*2) + " Spot");
@@ -79,7 +85,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         // public TextView organizationImage;
         private TextView meetupTitle;
         private TextView meetupDescription;
-        private ImageView meetupImage;
+        private TextView meetupName1;
         private TextView submitedBy;
         private FancyButton studentLimit;
 
@@ -88,7 +94,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
             meetupTitle = itemView.findViewById(R.id.textView2);
             meetupDescription = itemView.findViewById(R.id.textView14);
             submitedBy = itemView.findViewById(R.id.textView3);
-            meetupImage = itemView.findViewById(R.id.organizationimage);
+            meetupName1 = itemView.findViewById(R.id.organizationimage);
             studentLimit = itemView.findViewById(R.id.leftSpace);
 
         }

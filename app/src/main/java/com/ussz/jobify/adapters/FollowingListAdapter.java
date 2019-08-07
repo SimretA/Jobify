@@ -1,6 +1,8 @@
 package com.ussz.jobify.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.network.OrganizationRemote;
 import com.ussz.jobify.utilities.CustomOnClickListener;
+import com.ussz.jobify.utilities.Helper;
 
 import java.util.ArrayList;
 
@@ -56,7 +59,11 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         Organization currentOrganization = followingCompanies.get(position);
         holder.companyName.setText(currentOrganization.getOrganizationName());
         holder.companyBio.setText(currentOrganization.getOrganizationBio());
-        holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
+
+
+
+        holder.companyName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        holder.companyName1.setText(currentOrganization.getOrganizationName().substring(0,1).toUpperCase());
 
         if(currentOrganization.isFollowing()){
             holder.unfollow.setText("Unfollow");
@@ -102,14 +109,14 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
 
     class FollowingViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView companyImage;
+        private TextView companyName1;
         private TextView companyName;
         private TextView companyBio;
         private FancyButton unfollow;
 
         public FollowingViewHolder(@NonNull View itemView) {
             super(itemView);
-            companyImage = itemView.findViewById(R.id.company_image_recycler);
+            companyName1 = itemView.findViewById(R.id.company_image_recycler);
             companyBio = itemView.findViewById(R.id.company_bio_recycler);
             companyName = itemView.findViewById(R.id.company_name_recycler);
             unfollow = itemView.findViewById(R.id.following_list_unfollow);

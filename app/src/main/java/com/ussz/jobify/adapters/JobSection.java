@@ -1,12 +1,18 @@
 package com.ussz.jobify.adapters;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
+import com.ussz.jobify.data.Organization;
+import com.ussz.jobify.utilities.Helper;
 
 import java.util.List;
 
@@ -49,9 +55,13 @@ public class JobSection extends StatelessSection {
         Job job = jobs.get(position);
 
         itemViewHolder.title.setText(job.getTitle());
+        itemViewHolder.orgName.setText(job.getOrganizationName());
         itemViewHolder.description.setText(job.getDescription());
         itemViewHolder.studentLimit.setText(job.getStudentLimit() +" spot");
 
+
+        itemViewHolder.orgName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        itemViewHolder.orgName1.setText(job.getOrganizationName().substring(0,1).toUpperCase());
 
     }
 
@@ -86,15 +96,19 @@ public class JobSection extends StatelessSection {
         private final View rootView;
         private final TextView description;
         private final TextView title;
+        private final TextView orgName;
         private final FancyButton studentLimit;
+        private final TextView orgName1;
 
         ItemViewHolder(View view) {
             super(view);
 
             rootView = view;
+            orgName = view.findViewById(R.id.textView16);
             studentLimit = view.findViewById(R.id.leftSpace);
             description = view.findViewById(R.id.textView17);
             title = view.findViewById(R.id.textView2);
+            orgName1 = view.findViewById(R.id.organizationimage);
         }
     }
 }
