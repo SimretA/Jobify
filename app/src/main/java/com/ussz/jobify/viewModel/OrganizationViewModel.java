@@ -16,7 +16,7 @@ import java.util.List;
 public class OrganizationViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Organization>> organizations;
-    private Graduate graduate;
+    private Graduate graduate = new Graduate();
 
     public OrganizationViewModel() {
         ArrayList<Organization> organizationArrayList = new ArrayList<>();
@@ -29,7 +29,7 @@ public class OrganizationViewModel extends ViewModel {
             OrganizationRemote.getOrganizationsFromDocument(
                     documentReferenceList, object -> {
                         ArrayList<Organization> newOne = organizations.getValue();
-                        newOne.add(checkFollowing((Organization) object));
+                        newOne.add((Organization) object);
                         organizations.setValue(newOne);
                     }
             );
@@ -47,13 +47,13 @@ public class OrganizationViewModel extends ViewModel {
 
             OrganizationRemote.getOrganizations(object -> {
                 ArrayList<Organization> newOne = organizations.getValue();
-                newOne.add((Organization) object);
+                newOne.add(checkFollowing((Organization) object));
                 organizations.setValue(newOne);
             });
         }
     }
 
-    public Organization checkFollowing(Organization organization){
+    private Organization checkFollowing(Organization organization){
         for (DocumentReference doc :
                 graduate.getFollowing()) {
             if (doc.getId().equals(organization.getId())){

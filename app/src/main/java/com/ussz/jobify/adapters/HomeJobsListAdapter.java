@@ -2,16 +2,12 @@ package com.ussz.jobify.adapters;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +18,6 @@ import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.utilities.Helper;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
