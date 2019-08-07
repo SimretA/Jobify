@@ -19,23 +19,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+            <TextView
                 android:id="@+id/organizationimage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:civ_border_color="#fff"
-                app:civ_border_width="1dp"
-                app:civ_shadow="false"
-                app:civ_shadow_color="#fff"
-                app:civ_shadow_radius="10"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:text="G"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars[2]" />
+                app:layout_constraintTop_toTopOf="@+id/textView2"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView2"
