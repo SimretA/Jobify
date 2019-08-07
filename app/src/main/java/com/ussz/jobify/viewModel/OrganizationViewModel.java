@@ -3,9 +3,12 @@ package com.ussz.jobify.viewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.network.OrganizationRemote;
+import com.ussz.jobify.network.ProfileRemote;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 public class OrganizationViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Organization>> organizations;
+    private Graduate graduate;
 
     public OrganizationViewModel() {
         ArrayList<Organization> organizationArrayList = new ArrayList<>();
@@ -25,7 +29,7 @@ public class OrganizationViewModel extends ViewModel {
             OrganizationRemote.getOrganizationsFromDocument(
                     documentReferenceList, object -> {
                         ArrayList<Organization> newOne = organizations.getValue();
-                        newOne.add((Organization) object);
+                        newOne.add(checkFollowing((Organization) object));
                         organizations.setValue(newOne);
                     }
             );
@@ -35,13 +39,31 @@ public class OrganizationViewModel extends ViewModel {
     }
 
     public void  loadAllOrgs(){
+
         if(organizations.getValue().size()==0){
+
+            ProfileRemote.getProfile(object -> this.graduate = (Graduate) object,
+                    FirebaseAuth.getInstance().getCurrentUser().getUid());
+
             OrganizationRemote.getOrganizations(object -> {
                 ArrayList<Organization> newOne = organizations.getValue();
                 newOne.add((Organization) object);
                 organizations.setValue(newOne);
             });
         }
+    }
+
+    public Organization checkFollowing(Organization organization){
+        for (DocumentReference doc :
+                graduate.getFollowing()) {
+            if (doc.getId().equals(organization.getId())){
+                organization.setFollowing(true);
+                return organization;
+            }
+
+        }
+        organization.setFollowing(false);
+        return organization;
     }
 
 }

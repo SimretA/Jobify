@@ -68,8 +68,11 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
         if(currentOrganization.isFollowing()){
             holder.unfollow.setText("Unfollow");
         }
-        else{
+        else if(!currentOrganization.isFollowing()){
             holder.unfollow.setText("Follow");
+        }
+        else{
+            holder.unfollow.setText("---");
         }
         holder.unfollow.setOnClickListener(view ->{
           if(currentOrganization.isFollowing()){

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.ussz.jobify.data.Graduate;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     NavController navController;
+
+    public Graduate graduate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 }

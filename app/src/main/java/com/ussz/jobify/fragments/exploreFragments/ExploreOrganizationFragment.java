@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.FollowingListAdapter;
 import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.utilities.CustomOnClickListener;
+import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.OrganizationViewModel;
 
 import java.util.ArrayList;
@@ -57,6 +59,9 @@ public class ExploreOrganizationFragment extends Fragment implements CustomOnCli
     @Override
     public void showDetails(Object object, View view) {
 
+        Bundle args = new Bundle();
+        args.putSerializable(Tags.ORG_BUNDLE_KEY, (Organization) object);
+        Navigation.findNavController(view).navigate(R.id.org_profile_fragment_dest, args);
 
     }
 }
