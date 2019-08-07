@@ -1,5 +1,9 @@
 package com.ussz.jobify.adapters;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,8 +19,10 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.fragments.homeFragments.HomeJobsFragment;
 import com.ussz.jobify.utilities.CustomOnClickListener;
+import com.ussz.jobify.utilities.Helper;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -24,6 +31,8 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
     private Fragment fragment;
     private ArrayList<Job> jobArrayList;
     private CustomOnClickListener listener;
+
+
 
 
     public HomeJobsListAdapter(Fragment fragment, ArrayList<Job> jobArrayList, CustomOnClickListener listener) {
@@ -52,11 +61,17 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull HomeJobsViewHolder holder, int position) {
+
+
+
         Job job = jobArrayList.get(position);
         holder.jobTitle.setText(job.getTitle());
         holder.jobDescription.setText(job.getDescription());
-        holder.companyName.setText("Google " + position);
-        holder.companyImage.setImageResource(R.mipmap.profile_avatar_round);
+        holder.companyName.setText(job.getOrganizationName());
+
+
+        holder.companyName1.getBackground().setColorFilter(Color.parseColor(Helper.getRandomColorString()), PorterDuff.Mode.SRC_ATOP);
+        holder.companyName1.setText(job.getOrganizationName().substring(0,1).toUpperCase());
 
         if (fragment instanceof HomeJobsFragment){
             //here call function that will calculate duration left
@@ -84,7 +99,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         private TextView jobTitle;
         private TextView jobDescription;
         private TextView companyName;
-        private ImageView companyImage;
+        private TextView companyName1;
         private FancyButton leftSpace;
 
         public HomeJobsViewHolder(@NonNull View itemView) {
@@ -92,7 +107,7 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
             jobTitle = itemView.findViewById(R.id.textView2);
             jobDescription = itemView.findViewById(R.id.textView17);
             companyName = itemView.findViewById(R.id.textView16);
-            companyImage = itemView.findViewById(R.id.organizationimage); //textView18
+            companyName1 = itemView.findViewById(R.id.organizationimage); //textView18
             leftSpace = itemView.findViewById(R.id.leftSpace);
 
         }

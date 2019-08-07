@@ -49,7 +49,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
 
     private BottomSheetDialog bottomSheetDialog;
     private static final int  GALLERY_REQUEST_CODE = 377;
-    private TextView uploadFromGalleryTv,uploadFromFile;
 
     private ProgressBar progressBar4;
 
@@ -121,7 +120,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
         rootView.findViewById(R.id.tv_name).setOnClickListener(this);
 //        rootView.findViewById(R.id.emailLL).setOnClickListener(this);
         rootView.findViewById(R.id.phoneNumberLL).setOnClickListener(this);
-//        rootView.findViewById(R.id.universityLL).setOnClickListener(this);
+        rootView.findViewById(R.id.universityLL).setOnClickListener(this);
         rootView.findViewById(R.id.classOfLL).setOnClickListener(this);
         rootView.findViewById(R.id.departmentLL).setOnClickListener(this);
 
@@ -176,8 +175,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener , 
         if (bottomSheetDialog == null){
             View view = LayoutInflater.from(getContext()).inflate(R.layout.selectimagebottomsheet,null);
 
-            uploadFromGalleryTv = view.findViewById(R.id.uploadFromGalleryTv);
-            uploadFromFile = view.findViewById(R.id.uploadFromFile);
+            TextView uploadFromGalleryTv = view.findViewById(R.id.uploadFromGalleryTv);
+            TextView uploadFromFile = view.findViewById(R.id.uploadFromFile);
 
             uploadFromGalleryTv.setOnClickListener(this);
             uploadFromFile.setOnClickListener(this);

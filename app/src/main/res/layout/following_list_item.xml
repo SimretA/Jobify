@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.mikhaellopez.circularimageview.CircularImageView
+
+    <TextView
         android:id="@+id/company_image_recycler"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:civ_shadow="false"
-        app:civ_shadow_color="#fff"
-        app:civ_shadow_radius="10"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:text="G"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[2]" />
+        app:layout_constraintTop_toTopOf="@+id/company_name_recycler"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/company_name_recycler"
@@ -88,4 +87,3 @@
         android:maxLines="3"
         android:ellipsize="end"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.circularreveal.cardview.CircularRevealCardView>

@@ -24,4 +24,7 @@ public class Meetup implements Serializable {
     private String postedById;
 
     private Target target;
+
+
+    private String organizationName;
 }

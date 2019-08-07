@@ -100,7 +100,7 @@ public class EditProfileFragment extends Fragment implements IEditResult {
                 EditRemote.updatePhoneNumber(data,EditProfileFragment.this);
                 break;
             case "university":
-//                EditRemote.updateUniversity(data,EditProfileFragment.this);
+                EditRemote.updateUniversity(data,EditProfileFragment.this);
                 break;
             case "graduationyear":
                 EditRemote.updateGraduationYear(Integer.parseInt(data),EditProfileFragment.this);

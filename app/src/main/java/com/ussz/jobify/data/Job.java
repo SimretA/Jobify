@@ -35,6 +35,9 @@ public class Job implements Serializable {
     private Timestamp deadline;
 
 
+    private String organizationName;
+
+
     private Double salary;
 
 

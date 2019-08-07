@@ -14,17 +14,27 @@ import android.view.ViewGroup;
 
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
+import com.ussz.jobify.adapters.JobSection;
+import com.ussz.jobify.network.JobRemote;
+import com.ussz.jobify.utilities.CustomCallback;
 import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.viewModel.JobViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ExploreJobsFragment extends Fragment implements CustomOnClickListener {
+public class ExploreJobsFragment extends Fragment implements CustomCallback {
 
+
+
+    private SectionedRecyclerViewAdapter sectionAdapter;
+    private RecyclerView recyclerView;
 
     public ExploreJobsFragment() {
         // Required empty public constructor
@@ -37,20 +47,14 @@ public class ExploreJobsFragment extends Fragment implements CustomOnClickListen
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_explore_jobs, container, false);
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.exploreJobsRecyclerView);
 
-        //Job job = new Job("Software engineering","We are looking for software engineering graduates..",23, "Software Engineering");
-        ArrayList<Job> jobs = new ArrayList<>();
-        for(int i=0; i<10;i++) {
-          //  jobs.add(job);
-        }
-        HomeJobsListAdapter homeJobsListAdapter = new HomeJobsListAdapter(this,jobs, this);
-        recyclerView.setAdapter(homeJobsListAdapter);
+        sectionAdapter = new SectionedRecyclerViewAdapter();
+
+        recyclerView = rootView.findViewById(R.id.exploreJobsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
 
 
-
+        JobRemote.getJobWithWithDepartment("software engineering",this);
 
 
         return rootView;
@@ -58,7 +62,9 @@ public class ExploreJobsFragment extends Fragment implements CustomOnClickListen
 
 
     @Override
-    public void showDetails(Object object, View view) {
-
+    public void onCallBack(Object object) {
+        List<Job> jobs = (List<Job>) object;
+        sectionAdapter.addSection(new JobSection("Jobs with your department ",jobs));
+        recyclerView.setAdapter(sectionAdapter);
     }
 }
