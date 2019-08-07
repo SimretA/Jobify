@@ -1,6 +1,7 @@
 package com.ussz.jobify.data;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,8 +18,13 @@ public class Organization implements Serializable {
     private String organizationName;
     private String organizationImage;
     private String organizationBio;
+
     private int followers;
+
     private String address;
+
     private boolean following;
+
+    private Job job;
 
 }
