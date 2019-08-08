@@ -11,6 +11,7 @@ import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.Helper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
@@ -78,6 +79,7 @@ public class JobSection extends StatelessSection {
 
         headerViewHolder.tvTitle.setText(title);
     }
+
 
     //view holders
     private class HeaderViewHolder extends RecyclerView.ViewHolder {

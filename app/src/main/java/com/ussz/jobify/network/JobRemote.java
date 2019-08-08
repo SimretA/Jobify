@@ -20,6 +20,7 @@ import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.CustomCallback;
 import com.ussz.jobify.utilities.FilterCallBack;
 import com.ussz.jobify.utilities.LoginCustomeCallback;
+import com.ussz.jobify.utilities.RemoteFilterCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class JobRemote {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     static CollectionReference jobs = db.collection("/jobs");
 
-    public static void getJobWithWithDepartment(String department, FilterCallBack filterCallBack){
+    public static void getJobWithWithDepartment(String department, RemoteFilterCallback remoteFilterCallback){
 
         ArrayList<Job> jobsWithDepartment = new ArrayList<>();
 
@@ -42,8 +43,9 @@ public class JobRemote {
                             for(DocumentSnapshot doc: task.getResult()){
                                 jobsWithDepartment.add(doc.toObject(Job.class));
                             }
+                            remoteFilterCallback.onCallBack(jobsWithDepartment, "Jobs with "+department+" department");
 
-                            filterCallBack.onResult(jobsWithDepartment,"Jobs with "+department+" department");
+                            //filterCallBack.onResult(jobsWithDepartment,"Jobs with "+department+" department");
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
@@ -68,10 +70,10 @@ public class JobRemote {
 
 
 
-    public static void getJobWithSalaryGreaterThan(String department,double sallery,FilterCallBack filterCallBack){
+    public static void getJobWithSalaryGreaterThan(String department,double salary,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Job> jobsWithSalary = new ArrayList<>();
 
-        jobs.whereGreaterThanOrEqualTo("salary", sallery)
+        jobs.whereGreaterThanOrEqualTo("salary", salary)
                 .whereEqualTo("target.department",department)
                 .orderBy("salary", Query.Direction.DESCENDING)
                 .get()
@@ -81,7 +83,8 @@ public class JobRemote {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                             jobsWithSalary.add(documentSnapshot.toObject(Job.class));
                         }
-                        filterCallBack.onResult(jobsWithSalary,"Jobs with salary > "+sallery+" and department "+department);
+                        remoteFilterCallback.onCallBack(jobsWithSalary,"");
+                       // filterCallBack.onResult(jobsWithSalary,"Jobs with salary > "+salary+" and department "+department);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +56,7 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     private ProgressBar progressBar5;
 
+
     private ArrayList<JobSection> jobSectionStack = new ArrayList<>();
 
     public ExploreJobsFragment() {
@@ -75,9 +77,39 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
+        ArrayList<String> filter = new ArrayList<>();
+        filter.add("software engineering");
+        if(!jobViewModel.isStarted()) {
+            jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT, filter).observe(this, jobSections -> {
+                sectionAdapter.removeAllSections();
+                int length = jobSections.size() - 1;
+                for (int i = length; i >= 0; i--) {
+                    sectionAdapter.addSection(jobSections.get(i));
+                    jobViewModel.setStarted();
+                }
+                recyclerView.setAdapter(sectionAdapter);
+            });
 
+
+        }
+        else{
+            jobViewModel.jobSections.observe(this, new Observer<ArrayList<JobSection>>() {
+                @Override
+                public void onChanged(ArrayList<JobSection> jobSections) {
+                    sectionAdapter.removeAllSections();
+                    int length = jobSections.size() - 1;
+                    for (int i = length; i >= 0; i--) {
+                        sectionAdapter.addSection(jobSections.get(i));
+                        jobViewModel.setStarted();
+                    }
+                    recyclerView.setAdapter(sectionAdapter);
+                }
+            });
+
+        }
         //default
-        JobRemote.getJobWithWithDepartment("software engineering",this);
+        //JobRemote.getJobWithWithDepartment("software engineering",this);
 
         CustomDialog customDialog = new CustomDialog(getContext());
         dialog = customDialog.build();
@@ -109,19 +141,27 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
                 String salary = salaryFilterEt.getText().toString();
                 if (organization.equals("") && salary.equals("")){
                     //do with department only
-                    JobRemote.getJobWithWithDepartment(department,ExploreJobsFragment.this);
+                    filter.clear();
+                    filter.add(department);
+                    jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT,filter);
+
                 }
                 else if (organization.equals("")){
                     //do with dep and salary
-                    JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
+                    filter.clear();
+                    filter.add(salary);
+                    filter.add(department);
+                    jobViewModel.getFilteredJobs(Job.FIELD_SALARY+Job.FIELD_DEPARTMENT, filter);
+//                    JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
                 }
                 else if (salary.equals("")){
+
                     //do with dep and org
                     JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
                 }
                 else{
                     //all are entered :send separate request for both 2
-                    JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
+                    //JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
                     JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
                 }
 
