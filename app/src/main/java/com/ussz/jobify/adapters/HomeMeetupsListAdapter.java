@@ -65,7 +65,10 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         }
         else{
             //here call function that will calculate duration left
-            holder.studentLimit.setText("In " + (TimeStampConverter.timeLeft(meetup.getWhen().toDate())) + " days");
+            if (meetup.getWhen()!=null){
+                holder.studentLimit.setText("In " + (TimeStampConverter.timeLeft(meetup.getWhen().toDate())) + " days");
+            }
+
         }
         holder.studentLimit.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.bind(meetup,listener);
