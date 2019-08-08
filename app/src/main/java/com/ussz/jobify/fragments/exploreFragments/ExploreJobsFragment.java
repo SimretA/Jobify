@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,21 +20,17 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.R;
-import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.adapters.JobSection;
 import com.ussz.jobify.data.Department;
 import com.ussz.jobify.network.DepartmentRemote;
 import com.ussz.jobify.network.JobRemote;
 import com.ussz.jobify.utilities.CustomCallback;
-import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.FilterCallBack;
-import com.ussz.jobify.viewModel.JobViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
@@ -59,7 +54,7 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     private ArrayList<JobSection> jobSectionStack = new ArrayList<>();
 
-    ConstraintLayout exploreJobsLayout;
+    private ConstraintLayout exploreJobsLayout;
 
     public ExploreJobsFragment() {
         // Required empty public constructor
@@ -76,6 +71,9 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         sectionAdapter = new SectionedRecyclerViewAdapter();
 
         recyclerView = rootView.findViewById(R.id.exploreJobsRecyclerView);
+
+
+
         exploreJobsLayout = rootView.findViewById(R.id.exploreJobsLayout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -110,8 +108,8 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
             public void onClick(View view) {
 
                 String department = spinner.getSelectedItem().toString();
-                String organization = organizationFilterET.getText().toString();
-                String salary = salaryFilterEt.getText().toString();
+                String organization = organizationFilterET.getText().toString().trim();
+                String salary = salaryFilterEt.getText().toString().trim();
                 if (organization.equals("") && salary.equals("")){
                     //do with department only
                     JobRemote.getJobWithWithDepartment(department,ExploreJobsFragment.this);
@@ -188,14 +186,15 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     @Override
     public void onCallBack(Object object) {
+        showViews();
         Department department = (Department) object;
         setUpSpinner(department.getDepartments());
-        showViews();
+
     }
 
-    private void setUpSpinner(List departments) {
+    private void setUpSpinner(List<String> departments) {
         Collections.sort(departments);
-        ArrayAdapter dataAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item, departments);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item, departments);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
     }
