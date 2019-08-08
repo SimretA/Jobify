@@ -55,6 +55,8 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     private ProgressBar progressBar5;
 
+    private ArrayList<JobSection> jobSectionStack = new ArrayList<>();
+
     public ExploreJobsFragment() {
         // Required empty public constructor
     }
@@ -154,13 +156,17 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         salaryL.setEnabled(true);
     }
 
-    Stack<JobSection> jobSectionStack = new Stack<>();
-
     @Override
     public void onResult(Object object, String result) {
         List<Job> jobs = (List<Job>) object;
         if (jobs.size()>0){
-            sectionAdapter.addSection(new JobSection(result,jobs));
+
+            jobSectionStack.add(new JobSection(result,jobs));
+            sectionAdapter.removeAllSections();
+            int length = jobSectionStack.size()-1;
+            for (int i=length;i>=0;i--){
+                sectionAdapter.addSection(jobSectionStack.get(i));
+            }
             recyclerView.setAdapter(sectionAdapter);
         }
     }
