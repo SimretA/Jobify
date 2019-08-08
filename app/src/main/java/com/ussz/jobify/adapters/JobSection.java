@@ -7,11 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mikhaellopez.circularimageview.CircularImageView;
-import com.squareup.picasso.Picasso;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Job;
-import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.utilities.Helper;
 
 import java.util.List;

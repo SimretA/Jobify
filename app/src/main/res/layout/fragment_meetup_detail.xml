@@ -72,18 +72,21 @@
             app:layout_constraintTop_toBottomOf="@+id/meetup_detail_description" />
 
         <TextView
+            android:id="@+id/meetup_where"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="41dp"
-            android:layout_marginRight="41dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:text="Kera gar"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            android:singleLine="true"
+            android:ellipsize="marquee"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -115,6 +118,7 @@
             app:layout_constraintTop_toBottomOf="@+id/meetup_detail_description" />
 
         <TextView
+            android:id="@+id/meetup_when"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -161,6 +165,7 @@
             app:layout_constraintTop_toBottomOf="@+id/meetup_detail_description" />
 
         <TextView
+            android:id="@+id/meetup_by"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="41dp"

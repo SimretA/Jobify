@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ussz.jobify.R;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.utilities.Tags;
+import com.ussz.jobify.utilities.TimeStampConverter;
 
 
 /**
@@ -41,6 +42,9 @@ public class MeetupDetailFragment extends Fragment {
     private void setContent(View view, Meetup meetup) {
         ((TextView)view.findViewById(R.id.meetup_detail_title)).setText(meetup.getName());
         ((TextView)view.findViewById(R.id.meetup_detail_description)).setText(meetup.getDescription());
+        ((TextView)view.findViewById(R.id.meetup_where)).setText(meetup.getLocation());
+        ((TextView)view.findViewById(R.id.meetup_when)).setText(TimeStampConverter.timeLeft(meetup.getWhen().toDate()));
+        ((TextView)view.findViewById(R.id.meetup_by)).setText(meetup.getOrganizationName());
 
 
     }

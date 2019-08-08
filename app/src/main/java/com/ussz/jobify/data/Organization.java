@@ -1,5 +1,7 @@
 package com.ussz.jobify.data;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class Organization implements Serializable {
 
     private boolean following;
 
-    private Job job;
+
+    private List<DocumentReference> jobs;
+    private List<DocumentReference> meetups;
 
 }
