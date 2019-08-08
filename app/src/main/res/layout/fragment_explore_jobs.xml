@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+    android:id="@+id/exploreJobsLayout"
     tools:context=".fragments.exploreFragments.ExploreJobsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
