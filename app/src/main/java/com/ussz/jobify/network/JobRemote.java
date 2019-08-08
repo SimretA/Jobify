@@ -5,14 +5,19 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.CustomCallback;
+import com.ussz.jobify.utilities.FilterCallBack;
 
 import java.util.ArrayList;
 
@@ -21,7 +26,7 @@ public class JobRemote {
     static FirebaseFirestore db = FirebaseFirestore.getInstance();
     static CollectionReference jobs = db.collection("/jobs");
 
-    public static void getJobWithWithDepartment(String department,CustomCallback callback){
+    public static void getJobWithWithDepartment(String department, FilterCallBack filterCallBack){
 
         ArrayList<Job> jobsWithDepartment = new ArrayList<>();
 
@@ -34,7 +39,8 @@ public class JobRemote {
                             for(DocumentSnapshot doc: task.getResult()){
                                 jobsWithDepartment.add(doc.toObject(Job.class));
                             }
-                            callback.onCallBack(jobsWithDepartment);
+
+                            filterCallBack.onResult(jobsWithDepartment,"Jobs with "+department+" department");
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
@@ -46,8 +52,78 @@ public class JobRemote {
     }
 
 
-    public void getJobWithSalaryGreaterThan(double sallery){
-        
+
+
+
+    public static void getJobWithSalaryGreaterThan(String department,double sallery,FilterCallBack filterCallBack){
+        ArrayList<Job> jobsWithSalary = new ArrayList<>();
+
+        jobs.whereGreaterThanOrEqualTo("salary", sallery)
+                .whereEqualTo("target.department",department)
+                .orderBy("salary", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            jobsWithSalary.add(documentSnapshot.toObject(Job.class));
+                        }
+                        filterCallBack.onResult(jobsWithSalary,"Jobs with salary > "+sallery+" and department "+department);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("Compoundqueries",e.toString());
+                    }
+                });
+    }
+
+    public static  void getJobsForAll(String org,String department,Double salary,FilterCallBack filterCallBack){
+        ArrayList<Job> jobsWithSalary = new ArrayList<>();
+
+        jobs.whereGreaterThanOrEqualTo("organizationName", org)
+                .whereEqualTo("target.department",department)
+                .whereGreaterThanOrEqualTo("salary",salary)
+                .orderBy("salary", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            jobsWithSalary.add(documentSnapshot.toObject(Job.class));
+                        }
+                        filterCallBack.onResult(jobsWithSalary,"Jobs with organization "+org+" and department "+ department + " and salary "+salary);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Compoundqueries",e.toString());
+            }
+        });
+    }
+
+
+    public static void getJobWithOrganization(String org,String department,FilterCallBack filterCallBack){
+        ArrayList<Job> jobsWithSalary = new ArrayList<>();
+
+        jobs.whereGreaterThanOrEqualTo("organizationName", org)
+                .whereEqualTo("target.department",department)
+                .orderBy("organizationName", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            jobsWithSalary.add(documentSnapshot.toObject(Job.class));
+                        }
+                        filterCallBack.onResult(jobsWithSalary,"Jobs with organization "+org+" and department "+ department);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Compoundqueries",e.toString());
+            }
+        });
     }
 
 
