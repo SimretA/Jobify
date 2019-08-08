@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.HomeJobsListAdapter;
 import com.ussz.jobify.utilities.CustomOnClickListener;
@@ -22,6 +24,7 @@ import com.ussz.jobify.utilities.Tags;
 import com.ussz.jobify.viewModel.JobViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +57,15 @@ public class HomeJobsFragment extends Fragment implements CustomOnClickListener 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
+
+        if(getArguments() != null){
+            List<DocumentReference> jobs = (List<DocumentReference>) getArguments().getSerializable(Tags.LIST_JOBS_BUNDLE_KEY);
+            JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
+            jobViewModel.getJobsFromDoc(jobs).observe(this, jobs1 -> listen((ArrayList<Job>) jobs1));
+            prograssbarhomejobs.setVisibility(View.VISIBLE);
+
+            return rootView;
+        }
 
         JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
         jobViewModel.getJobs().observe(this, jobs -> listen((ArrayList<Job>) jobs) );

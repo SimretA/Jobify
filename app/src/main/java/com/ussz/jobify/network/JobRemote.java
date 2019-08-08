@@ -7,14 +7,17 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.utilities.CustomCallback;
+import com.ussz.jobify.utilities.LoginCustomeCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class JobRemote {
 
@@ -42,6 +45,16 @@ public class JobRemote {
                     }
                 });
 
+
+    }
+
+    public static void getJobsFromRef(List<DocumentReference> jobs, CustomCallback customCallback) {
+        for (DocumentReference doc :
+                jobs) {
+            doc.get().addOnCompleteListener(task -> {
+                customCallback.onCallBack(task.getResult().toObject(Job.class));
+            });
+        }
 
     }
 

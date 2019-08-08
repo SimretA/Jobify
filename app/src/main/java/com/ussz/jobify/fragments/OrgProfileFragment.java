@@ -3,7 +3,11 @@ package com.ussz.jobify.fragments;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +15,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ussz.jobify.R;
+import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Organization;
+import com.ussz.jobify.network.JobRemote;
 import com.ussz.jobify.utilities.Tags;
+import com.ussz.jobify.viewModel.JobViewModel;
+
+import java.io.Serializable;
+import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -36,6 +46,13 @@ public class OrgProfileFragment extends Fragment {
         if(getArguments() != null){
             Organization organization = (Organization) getArguments().getSerializable(Tags.ORG_BUNDLE_KEY);
             setContent(view, organization);
+            view.findViewById(R.id.org_jobs).setOnClickListener(v ->{
+                Bundle args = new Bundle();
+                args.putSerializable(Tags.LIST_JOBS_BUNDLE_KEY, (Serializable) organization.getJobs());
+                Navigation.findNavController(v).navigate(R.id.home_jobs_fragment_dest, args);
+
+
+            });
 
         }
         return view;

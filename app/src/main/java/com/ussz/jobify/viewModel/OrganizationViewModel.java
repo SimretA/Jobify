@@ -42,26 +42,32 @@ public class OrganizationViewModel extends ViewModel {
 
         if(organizations.getValue().size()==0){
 
-            ProfileRemote.getProfile(object -> this.graduate = (Graduate) object,
+            ProfileRemote.getProfile(object -> {
+                this.graduate = (Graduate) object;
+                        OrganizationRemote.getOrganizations(object1 -> {
+                            ArrayList<Organization> newOne = organizations.getValue();
+                            newOne.add(checkFollowing((Organization) object1));
+                            organizations.setValue(newOne);
+                        });
+                    },
                     FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-            OrganizationRemote.getOrganizations(object -> {
-                ArrayList<Organization> newOne = organizations.getValue();
-                newOne.add(checkFollowing((Organization) object));
-                organizations.setValue(newOne);
-            });
+
         }
     }
 
     private Organization checkFollowing(Organization organization){
-        for (DocumentReference doc :
-                graduate.getFollowing()) {
-            if (doc.getId().equals(organization.getId())){
-                organization.setFollowing(true);
-                return organization;
-            }
+        if(graduate.getFollowing() != null){
+            for (DocumentReference doc :
+                    graduate.getFollowing()) {
+                if (doc.getId().equals(organization.getId())){
+                    organization.setFollowing(true);
+                    return organization;
+                }
 
+            }
         }
+
         organization.setFollowing(false);
         return organization;
     }
