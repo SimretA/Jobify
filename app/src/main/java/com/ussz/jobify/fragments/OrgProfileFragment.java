@@ -53,6 +53,9 @@ public class OrgProfileFragment extends Fragment {
 
 
             });
+            view.findViewById(R.id.org_meetups).setOnClickListener(v -> {
+                //TODO
+            });
 
         }
         return view;

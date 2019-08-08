@@ -16,7 +16,9 @@ import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.fragments.exploreFragments.ExploreMeetupsFragment;
 import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.utilities.Helper;
+import com.ussz.jobify.utilities.TimeStampConverter;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -47,7 +49,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
     @Override
     public void onBindViewHolder(@NonNull HomeMeetupsViewHolder holder, int position) {
         Meetup meetup = meetupsArrayList.get(position);
-        holder.meetupTitle.setText(meetup.getName()+ " " + position);
+        holder.meetupTitle.setText(meetup.getName());
         holder.meetupDescription.setText(meetup.getDescription());
 
         String currentColor = Helper.getRandomColorString();
@@ -63,7 +65,7 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         }
         else{
             //here call function that will calculate duration left
-            holder.studentLimit.setText("In " + (meetup.getStudentLimit()-position*2) + " days");
+            holder.studentLimit.setText("In " + (TimeStampConverter.timeLeft(meetup.getWhen().toDate())) + " days");
         }
         holder.studentLimit.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
         holder.bind(meetup,listener);

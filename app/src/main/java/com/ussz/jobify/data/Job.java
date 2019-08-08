@@ -5,7 +5,6 @@ package com.ussz.jobify.data;
 import com.google.firebase.Timestamp;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

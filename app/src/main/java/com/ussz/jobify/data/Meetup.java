@@ -1,6 +1,8 @@
 package com.ussz.jobify.data;
 
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -20,11 +22,9 @@ public class Meetup implements Serializable {
     private String description;
     private String meetupImageUrl;
     private int studentLimit;
-    private String postedByName;
-    private String postedById;
-
-    private Target target;
-
-
     private String organizationName;
+    private String postedById;
+    private Timestamp when;
+    private String location;
+    private Target target;
 }
