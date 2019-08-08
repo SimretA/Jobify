@@ -30,19 +30,16 @@ import java.util.List;
 public class ExploreFragment extends Fragment {
 
 
-    private Dialog dialog;
-
     private String currentTab = "JOBS";
 
 
-    private TextInputLayout departmentEt,orgEt,salaryEt,locationEt;
+//    private TextInputLayout departmentEt,orgEt,salaryEt,locationEt;
 
     public ExploreFragment() {
         // Required empty public constructor
     }
 
 
-    HashMap<String,Integer> filterEditTextVisiblity;
 
 
     @Override
@@ -60,7 +57,6 @@ public class ExploreFragment extends Fragment {
         fragmentList.add(new ExploreMeetupsFragment());
         fragmentList.add(new ExploreOrganizationFragment());
 
-        filterEditTextVisiblity = new HashMap<>();
 
 
 
@@ -75,81 +71,15 @@ public class ExploreFragment extends Fragment {
         viewPager.setAdapter(evpa);
         tabLayout.setupWithViewPager(viewPager);
 
-        rootView.findViewById(R.id.filterFAB).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makeAndShowDialog();
-            }
-        });
 
 
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                currentTab = tab.getText().toString().toUpperCase();
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
 
 
         return rootView;
     }
 
-
-
-    private void makeAndShowDialog(){
-        dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-        dialog.setContentView(R.layout.filterdialog);
-        dialog.setCancelable(true);
-
-
-        departmentEt = dialog.findViewById(R.id.textInputLayout);
-        orgEt = dialog.findViewById(R.id.textInputLayout5);
-        salaryEt = dialog.findViewById(R.id.textInputLayout9);
-        locationEt = dialog.findViewById(R.id.textInputLayout19);
-
-
-        handleVisibility();
-
-
-        ((ImageButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
-    }
-
-    private void handleVisibility() {
-
-        if (currentTab.equalsIgnoreCase("meetups") ){
-            salaryEt.setVisibility(View.GONE);
-        }
-        else if(currentTab.equalsIgnoreCase("org")){
-            salaryEt.setVisibility(View.GONE);
-            departmentEt.setVisibility(View.GONE);
-        }
-    }
 
 
 }
