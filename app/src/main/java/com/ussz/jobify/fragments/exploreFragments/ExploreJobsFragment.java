@@ -4,6 +4,7 @@ package com.ussz.jobify.fragments.exploreFragments;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.R;
@@ -57,6 +59,8 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     private ArrayList<JobSection> jobSectionStack = new ArrayList<>();
 
+    ConstraintLayout exploreJobsLayout;
+
     public ExploreJobsFragment() {
         // Required empty public constructor
     }
@@ -72,6 +76,7 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         sectionAdapter = new SectionedRecyclerViewAdapter();
 
         recyclerView = rootView.findViewById(R.id.exploreJobsRecyclerView);
+        exploreJobsLayout = rootView.findViewById(R.id.exploreJobsLayout);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -169,6 +174,15 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
             }
             recyclerView.setAdapter(sectionAdapter);
         }
+        else{
+            showNoResultFound();
+        }
+    }
+
+    private void showNoResultFound() {
+        Snackbar snackbar = Snackbar.make(exploreJobsLayout,getString(R.string.noresultfound),Snackbar.LENGTH_LONG);
+        snackbar.setTextColor(getResources().getColor(R.color.green));
+        snackbar.show();
     }
 
 
