@@ -11,6 +11,7 @@ import com.ussz.jobify.data.Job;
 import com.ussz.jobify.network.JobRemote;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class JobViewModel extends ViewModel {
@@ -78,17 +79,44 @@ public class JobViewModel extends ViewModel {
             jobSections.setValue(jobSectionArrayList);
         });
     }
+    private void loadJobsWithDepartmentAndOrganization(String department, String organization){
+        JobRemote.getJobWithOrganization(organization,department, ((object, string) -> {
+            ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
+            jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department, (List<Job>) object));
+        }));
+    }
+    private void loadJobWithAllFilters(Double salary, String department, String organization){
+        JobRemote.getJobWithSalaryGreaterThan(department, salary,((object, string) -> {
+            ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
+            ArrayList<Job> temp = (ArrayList<Job>) object;
+            JobRemote.getJobWithOrganization(organization, department,((object1, string1) -> {
+                temp.addAll((Collection<? extends Job>) object1);
+                jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department+" and salary more than "+ salary,
+                        temp));
+            }));
+        }));
+    }
     public LiveData<ArrayList<JobSection>> getFilteredJobs(String filterBy, ArrayList<String> filters){
         if (jobSections == null){
             jobSections = new MutableLiveData<>();
             jobSections.setValue(new ArrayList<>());
         }
-        if (filterBy.equals("department")){
-            loadJobsWithDepartment(filters.get(0));
-        }
-        else if(filterBy.equals(Job.FIELD_SALARY+Job.FIELD_DEPARTMENT)){
+        switch (filterBy) {
+            case "department":
+                loadJobsWithDepartment(filters.get(0));
+                break;
+            case Job.FIELD_SALARY + Job.FIELD_DEPARTMENT:
 
-            loadJobsWithDepartmentAndSalary(Double.valueOf(filters.get(0)),filters.get(1));
+                loadJobsWithDepartmentAndSalary(Double.valueOf(filters.get(0)), filters.get(1));
+                break;
+            case Job.FIELD_DEPARTMENT + Job.FIELD_ORGINAZATION:
+                loadJobsWithDepartmentAndOrganization(filters.get(0), filters.get(1));
+                break;
+            case Job.FIELD_SALARY+Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION:
+                loadJobWithAllFilters(Double.valueOf(filters.get(0)),filters.get(1), filters.get(2));
+                break;
+                default:
+                    break;
         }
         return jobSections;
     }

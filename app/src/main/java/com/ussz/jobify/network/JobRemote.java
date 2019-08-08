@@ -119,7 +119,7 @@ public class JobRemote {
     }
 
 
-    public static void getJobWithOrganization(String org,String department,FilterCallBack filterCallBack){
+    public static void getJobWithOrganization(String org,String department,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Job> jobsWithSalary = new ArrayList<>();
 
         jobs.whereGreaterThanOrEqualTo("organizationName", org)
@@ -132,7 +132,7 @@ public class JobRemote {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                             jobsWithSalary.add(documentSnapshot.toObject(Job.class));
                         }
-                        filterCallBack.onResult(jobsWithSalary,"Jobs with organization "+org+" and department "+ department);
+                        remoteFilterCallback.onCallBack(jobsWithSalary,"");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override

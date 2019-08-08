@@ -155,14 +155,22 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 //                    JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
                 }
                 else if (salary.equals("")){
-
                     //do with dep and org
-                    JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
+                    filter.clear();
+                    filter.add(department);
+                    filter.add(organization);
+                    jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION, filter);
+                    //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
                 }
                 else{
                     //all are entered :send separate request for both 2
+                    filter.clear();
+                    filter.add(salary);
+                    filter.add(department);
+                    filter.add(organization);
+                    jobViewModel.getFilteredJobs(Job.FIELD_SALARY+ Job.FIELD_DEPARTMENT+ Job.FIELD_ORGINAZATION, filter);
                     //JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
-                    JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
+                    //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
                 }
 
                 dialog.dismiss();

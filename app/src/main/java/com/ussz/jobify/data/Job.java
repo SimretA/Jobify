@@ -19,7 +19,8 @@ public class Job implements Serializable {
     public final static String FIELD_DESCRIPTION = "description";
     public final static String FIELD_STUDENT_LIMIT = "studentLimit";
     public final static String FIELD_DEPARTMENT = "department";
-    public final static String FIELD_SALARY = "department";
+    public final static String FIELD_SALARY = "salary";
+    public final static String FIELD_ORGINAZATION="organization";
 
 
     private String title;
