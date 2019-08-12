@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/org_profile_name"
             fancy:fb_defaultColor="#fff"
-            fancy:fb_fontIconResource="&#xf04b;"
+            fancy:fb_iconResource="@drawable/ic_location_on_black_24dp"
             fancy:fb_text="Kera, AA, ET"
             fancy:fb_textColor="#aeaeae" />
 
