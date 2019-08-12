@@ -9,6 +9,7 @@ import com.ussz.jobify.adapters.JobSection;
 import com.ussz.jobify.data.Graduate;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.network.JobRemote;
+import com.ussz.jobify.utilities.CustomCallback;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +26,7 @@ public class JobViewModel extends ViewModel {
 
     private Boolean started = false;
 
+    private CustomCallback customCallback;
     public void setStarted(){
         started = true;
     }
@@ -62,27 +64,49 @@ public class JobViewModel extends ViewModel {
             pJobs.setValue(new ArrayList<>());
             loadJobsFromRef(jobs);
         }
+
         return pJobs;
     }
     private void loadJobsWithDepartment(String department){
         JobRemote.getJobWithWithDepartment(department, (object, string) -> {
-            ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
-            jobSectionArrayList.add(new JobSection("Jobs with "+department+" department", (List<Job>) object));
-            jobSections.setValue(jobSectionArrayList);
+            List<Job> temp  = ((List)object);
+            if (temp.size() == 0){
+                if (customCallback !=null)
+                    this.customCallback.onCallBack(null);
+            }
+            else {
+                ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
+                jobSectionArrayList.add(new JobSection("Jobs with "+department+" department", temp));
+                jobSections.setValue(jobSectionArrayList);
+            }
+
         });
 
     }
+
     private void loadJobsWithDepartmentAndSalary(Double salary, String department){
         JobRemote.getJobWithSalaryGreaterThan(department,salary,(object,string) -> {
+            List<Job> temp  = ((List)object);
+            if (temp.size() == 0){
+                if (customCallback !=null)
+                    this.customCallback.onCallBack(null);
+                return;
+            }
             ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
-            jobSectionArrayList.add(new JobSection("Jobs with salary more than "+salary+" and department "+department, (List<Job>) object));
+            jobSectionArrayList.add(new JobSection("Jobs with salary more than "+salary+" and department "+department, temp));
             jobSections.setValue(jobSectionArrayList);
         });
     }
     private void loadJobsWithDepartmentAndOrganization(String department, String organization){
         JobRemote.getJobWithOrganization(organization,department, ((object, string) -> {
+            List<Job> temp  = ((List)object);
+            if (temp.size() == 0){
+                if (customCallback !=null)
+                    this.customCallback.onCallBack(null);
+                return;
+            }
             ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
-            jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department, (List<Job>) object));
+            jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department, temp));
         }));
     }
     private void loadJobWithAllFilters(Double salary, String department, String organization){
@@ -90,9 +114,16 @@ public class JobViewModel extends ViewModel {
             ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
             ArrayList<Job> temp = (ArrayList<Job>) object;
             JobRemote.getJobWithOrganization(organization, department,((object1, string1) -> {
-                temp.addAll((Collection<? extends Job>) object1);
-                jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department+" and salary more than "+ salary,
-                        temp));
+                if(temp.size()==0 && ((List)object1).size()==0){
+                    if (customCallback !=null)
+                        this.customCallback.onCallBack(null);
+                }
+                else{
+                    temp.addAll((Collection<? extends Job>) object1);
+                    jobSectionArrayList.add(new JobSection("Jobs with organization "+organization+" and department "+ department+" and salary more than "+ salary,
+                            temp));
+                }
+
             }));
         }));
     }
@@ -119,6 +150,10 @@ public class JobViewModel extends ViewModel {
                     break;
         }
         return jobSections;
+    }
+
+    public void setCallback(CustomCallback customCallback){
+        this.customCallback =customCallback;
     }
 
 

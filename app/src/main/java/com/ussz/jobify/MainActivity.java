@@ -1,7 +1,11 @@
 package com.ussz.jobify;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -145,8 +149,16 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout_icon) {
-            FirebaseAuth.getInstance().signOut();
-            this.navController.navigate(R.id.login_fragment_dest);
+            new MaterialAlertDialogBuilder(MainActivity.this)
+                    .setTitle("Jobify")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut();
+                        navController.navigate(R.id.login_fragment_dest);
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
+
             return true;
         }
 

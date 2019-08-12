@@ -93,6 +93,7 @@ public class ExploreMeetupsFragment extends Fragment implements CustomCallback ,
 
 
         MeetupViewModel meetupViewModel = ViewModelProviders.of(this).get(MeetupViewModel.class);
+        meetupViewModel.setCustomCallback(this);
         ArrayList<String> filter = new ArrayList<>();
         filter.add("software engineering");
         if(!meetupViewModel.isStarted()){
@@ -197,6 +198,10 @@ public class ExploreMeetupsFragment extends Fragment implements CustomCallback ,
 
     @Override
     public void onCallBack(Object object) {
+        if(object == null){
+            showNoResultFound();
+            return;
+        }
         showViews();
         Department department = (Department) object;
         setUpSpinner(department.getDepartments());

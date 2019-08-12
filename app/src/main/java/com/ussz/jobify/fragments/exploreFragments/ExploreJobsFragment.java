@@ -84,6 +84,7 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         JobViewModel jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
+        jobViewModel.setCallback(this);
         ArrayList<String> filter = new ArrayList<>();
         filter.add("software engineering");
         if(!jobViewModel.isStarted()) {
@@ -232,6 +233,10 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
 
     @Override
     public void onCallBack(Object object) {
+        if(object == null){
+            showNoResultFound();
+            return;
+        }
         showViews();
         Department department = (Department) object;
         setUpSpinner(department.getDepartments());
