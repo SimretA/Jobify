@@ -75,7 +75,7 @@ public class JobViewModel extends ViewModel {
     private void loadJobsWithDepartmentAndSalary(Double salary, String department){
         JobRemote.getJobWithSalaryGreaterThan(department,salary,(object,string) -> {
             ArrayList<JobSection> jobSectionArrayList = jobSections.getValue();
-            jobSectionArrayList.add(new JobSection("Jobs with salary > "+salary+" and department "+department, (List<Job>) object));
+            jobSectionArrayList.add(new JobSection("Jobs with salary more than "+salary+" and department "+department, (List<Job>) object));
             jobSections.setValue(jobSectionArrayList);
         });
     }
