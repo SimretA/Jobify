@@ -13,7 +13,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="#F3A09797"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+
+        android:fontFamily="sans-serif"
         android:textStyle="bold" />
 
 </LinearLayout>
