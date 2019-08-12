@@ -3,12 +3,6 @@ package com.ussz.jobify.fragments.exploreFragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,22 +12,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.R;
-import com.ussz.jobify.adapters.HomeMeetupsListAdapter;
-import com.ussz.jobify.adapters.JobSection;
 import com.ussz.jobify.adapters.MeetupSection;
 import com.ussz.jobify.data.Department;
 import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.network.DepartmentRemote;
-import com.ussz.jobify.network.JobRemote;
-import com.ussz.jobify.network.MeetupRemote;
 import com.ussz.jobify.utilities.CustomCallback;
-import com.ussz.jobify.utilities.CustomOnClickListener;
 import com.ussz.jobify.utilities.FilterCallBack;
+import com.ussz.jobify.viewModel.MeetupViewModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,7 +92,31 @@ public class ExploreMeetupsFragment extends Fragment implements CustomCallback ,
         progressBar5 = dialog.findViewById(R.id.progressBar5);
 
 
-        MeetupRemote.getWithDepartment("software engineering",ExploreMeetupsFragment.this);
+        MeetupViewModel meetupViewModel = ViewModelProviders.of(this).get(MeetupViewModel.class);
+        ArrayList<String> filter = new ArrayList<>();
+        filter.add("software engineering");
+        if(!meetupViewModel.isStarted()){
+            meetupViewModel.getFilteredMeetups(Job.FIELD_DEPARTMENT, filter).observe(this, meetupSections -> {
+                sectionAdapter.removeAllSections();
+                int lenght = meetupSections.size()-1;
+                for(int i=lenght; i>=0; i--){
+                    sectionAdapter.addSection(meetupSections.get(i));
+                }
+                meetupViewModel.setStarted();
+                recyclerView.setAdapter(sectionAdapter);
+            });
+        }
+        else{
+            meetupViewModel.meetupSection.observe(this, meetupSections1 -> {
+                sectionAdapter.removeAllSections();
+                int lenght = meetupSections1.size()-1;
+                for(int i=lenght; i>=0; i--){
+                    sectionAdapter.addSection(meetupSections1.get(i));
+                }
+                recyclerView.setAdapter(sectionAdapter);
+            });
+        }
+
 
 
 
@@ -115,21 +135,37 @@ public class ExploreMeetupsFragment extends Fragment implements CustomCallback ,
 
             if (orgName.equals("") && userMeetUpName.equals("")){
                 //search with dep only
-                MeetupRemote.getWithDepartment(department,ExploreMeetupsFragment.this);
+                filter.clear();
+                filter.add(department);
+                meetupViewModel.getFilteredMeetups(Job.FIELD_DEPARTMENT, filter);
+                //MeetupRemote.getWithDepartment(department,ExploreMeetupsFragment.this);
                 Log.i("here","here");
             }
             else if(userMeetUpName.equals("")){
                 //search with org and dep
-                MeetupRemote.getWithOrganization(department,orgName,ExploreMeetupsFragment.this);
+                filter.clear();
+                filter.add(department);
+                filter.add(orgName);
+                meetupViewModel.getFilteredMeetups(Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION, filter);
+              //  MeetupRemote.getWithOrganization(department,orgName,ExploreMeetupsFragment.this);
             }
             else  if(orgName.equals("")){
                 //search with dep and meet
-                MeetupRemote.getWithMeetUpName(department,userMeetUpName,ExploreMeetupsFragment.this);
+                filter.clear();
+                filter.add(department);
+                filter.add(userMeetUpName);
+                meetupViewModel.getFilteredMeetups(Job.FIELD_DEPARTMENT+Meetup.FIELD_NAME, filter);
+               // MeetupRemote.getWithMeetUpName(department,userMeetUpName,ExploreMeetupsFragment.this);
             }
             else{
                 //search with all
-                MeetupRemote.getWithOrganization(department,orgName,ExploreMeetupsFragment.this);
-                MeetupRemote.getWithMeetUpName(department,userMeetUpName,ExploreMeetupsFragment.this);
+                filter.clear();
+                filter.add(department);
+                filter.add(orgName);
+                filter.add(userMeetUpName);
+                meetupViewModel.getFilteredMeetups(Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION+Meetup.FIELD_NAME, filter);
+               // MeetupRemote.getWithOrganization(department,orgName,ExploreMeetupsFragment.this);
+                //MeetupRemote.getWithMeetUpName(department,userMeetUpName,ExploreMeetupsFragment.this);
             }
 
 

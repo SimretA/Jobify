@@ -16,6 +16,7 @@ import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.utilities.CustomCallback;
 import com.ussz.jobify.utilities.FilterCallBack;
+import com.ussz.jobify.utilities.RemoteFilterCallback;
 
 import java.io.FilterInputStream;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class MeetupRemote {
     }
 
 
-    public static void getWithDepartment(String department, FilterCallBack filterCallBack){
+    public static void getWithDepartment(String department, RemoteFilterCallback remoteFilterCallback){
         ArrayList<Meetup> meetupArrayList = new ArrayList<>();
 
         meetups.whereEqualTo("target.department", department)
@@ -57,7 +58,7 @@ public class MeetupRemote {
                                 meetupArrayList.add(doc.toObject(Meetup.class));
                             }
 
-                            filterCallBack.onResult(meetupArrayList,"Meetups with "+department+" department");
+                            remoteFilterCallback.onCallBack(meetupArrayList,"Meetups with "+department+" department");
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
@@ -67,7 +68,7 @@ public class MeetupRemote {
     }
 
 
-    public static  void getWithOrganization(String department, String organization,FilterCallBack filterCallBack){
+    public static  void getWithOrganization(String department, String organization,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Meetup> meetupArrayList = new ArrayList<>();
 
         meetups.whereEqualTo("target.department", department)
@@ -82,7 +83,7 @@ public class MeetupRemote {
                                 meetupArrayList.add(doc.toObject(Meetup.class));
                             }
 
-                            filterCallBack.onResult(meetupArrayList,"Meetups with "+department+" department and organization "+organization);
+                            remoteFilterCallback.onCallBack(meetupArrayList,"Meetups with "+department+" department and organization "+organization);
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
@@ -92,7 +93,7 @@ public class MeetupRemote {
     }
 
 
-    public static  void getWithMeetUpName(String department, String meetupName,FilterCallBack filterCallBack){
+    public static  void getWithMeetUpName(String department, String meetupName,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Meetup> meetupArrayList = new ArrayList<>();
 
         meetups.whereEqualTo("target.department", department)
@@ -107,7 +108,7 @@ public class MeetupRemote {
                                 meetupArrayList.add(doc.toObject(Meetup.class));
                             }
 
-                            filterCallBack.onResult(meetupArrayList,"Meetups with "+department+" department and name "+meetupName);
+                            remoteFilterCallback.onCallBack(meetupArrayList,"Meetups with "+department+" department and name "+meetupName);
                         }
                         else
                             Log.d("dataerror", task.getException().toString());
