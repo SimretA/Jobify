@@ -25,9 +25,11 @@
 
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:tint="@color/white"
 
+        app:backgroundTint="@color/green"
+        android:background="@color/green"
 
-        android:backgroundTint="@color/green"
         android:src="@drawable/ic_filter_list_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
