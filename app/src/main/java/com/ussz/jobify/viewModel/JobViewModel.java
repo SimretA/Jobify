@@ -102,14 +102,14 @@ public class JobViewModel extends ViewModel {
             jobSections.setValue(new ArrayList<>());
         }
         switch (filterBy) {
-            case "department":
+            case Job.FIELD_DEPARTMENT:
                 loadJobsWithDepartment(filters.get(0));
                 break;
             case Job.FIELD_SALARY + Job.FIELD_DEPARTMENT:
 
                 loadJobsWithDepartmentAndSalary(Double.valueOf(filters.get(0)), filters.get(1));
                 break;
-            case Job.FIELD_DEPARTMENT + Job.FIELD_ORGINAZATION:
+            case Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION:
                 loadJobsWithDepartmentAndOrganization(filters.get(0), filters.get(1));
                 break;
             case Job.FIELD_SALARY+Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION:

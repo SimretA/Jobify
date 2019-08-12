@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.ussz.jobify.R;
 import com.ussz.jobify.adapters.JobSection;
 import com.ussz.jobify.data.Department;
+import com.ussz.jobify.data.Meetup;
 import com.ussz.jobify.network.DepartmentRemote;
 import com.ussz.jobify.network.JobRemote;
 import com.ussz.jobify.utilities.CustomCallback;
@@ -87,18 +88,13 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         filter.add("software engineering");
         if(!jobViewModel.isStarted()) {
             jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT, filter).observe(this, jobSections -> {
-                sectionAdapter.removeAllSections();
-                int length = jobSections.size() - 1;
-                for (int i = length; i >= 0; i--) {
-                    sectionAdapter.addSection(jobSections.get(i));
-                    jobViewModel.setStarted();
-                }
+                jobViewModel.setStarted();
+                refresh(jobSections);
                 recyclerView.setAdapter(sectionAdapter);
             });
 
 
         }
-        else{
             jobViewModel.jobSections.observe(this, new Observer<ArrayList<JobSection>>() {
                 @Override
                 public void onChanged(ArrayList<JobSection> jobSections) {
@@ -112,7 +108,7 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
                 }
             });
 
-        }
+
         //default
         //JobRemote.getJobWithWithDepartment("software engineering",this);
 
@@ -219,6 +215,14 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         }
     }
 
+    public void  refresh(ArrayList<JobSection> jobSections){
+        sectionAdapter.removeAllSections();
+        int length = jobSections.size() - 1;
+        for (int i = length; i >= 0; i--) {
+            sectionAdapter.addSection(jobSections.get(i));
+        }
+
+    }
     private void showNoResultFound() {
         Snackbar snackbar = Snackbar.make(exploreJobsLayout,getString(R.string.noresultfound),Snackbar.LENGTH_LONG);
         snackbar.setTextColor(getResources().getColor(R.color.green));
