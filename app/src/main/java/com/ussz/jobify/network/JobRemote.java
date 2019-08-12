@@ -73,8 +73,8 @@ public class JobRemote {
     public static void getJobWithSalaryGreaterThan(String department,double salary,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Job> jobsWithSalary = new ArrayList<>();
 
-        jobs.whereGreaterThanOrEqualTo("salary", salary)
-                .whereEqualTo("target.department",department)
+        jobs.whereEqualTo("target.department",department)
+                .whereGreaterThanOrEqualTo("salary", salary)
                 .orderBy("salary", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -94,36 +94,12 @@ public class JobRemote {
                 });
     }
 
-    public static  void getJobsForAll(String org,String department,Double salary,FilterCallBack filterCallBack){
-        ArrayList<Job> jobsWithSalary = new ArrayList<>();
-
-        jobs.whereGreaterThanOrEqualTo("organizationName", org)
-                .whereEqualTo("target.department",department)
-                .whereGreaterThanOrEqualTo("salary",salary)
-                .orderBy("salary", Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                            jobsWithSalary.add(documentSnapshot.toObject(Job.class));
-                        }
-                        filterCallBack.onResult(jobsWithSalary,"Jobs with organization "+org+" and department "+ department + " and salary "+salary);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("Compoundqueries",e.toString());
-            }
-        });
-    }
-
 
     public static void getJobWithOrganization(String org,String department,RemoteFilterCallback remoteFilterCallback){
         ArrayList<Job> jobsWithSalary = new ArrayList<>();
 
-        jobs.whereGreaterThanOrEqualTo("organizationName", org)
-                .whereEqualTo("target.department",department)
+        jobs.whereEqualTo("target.department",department)
+                .whereGreaterThanOrEqualTo("organizationName", org)
                 .orderBy("organizationName", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

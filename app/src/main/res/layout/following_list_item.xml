@@ -61,7 +61,7 @@
         fancy:fb_iconPosition="left"
         fancy:fb_borderColor="@color/green"
         fancy:fb_defaultColor="#9bd823"
-        fancy:fb_radius="30dp"
+        fancy:fb_radius="15dp"
         fancy:fb_textColor="@color/white"
 
         fancy:fb_text="@string/unfollow" />

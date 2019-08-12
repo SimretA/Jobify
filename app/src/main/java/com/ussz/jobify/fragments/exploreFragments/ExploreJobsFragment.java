@@ -133,59 +133,51 @@ public class ExploreJobsFragment extends Fragment implements FilterCallBack ,Cus
         });
 
 
-        dialog.findViewById(R.id.filterButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        dialog.findViewById(R.id.filterButton).setOnClickListener(view -> {
 
-                String department = spinner.getSelectedItem().toString();
-                String organization = organizationFilterET.getText().toString().trim();
-                String salary = salaryFilterEt.getText().toString().trim();
-                if (organization.equals("") && salary.equals("")){
-                    //do with department only
-                    filter.clear();
-                    filter.add(department);
-                    jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT,filter);
+            String department = spinner.getSelectedItem().toString();
+            String organization = organizationFilterET.getText().toString().trim();
+            String salary = salaryFilterEt.getText().toString().trim();
+            if (organization.equals("") && salary.equals("")){
+                //do with department only
+                filter.clear();
+                filter.add(department);
+                jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT,filter);
 
-                }
-                else if (organization.equals("")){
-                    //do with dep and salary
-                    filter.clear();
-                    filter.add(salary);
-                    filter.add(department);
-                    jobViewModel.getFilteredJobs(Job.FIELD_SALARY+Job.FIELD_DEPARTMENT, filter);
+            }
+            else if (organization.equals("")){
+                //do with dep and salary
+                filter.clear();
+                filter.add(salary);
+                filter.add(department);
+                jobViewModel.getFilteredJobs(Job.FIELD_SALARY+Job.FIELD_DEPARTMENT, filter);
 //                    JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
-                }
-                else if (salary.equals("")){
-                    //do with dep and org
-                    filter.clear();
-                    filter.add(department);
-                    filter.add(organization);
-                    jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION, filter);
-                    //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
-                }
-                else{
-                    //all are entered :send separate request for both 2
-                    filter.clear();
-                    filter.add(salary);
-                    filter.add(department);
-                    filter.add(organization);
-                    jobViewModel.getFilteredJobs(Job.FIELD_SALARY+ Job.FIELD_DEPARTMENT+ Job.FIELD_ORGINAZATION, filter);
-                    //JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
-                    //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
-                }
-
-                dialog.dismiss();
-
-
             }
+            else if (salary.equals("")){
+                //do with dep and org
+                filter.clear();
+                filter.add(department);
+                filter.add(organization);
+                jobViewModel.getFilteredJobs(Job.FIELD_DEPARTMENT+Job.FIELD_ORGINAZATION, filter);
+                //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
+            }
+            else{
+                //all are entered :send separate request for both 2
+                filter.clear();
+                filter.add(salary);
+                filter.add(department);
+                filter.add(organization);
+                jobViewModel.getFilteredJobs(Job.FIELD_SALARY+ Job.FIELD_DEPARTMENT+ Job.FIELD_ORGINAZATION, filter);
+                //JobRemote.getJobWithSalaryGreaterThan(department,Double.parseDouble(salary),ExploreJobsFragment.this);
+                //JobRemote.getJobWithOrganization(organization,department,ExploreJobsFragment.this);
+            }
+
+            dialog.dismiss();
+
+
         });
 
-        dialog.findViewById(R.id.bt_close).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        dialog.findViewById(R.id.bt_close).setOnClickListener(view -> dialog.dismiss());
 
 
         return rootView;

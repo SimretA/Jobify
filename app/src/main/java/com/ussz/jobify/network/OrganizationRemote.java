@@ -2,15 +2,22 @@ package com.ussz.jobify.network;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
+import com.ussz.jobify.data.Job;
 import com.ussz.jobify.data.Organization;
 import com.ussz.jobify.utilities.CustomCallback;
+import com.ussz.jobify.utilities.FilterCallBack;
 import com.ussz.jobify.utilities.Tags;
 
 import java.util.ArrayList;
@@ -18,6 +25,7 @@ import java.util.List;
 
 public class OrganizationRemote {
     private  static FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static CollectionReference orgs = db.collection("/organizations");
 
 
     public static void getOrganizationsFromDocument(List<DocumentReference> documentReferenceList, CustomCallback callback){
@@ -83,7 +91,7 @@ public class OrganizationRemote {
     }
 
     public static void getOrganizations(CustomCallback customCallback){
-        CollectionReference orgs = db.collection("/organizations");
+
         orgs.get()
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
@@ -101,6 +109,28 @@ public class OrganizationRemote {
                         Log.d("dataerror", task.getException().toString());
                 });
 
+    }
+
+    public static void getOrganzationByName(String orgName, FilterCallBack filterCallBack){
+        ArrayList<Organization> organizations = new ArrayList<>();
+
+        orgs.whereGreaterThanOrEqualTo("organizationName", orgName)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(DocumentSnapshot doc: task.getResult()){
+                                organizations.add(doc.toObject(Organization.class));
+                            }
+
+                            filterCallBack.onResult(organizations,"");
+                        }
+                        else
+                            Log.d("dataerror", task.getException().toString());
+
+                    }
+                });
     }
 
 
