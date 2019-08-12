@@ -64,11 +64,12 @@ public class HomeJobsListAdapter extends RecyclerView.Adapter<HomeJobsListAdapte
         holder.jobDescription.setText(job.getDescription());
         holder.companyName.setText(job.getOrganizationName());
 
-
-        String currentColor = Helper.getRandomColorString();
+        String orgCaptial = job.getOrganizationName().substring(0,1).toUpperCase();
+        char letter = orgCaptial.charAt(0);
+        String currentColor = Helper.getRandomColorString(letter);
 
         holder.companyName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
-        holder.companyName1.setText(job.getOrganizationName().substring(0,1).toUpperCase());
+        holder.companyName1.setText(orgCaptial);
 
         if (fragment instanceof HomeJobsFragment){
             //here call function that will calculate duration left

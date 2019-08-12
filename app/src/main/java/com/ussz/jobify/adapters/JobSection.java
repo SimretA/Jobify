@@ -57,11 +57,12 @@ public class JobSection extends StatelessSection {
         itemViewHolder.description.setText(job.getDescription());
         itemViewHolder.studentLimit.setText(job.getStudentLimit() +" spot");
 
-
-        String currentColor = Helper.getRandomColorString();
+        String orgCapital = job.getOrganizationName().substring(0,1).toUpperCase();
+        char letter = orgCapital.charAt(0);
+        String currentColor = Helper.getRandomColorString(letter);
 
         itemViewHolder.orgName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
-        itemViewHolder.orgName1.setText(job.getOrganizationName().substring(0,1).toUpperCase());
+        itemViewHolder.orgName1.setText(orgCapital);
 
         itemViewHolder.studentLimit.getBackground().setColorFilter(Color.parseColor(currentColor),PorterDuff.Mode.SRC_ATOP);
     }

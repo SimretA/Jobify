@@ -52,10 +52,13 @@ public class HomeMeetupsListAdapter extends RecyclerView.Adapter<HomeMeetupsList
         holder.meetupTitle.setText(meetup.getName());
         holder.meetupDescription.setText(meetup.getDescription());
 
-        String currentColor = Helper.getRandomColorString();
+
+        String orgCapital = meetup.getOrganizationName().substring(0,1).toUpperCase();
+
+        String currentColor = Helper.getRandomColorString(orgCapital.charAt(0));
 
         holder.meetupName1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
-        holder.meetupName1.setText(meetup.getOrganizationName().substring(0,1).toUpperCase());
+        holder.meetupName1.setText(orgCapital);
 
 
         holder.submitedBy.setText(meetup.getOrganizationName());

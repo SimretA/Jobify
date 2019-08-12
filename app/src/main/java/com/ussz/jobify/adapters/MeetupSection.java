@@ -59,10 +59,12 @@ public class MeetupSection extends StatelessSection {
         itemViewHolder.leftSpace.setText(meetup.getStudentLimit() +" spot");
 
 
-        String currentColor = Helper.getRandomColorString();
+        String orgCapital = meetup.getOrganizationName().substring(0,1).toUpperCase();
+        char letter = orgCapital.charAt(0);
+        String currentColor = Helper.getRandomColorString(letter);
 
         itemViewHolder.meetUpname1.getBackground().setColorFilter(Color.parseColor(currentColor), PorterDuff.Mode.SRC_ATOP);
-        itemViewHolder.meetUpname1.setText(meetup.getOrganizationName().substring(0,1).toUpperCase());
+        itemViewHolder.meetUpname1.setText(orgCapital);
 
         itemViewHolder.leftSpace.getBackground().setColorFilter(Color.parseColor(currentColor),PorterDuff.Mode.SRC_ATOP);
     }
